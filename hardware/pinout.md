@@ -28,7 +28,7 @@ Provvisoria, da confermare sulla breadboard. Evitare GPIO 35–37 (PSRAM), 0, 3,
 | Cursore volume | Wiper | 2 | ADC1 |
 | Cursore volume | Alimentazione | 42 | Alto solo da sveglio |
 | Tasto avanti | — | 21 | Pin RTC, risveglio; pull-up interno |
-| Tasto indietro | — | 47 | Pull-up interno |
+| Tasto indietro | — | 47 | Pull-up interno; non è un pin RTC, non sveglia (va bene) |
 | Tasto genitori | — | 0 | In parallelo al tasto BOOT |
 | Batteria | ADC | 7 | Partitore 100 kΩ / 100 kΩ + 100 nF |
 | Libero | — | 1 | Riserva, ADC e RTC |
@@ -39,3 +39,7 @@ Provvisoria, da confermare sulla breadboard. Evitare GPIO 35–37 (PSRAM), 0, 3,
 - [ ] SD_MMC su 38/39/40 funziona con la PSRAM octal
 - [ ] Log su USB nativa con UART0 occupata dal DS3231
 - [ ] Partitore batteria: lettura tarata con multimetro
+- [ ] Modulo microSD a 3,3 V nativo (quelli con AMS1117 + 74LVC125 non vanno)
+- [ ] Regolatore 3,3 V da almeno 500 mA e bassa caduta (ME6211 / AP2112K)
+
+Collegamento per collegamento e insidie note: [`cablaggio.md`](cablaggio.md).

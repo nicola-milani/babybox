@@ -1,21 +1,25 @@
-componente,modello,qta_per_box,prezzo_indicativo_eur,fornitore_consigliato,ricambi_da_ordinare,note
-Microcontrollore,ESP32-S3 DevKitC-1 N16R8 (16MB flash 8MB PSRAM),1,8-12,Amazon (subito),2,PSRAM obbligatoria per ESPuino; alternativa ESP32-WROVER
-Lettore NFC,PN5180 (SPI),1,8-12,Amazon (subito),1,Risveglio dal deep sleep (LPCD)
-Tag NFC,NTAG213 adesivi 25 mm,10+,0.20-0.40 cad,Amazon (subito),rotolo da 50,Uno per statuina o vinile
-Amplificatore,MAX98357A I2S 3W,1,3-5,Amazon (subito),2,Alimentato dalla batteria
-Altoparlante,4 ohm 3W 40-50 mm,1,3-6,Amazon (subito),1,Sceglierlo PRIMA di disegnare il case
-Lettore microSD,Modulo microSD compatibile SD_MMC,1,1-2,Amazon,1,Accesso dal retro del case
-MicroSD,16-32 GB classe 10,1,5-8,Amazon,0,FAT32
-Display,E-paper 2.13in 250x122 B/N (Waveshare o WeAct),1,10-15,Amazon (subito),0,Refresh parziale
-Orologio,Modulo RTC DS3231,1,2-4,Amazon,1,Pila a bottone chiusa nel case
-Batteria,18650 3000 mAh protetta (Samsung/LG/Molicel),1,5-10,Negozio/Amazon,1,Marca affidabile
-Portabatteria,Supporto 18650 contatti a molla,1,1,Amazon/AliExpress,1,
-Modulo carica,TP4056 USB-C con DW01 (6 pin),1,1-2,Amazon (subito),2,Meglio con load sharing
-Regolatore 3.3V,HT7333 o ME6211,1,0.50,AliExpress,3,Evitare AMS1117
-Interruttore,Slitta da pannello,1,0.50,AliExpress,2,Incassato sul fondo
-Cursore volume,Potenziometro a slitta lineare 60 mm B10K,1,1-3,Amazon,1,Pomello largo stampato
-Tasti,Pulsanti arcade 30 mm bassa forza,2,1-2 cad,Amazon,2,Colori diversi
-Tasto genitori,Pulsante tattile 6 mm,1,0.10,AliExpress,5,
-Partitore batteria,2x100k + 100nF,1 set,0.10,AliExpress,,
-Minuteria,Viti M2/M2.5 inserti a caldo JST millefori,1 set,5,AliExpress,,
-Filamento,PETG (case) / PLA (prototipi),~150 g,3,,,
+rif,componente,modello_consigliato,qta_per_box,qta_da_ordinare,prezzo_indicativo_eur,fornitore,note
+A1,Microcontrollore,ESP32-S3-DevKitC-1 N16R8 (16MB flash 8MB PSRAM octal),1,2,12-20,Amazon subito,PSRAM obbligatoria per ESPuino; verificare la sigla N16R8
+A2,Lettore NFC,PN5180 SPI con antenna sul PCB,1,2,9-14,Amazon subito,Unico con risveglio all'appoggio (LPCD); servono SCK MOSI MISO NSS BUSY RST
+A3,Tag NFC,NTAG213 adesivi 25 mm,1 per personaggio,50,8-12,Amazon subito,ISO 14443A; non NTAG215/216 ne Mifare Classic
+A4,Amplificatore,MAX98357A I2S 3W,1,2,6-10,Amazon subito,Alimentato da VBAT non da 3V3
+A5,Altoparlante,4 ohm 3W diametro 40 mm altezza max 6 mm,1,2,6-10,Amazon subito,Misurare appena arriva: il case e' disegnato su Ø40x6
+A6,Display,Waveshare e-Paper 2.13 pollici 250x122 B/N SPI,1,1,12-18,Amazon subito,Niente versioni a 3 colori (refresh 15 s)
+A7,Batteria,18650 protetta Samsung 35E o LG MJ1 3000-3500 mAh,1,2,10-18,Amazon/negozio,Venditore serio; diffidare delle celle da 9900 mAh
+A8,Modulo carica,TP4056 USB-C 6 pin con protezione DW01,1,3,6-9,Amazon subito,USB-C non micro-USB; si carica a box spento
+A9,Cursore volume,Potenziometro a slitta lineare B10K corsa 60 mm,1,2,6-10,Amazon subito,Lineare (B); misurare corpo e levetta appena arriva
+A10,Tasti,Pulsanti arcade 30 mm bassa forza,2,4,6-10,Amazon subito,Due colori; verificare il foro di montaggio (28 o 30 mm)
+A11,MicroSD,32 GB classe 10,1,1,6-9,Amazon,Formattare FAT32
+A12,Lettore microSD,Modulo microSD 3.3V nativo o portacard nudo,1,2,3-5,Amazon,NON i moduli con AMS1117 + 74LVC125 (sono per 5V)
+B1,Orologio,Modulo RTC DS3231,1,2,4,AliExpress,Dissaldare la resistenza di carica da 200 ohm se si usa una CR2032
+B2,Regolatore 3.3V,ME6211C33 o AP2112K-3.3 (500-600 mA),1,5,3,AliExpress,Evitare AMS1117 (caduta 1.1 V) e HT7333 (solo 250 mA)
+B3,Portabatteria,Supporto 18650 contatti a molla,1,3,3,AliExpress,Misurare: il vano e' 24x78x20
+B4,Interruttore,Slitta da pannello SS12D00,1,5,3,AliExpress,Incassato nel fondo
+B5,Tasto genitori,Micropulsante 6x6 mm,1,20,2,AliExpress,Incassato nel fondo
+B6,Passivi,100k 1% / 100 nF / 10 uF / 220 uF / 10k,1 set,kit,4,AliExpress,Partitore batteria pull-up SD e condensatori di serbatoio
+B7,Basetta,Millefori 90x70 mm doppia faccia,1,5,6,AliExpress,Misura su cui sono disegnate le colonnine del fondo
+B8,Minuteria,Inserti a caldo M2.5 e viti M2.5,1 set,kit,8,AliExpress,4 inserti per il fondo + 2 per la culla del cursore
+B9,Viti di sicurezza,Torx pin o triwing M2.5x8,4,20,5,AliExpress,Chiusura del fondo non apribile a mano da un bambino
+B10,Cablaggio,Cavetto siliconico 26 AWG e connettori JST-XH,1 set,kit,8,AliExpress,
+B11,Varie,Biadesivo 3M VHB e rete anti-polvere,1 set,1,5,AliExpress,Display incollato nella sede; rete dietro la griglia
+C1,Filamento,PETG per il case PLA per provini e statuine,~150 g,1 kg,20,,Colori diversi per piatto NFC ed etichette dei vinili
