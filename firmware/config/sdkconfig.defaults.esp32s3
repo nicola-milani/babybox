@@ -1,0 +1,22 @@
+# ============================================================
+#  sdkconfig.defaults.esp32s3 — aggiunte per l'ESP32-S3 N16R8
+# ------------------------------------------------------------
+#  L'ESP-IDF legge da solo "sdkconfig.defaults.<target>" oltre a
+#  "sdkconfig.defaults": queste righe valgono quindi solo per l'S3 e non
+#  toccano le schede ESP32 di ESPuino.
+#
+#  Perche' serve: ESPuino dichiara CONFIG_SPIRAM=y senza la modalita', e
+#  sull'S3 l'ESP-IDF ripiega su QUAD. La N16R8 ha la PSRAM octal: senza
+#  queste righe il firmware compila e si avvia, ma non vede gli 8 MB, che
+#  per ESPuino sono obbligatori.
+#  Nota: -DBOARD_HAS_PSRAM non basta, vale solo per il lato Arduino, e
+#  nemmeno "custom_sdkconfig" di pioarduino, che viene ignorato quando il
+#  framework e' "arduino, espidf" (vedi builder/frameworks/espidf.py).
+#
+#  La copia buona sta in firmware/config/: ./firmware/applica-config.sh la
+#  riporta nel fork, anche perche' updateSdkConfig.py di ESPuino cancella i
+#  file "sdkconfig.*" quando sdkconfig.defaults cambia.
+# ============================================================
+
+CONFIG_SPIRAM_MODE_OCT=y
+CONFIG_SPIRAM_SPEED_80M=y

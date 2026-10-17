@@ -13,3 +13,6 @@ audio/musica/
 fp-info-cache
 # Sistema
 .DS_Store
+
+# PlatformIO locale
+.venv-pio/

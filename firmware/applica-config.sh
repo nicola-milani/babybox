@@ -3,9 +3,11 @@
 #
 #   ./firmware/applica-config.sh
 #
-# settings-override.h e platformio-override.ini sono in .gitignore dentro
-# ESPuino (sono i punti di personalizzazione previsti): li colleghiamo con
-# un symlink, così si modificano da un posto solo.
+# settings-override.h, platformio-override.ini e sdkconfig.defaults.esp32s3
+# sono in .gitignore dentro ESPuino (sono i punti di personalizzazione
+# previsti): li colleghiamo con un symlink, così si modificano da un posto
+# solo. Il terzo va anche rimesso ogni tanto: updateSdkConfig.py di ESPuino
+# cancella i file "sdkconfig.*" quando sdkconfig.defaults cambia.
 # settings-custom.h invece è un file tracciato dal fork: va copiato, e la
 # modifica si vede come differenza del submodule. È voluto.
 set -euo pipefail
@@ -24,6 +26,7 @@ collega firmware/config/settings-override.h   "$FORK/src/settings-override.h"
 collega firmware/config/platformio-override.ini "$FORK/platformio-override.ini"
 cp firmware/config/settings-custom.h "$FORK/src/settings-custom.h"
 echo "  copia    $FORK/src/settings-custom.h"
+collega firmware/config/sdkconfig.defaults.esp32s3 "$FORK/sdkconfig.defaults.esp32s3"
 
 echo
 echo "Fatto. Compila con:  pio run -e boxstorie -d firmware/ESPuino"
