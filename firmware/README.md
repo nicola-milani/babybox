@@ -4,14 +4,17 @@ Il firmware è un fork di [ESPuino](https://github.com/biologist79/ESPuino). Il 
 
 ## Setup (una volta sola)
 
-1. Su GitHub: fork di `biologist79/ESPuino` sul tuo account (es. `nicola/ESPuino`), branch di lavoro `main`.
-2. Da questa cartella del repository:
+1. Autenticati su GitHub e lancia lo script: fa il fork e aggiunge il submodule.
    ```bash
-   git submodule add https://github.com/<tuo-utente>/ESPuino.git firmware/ESPuino
+   gh auth login          # una volta sola
+   ./firmware/setup-fork.sh
    ```
-3. In VS Code installa l'estensione **PlatformIO IDE** e apri `firmware/ESPuino` come progetto PlatformIO (o usa il workspace `boxaudiobimbo.code-workspace`).
-4. Scegli/crea l'ambiente per ESP32-S3 N16R8 in `platformio.ini` (verificare gli ambienti già presenti in ESPuino per S3 con PSRAM octal).
-5. Prima compilazione senza modifiche: deve passare prima di toccare qualsiasi cosa.
+   Lo script crea il fork `<tuo-utente>/ESPuino`, lo aggancia come submodule in
+   `firmware/ESPuino` e gli aggiunge il remote `upstream` verso il progetto
+   originale, che serve agli allineamenti mensili (task 5).
+2. In VS Code installa l'estensione **PlatformIO IDE** e apri `firmware/ESPuino` come progetto PlatformIO (o usa il workspace `boxaudiobimbo.code-workspace`).
+3. Scegli/crea l'ambiente per ESP32-S3 N16R8 in `platformio.ini` (verificare gli ambienti già presenti in ESPuino per S3 con PSRAM octal).
+4. Prima compilazione senza modifiche: deve passare prima di toccare qualsiasi cosa.
 
 ## Dove vanno le nostre modifiche
 
