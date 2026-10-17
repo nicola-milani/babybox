@@ -2,6 +2,8 @@
 
 Portare ESPuino sull'ESP32-S3 N16R8 con i pin di `hardware/pinout.md` e le opzioni di `firmware/config/impostazioni-box.md`.
 
+**Già fatto (17 ottobre):** i tre file di configurazione esistono in `firmware/config/` e si applicano con `./firmware/applica-config.sh`. In ESPuino 3.1 LPCD, pausa togliendo il tag e salvataggio della posizione sono impostazioni della web UI, non `#define`: quello che resta da fare qui è la prima compilazione, la lettura del cursore, la taratura della batteria e i due punti aperti (pin microSD, GPIO48).
+
 ## Gesti del bambino (solo pressione breve)
 - Cursore = volume, da sinistra (piano) a destra (forte).
 - Tasto avanti / indietro = traccia successiva / precedente.

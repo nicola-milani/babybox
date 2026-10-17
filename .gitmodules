@@ -1,0 +1,4 @@
+[submodule "firmware/ESPuino"]
+	path = firmware/ESPuino
+	url = https://github.com/nicola-milani/ESPuino.git
+	branch = main

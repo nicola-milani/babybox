@@ -1,0 +1,276 @@
+// clang-format off
+// ============================================================
+//  settings-override.h — impostazioni generali del nostro box
+// ------------------------------------------------------------
+//  NON si modifica dentro il fork: la copia buona sta in
+//  boxaudiobimbo/firmware/config/ e ci arriva con ./firmware/applica-config.sh
+//  (in ESPuino questo nome e' in .gitignore apposta per le personalizzazioni).
+//
+//  Attenzione: quando questo file esiste, ESPuino IGNORA del tutto
+//  src/settings.h, quindi qui dentro deve esserci tutto. E' una copia di
+//  settings.h di ESPuino 3.1 con le nostre modifiche marcate [BOX].
+//  Al prossimo allineamento (task 5): rigenerarlo dal settings.h nuovo e
+//  riapplicare le righe [BOX].
+//
+//  Generato da ESPuino 3.1 (commit b157ba4) il 17 ottobre 2026.
+// ============================================================
+
+#ifndef __ESPUINO_SETTINGS_OVERRIDE_H__
+	#define __ESPUINO_SETTINGS_OVERRIDE_H__
+		#include "Arduino.h"
+		#include "values.h"
+
+	//######################### INFOS ####################################
+	// This is the general configfile for ESPuino-configuration.
+
+	//################## HARDWARE-PLATFORM ###############################
+	/* Make sure to also edit the configfile, that is specific for your platform.
+	If in doubts (your board is not listed) use HAL 7
+
+	!!!Only ESP32 with PSRAM are supported!!!
+
+	HAL 4: Wemos Lolin D32 pro                  => settings-lolin_D32_pro.h
+	HAL 5: Lilygo T8 (V1.7)                     => settings-ttgo_t8.h
+	HAL 6: ESPuino complete                     => settings-complete.h
+	HAL 7: Lolin D32 pro SDMMC Port-Expander    => settings-lolin_d32_pro_sdmmc_pe.h
+	HAL 99: custom                              => settings-custom.h
+	*/
+	#ifndef HAL             // Will be set by platformio.ini. There's no need to adjust this manually right here
+		#define HAL 7
+	#endif
+
+	// Enforce port expander for some HALs because it's mandatory for those and users constantly forget it. Endless story...
+	#if (HAL == 6) || (HAL == 7)
+		#define PORT_EXPANDER_ENABLE 
+	#endif
+
+	//########################## MODULES #################################
+	//#define PORT_EXPANDER_ENABLE          // When enabled, buttons can be connected via port-expander PCA9555 (https://forum.espuino.de/t/einsatz-des-port-expanders-pca9555/306)
+	//#define I2S_COMM_FMT_LSB_ENABLE       // Enables FMT instead of MSB for I2S-communication-format. Used e.g. by PT2811. Don't enable for MAX98357a, AC101 or PCM5102A)
+	#define MDNS_ENABLE                     // When enabled, you don't have to handle with ESPuino's IP-address. If hostname is set to "ESPuino", you can reach it via ESPuino.local
+	//#define MQTT_ENABLE                   // [BOX] spento: non ci serve e libera risorse                     // Make sure to configure mqtt-server and (optionally) username+pwd
+	//#define FTP_ENABLE                    // [BOX] spento: si attiva con una combinazione di tasti, che non vogliamo                      // Enables FTP-server; DON'T FORGET TO ACTIVATE AFTER BOOT BY PRESSING PAUSE + NEXT-BUTTONS (IN PARALLEL)!
+	//#define NEOPIXEL_ENABLE               // [BOX] spento: al posto dell'anello LED c'e' l'e-paper (task 2)                 // Don't forget configuration of NUM_LEDS if enabled
+	#define LANGUAGE EN                     // [BOX] diventa IT col task 3 (LogMessages_IT.cpp). Originale: DE                     // DE = deutsch; EN = english: FR = french
+	//#define HEADPHONE_ADJUST_ENABLE       // [BOX] spento: non c'e' presa cuffie         // Used to adjust (lower) volume for optional headphone-pcb (refer maxVolumeSpeaker / maxVolumeHeadphone) and to enable stereo (headphones are always stereo, even if mono-playback is enabled via GUI)
+	#define SHUTDOWN_IF_SD_BOOT_FAILS       // Will put ESP to deepsleep if boot fails due to SD. Really recommend this if there's in battery-mode no other way to restart ESP! Interval adjustable via deepsleepTimeAfterBootFails.
+	#define MEASURE_BATTERY_VOLTAGE         // Enables battery-measurement via GPIO (ADC) and voltage-divider
+	//#define USEROTARY_ENABLE              // [BOX] spento: il volume e' un cursore a slitta (task 1)                // If rotary-encoder is used (don't forget to review WAKEUP_BUTTON if you disable this feature!)
+	//#define BLUETOOTH_ENABLE              // [BOX] spento: mangia flash e RAM, non serve                // If enabled and bluetooth-mode is active, you can stream to your ESPuino or to a headset via bluetooth (a2dp-sink & a2dp-source). Note: This feature consumes a lot of resources and the available flash/ram might not be sufficient.
+	//#define IR_CONTROL_ENABLE             // Enables remote control (https://forum.espuino.de/t/neues-feature-fernsteuerung-per-infrarot-fernbedienung/265)
+	//#define HALLEFFECT_SENSOR_ENABLE      // Support for hallsensor. For fine-tuning please adjust HallEffectSensor.h Please note: only user-support provided (https://forum.espuino.de/t/magnetische-hockey-tags/1449/35)
+
+	//################## select SD card mode #############################
+	#define SD_MMC_1BIT_MODE              // run SD card in SD-MMC 1Bit mode (using GPIOs 15 + 14 + 2 is mandatory!)
+	//#define SINGLE_SPI_ENABLE             // If only one SPI-instance should be used instead of two (not yet working!)
+	//#define NO_SDCARD                     // enable to start without any SD card, e.g. for a webplayer only. SD card Settings above will be ignored
+
+
+	//################## select RFID reader ##############################
+	// Runtime RFID reader selection is now supported via web interface
+	// Runtime RFID reader type configuration
+	// 0 = Auto-detect
+	// 1 = MFRC522 (SPI)
+	// 2 = MFRC522 (I2C)
+	// 3 = PN5180
+	#define RFID_READER_TYPE_RUNTIME 3    // [BOX] 3 = PN5180 (cambiabile anche dalla web UI)
+
+	#if defined(RFID_READER_TYPE_RUNTIME)
+		#define MFRC522_ADDR 0x28           // default I2C-address of MFRC522
+	#endif
+
+	//############# Port-expander-configuration ######################
+	#ifdef PORT_EXPANDER_ENABLE
+		constexpr uint8_t expanderI2cAddress = 0x20;  // I2C-address of PCA9555 (0x20 is true if PCA's pins A0+A1+A2 are pulled to GND)
+	#endif
+
+	//################## BUTTON-Layout ##################################
+	/* German documentation: https://forum.espuino.de/t/das-dynamische-button-layout/224
+	Please note the following numbers as you need to know them in order to define actions for buttons.
+	Even if you don't use all of them, their numbers won't change
+		0: NEXT_BUTTON
+		1: PREVIOUS_BUTTON
+		2: PAUSEPLAY_BUTTON
+		3: ROTARYENCODER_BUTTON
+		4: BUTTON_4
+		5: BUTTON_5
+
+	Don't forget to enable/configure those buttons you want to use in your develboard-specific config (e.g. settings-custom.h)
+
+	Single-buttons [can be long or short] (examples):
+		BUTTON_0_SHORT => Button 0 (NEXT_BUTTON) pressed shortly
+		BUTTON_3_SHORT => Button 3 (ROTARYENCODER_BUTTON) pressed shortly
+		BUTTON_4_LONG => Button 4 (BUTTON_4) pressed long
+
+	Multi-buttons [short only] (examples):
+		BUTTON_MULTI_01 => Buttons 0+1 (NEXT_BUTTON + PREVIOUS_BUTTON) pressed in parallel
+		BUTTON_MULTI_12 => Buttons 1+2 (PREV_BUTTON + PAUSEPLAY_BUTTON) pressed in parallel
+
+	Actions:
+		To all of those buttons, an action can be assigned freely.
+		Please have a look at values.h to look up actions available (>=100 can be used)
+		If you don't want to assign an action or you don't use a given button: CMD_NOTHING has to be set
+	*/
+	// *****BUTTON*****        *****ACTION*****
+	#define BUTTON_0_SHORT    CMD_NEXTTRACK
+	#define BUTTON_1_SHORT    CMD_PREVTRACK
+	#define BUTTON_2_SHORT    CMD_PLAYPAUSE
+	#define BUTTON_3_SHORT    CMD_MEASUREBATTERY
+	#define BUTTON_4_SHORT    CMD_SEEK_BACKWARDS
+	#define BUTTON_5_SHORT    CMD_SEEK_FORWARDS
+
+	#define BUTTON_0_LONG     CMD_NOTHING           // [BOX] niente pressione lunga
+	#define BUTTON_1_LONG     CMD_NOTHING           // [BOX] niente pressione lunga
+	#define BUTTON_2_LONG     CMD_NOTHING           // [BOX] niente pressione lunga
+	#define BUTTON_3_LONG     CMD_NOTHING           // [BOX] niente pressione lunga
+	#define BUTTON_4_LONG     CMD_NOTHING           // [BOX] niente pressione lunga
+	#define BUTTON_5_LONG     CMD_NOTHING           // [BOX] niente pressione lunga
+
+	// Rotary gestures: hold the button, turn the encoder. CMD_NOTHING disables the button as a modifier.
+	// A modifier button keeps its normal short/long action when it is pressed *without* turning the encoder.
+	#define BUTTON_0_ROTARY_CW   CMD_SEEK_FORWARDS   // hold NEXT + turn: seek within the track
+	#define BUTTON_0_ROTARY_CCW  CMD_SEEK_BACKWARDS
+	#define BUTTON_1_ROTARY_CW   CMD_NOTHING
+	#define BUTTON_1_ROTARY_CCW  CMD_NOTHING
+	#define BUTTON_2_ROTARY_CW   CMD_BRIGHTNESS_UP   // hold PLAY/PAUSE + turn: LED brightness
+	#define BUTTON_2_ROTARY_CCW  CMD_BRIGHTNESS_DOWN
+	#define BUTTON_3_ROTARY_CW   CMD_NOTHING         // rotary push: short=play/pause, long=sleep -- left free on purpose
+	#define BUTTON_3_ROTARY_CCW  CMD_NOTHING
+	#define BUTTON_4_ROTARY_CW   CMD_NOTHING
+	#define BUTTON_4_ROTARY_CCW  CMD_NOTHING
+	#define BUTTON_5_ROTARY_CW   CMD_NOTHING
+	#define BUTTON_5_ROTARY_CCW  CMD_NOTHING
+
+	#define BUTTON_MULTI_01   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_02   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_03   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_04   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_05   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_12   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_13   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_14   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_15   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_23   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_24   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_25   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_34   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_35   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+	#define BUTTON_MULTI_45   CMD_NOTHING           // [BOX] niente combinazioni di tasti
+
+	//#################### Various settings ##############################
+
+	// Serial-logging-configuration
+	#define SERIAL_LOGLEVEL LOGLEVEL_DEBUG              // Current loglevel for serial console
+
+	// Buttons (better leave unchanged if in doubts :-))
+	constexpr uint8_t buttonDebounceInterval = 50;                // Interval in ms to software-debounce buttons
+	constexpr uint16_t intervalToLongPress = 700;                 // Interval in ms to distinguish between short and long press of buttons
+
+	// Buttons active state: Default 0 for active LOW, 1 for active HIGH e.g. for TTP223 Capacitive Touch Switch Button (FinnBox)
+	#define BUTTON_0_ACTIVE_STATE 0
+	#define BUTTON_1_ACTIVE_STATE 0
+	#define BUTTON_2_ACTIVE_STATE 0
+	#define BUTTON_3_ACTIVE_STATE 0
+	#define BUTTON_4_ACTIVE_STATE 0
+	#define BUTTON_5_ACTIVE_STATE 0
+
+	//#define CONTROLS_LOCKED_BY_DEFAULT			// If set the controls are locked at boot
+	#define INCLUDE_ROTARY_IN_CONTROLS_LOCK			// If set the rotary encoder is locked if controls are locked
+
+	// Automatic restart
+	#ifdef SHUTDOWN_IF_SD_BOOT_FAILS
+		constexpr uint32_t deepsleepTimeAfterBootFails = 20;      // Automatic restart takes place if boot was not successful after this period (in seconds)
+	#endif
+
+	// FTP
+	// Nothing to be configured here...
+	// Default user/password is esp32/esp32 but can be changed via webgui
+
+	// timezone
+	// see list of valid timezones: https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
+	// example for Europe/Berlin:	"CET-1CEST,M3.5.0,M10.5.0/3"
+	// example for America/Toronto:	"EST5EDT,M3.2.0,M11.1.0"
+	constexpr const char timeZone[] = "CET-1CEST,M3.5.0,M10.5.0/3"; // [BOX] Europe/Rome (stesso fuso di Berlino)
+
+	// Bluetooth
+	constexpr const char nameBluetoothSinkDevice[] = "boxstorie";        // Name of your ESPuino as Bluetooth-device
+
+	// Where to store the backup-file for NVS-records
+	constexpr const char backupFile[] = "/backup.txt"; // File is written every time a (new) RFID-assignment via GUI is done
+
+	//#################### Settings for optional Modules##############################
+	// (optinal) Neopixel
+	#ifdef NEOPIXEL_ENABLE
+		#define CHIPSET					WS2812B     	// type of Neopixel
+		#define COLOR_ORDER				GRB
+	#endif
+
+	#ifdef MEASURE_BATTERY_VOLTAGE
+		#define BATTERY_MEASURE_ENABLE                 // Don't change. Set automatically if any method of battery monitoring is selected.
+		constexpr uint8_t s_batteryCheckInterval = 10; // How often battery is measured (in minutes) (can be changed via GUI!)
+
+		// (optional) Default-voltages for battery-monitoring via Neopixel; can be changed later via WebGUI
+		constexpr float s_warningLowVoltage = 3.0;                      // If battery-voltage is <= this value, a cyclic warning will be indicated by Neopixel (can be changed via GUI!)
+		constexpr float s_warningCriticalVoltage = 2.9;                 // If battery-voltage is <= this value, assume battery near-empty. Whether this triggers a shutdown is a separate GUI-toggle (off by default).
+		constexpr float s_voltageIndicatorLow = 2.9;                    // Lower range for Neopixel-voltage-indication (0 leds) (can be changed via GUI!)
+		constexpr float s_voltageIndicatorHigh = 3.3;                   // Upper range for Neopixel-voltage-indication (all leds) (can be changed via GUI!)
+	#endif
+
+	// enable I2C if necessary
+	#if defined(RFID_READER_TYPE_RUNTIME) || defined(PORT_EXPANDER_ENABLE)
+		#define I2C_2_ENABLE
+	#endif
+
+	// (optinal) Headphone-detection (leave unchanged if in doubts...)
+	#ifdef HEADPHONE_ADJUST_ENABLE
+		constexpr uint16_t headphoneLastDetectionDebounce = 1000; // Debounce-interval in ms when plugging in headphone
+	#endif
+
+	// Topics for MQTT: used to build actual topics in webinterface. So normally there's no need to apply any changes here 
+	// MQTT configuration available via webinterface: https://forum.espuino.de/t/dokumentation-webinterface/2807.
+	#ifdef MQTT_ENABLE
+		constexpr const char base_topic[] = "";
+		constexpr const char device_id[] = "ESPuino-<MAC>";        // Name that is used for MQTT
+		constexpr const char setter_token[] = "set";        		// Word to identify command-topics
+		// Topics (settable)
+		constexpr const char topicSleep[] = "sleep";           // Cmnd/State: power off (Cmnd '0' or 'OFF' to shutdown), State: ON/OFF
+		constexpr const char topicRfid[] = "rfid";            // Cmnd/State: emulate an RFID tag (Cmnd: 12-digit id), State: current RFID tag id
+		constexpr const char topicTrackControl[] = "trackcontrol"; // Cmnd: playback control (1=stop,3=play/pause,4=next,5=prev,6=first,7=last,8=next folder,9=prev folder)
+		constexpr const char topicLoudness[] = "loudness";    // Cmnd/State: set / report volume (numeric)
+		constexpr const char topicSleepTimer[] = "sleep_timer"; // Cmnd/State: sleep timer commands (EOP/EOT/EO5T, minutes, or 0 to deactivate)
+		constexpr const char topicSleepTimerState[] = "sleep_timer_state"; // State: JSON {mode,remainingMinutes,remainingTracks}; mode = OFF/MINUTES/EOT/EOP/EO5T
+		constexpr const char topicLockControls[] ="lock_controls"; // Cmnd/State: lock or unlock physical controls (ON/OFF)
+		constexpr const char topicRepeatMode[] = "repeatmode"; // Cmnd/State: set repeat mode (0=no,1=track,2=playlist,3=both)
+		constexpr const char topicLedBrightness[] = "led_brightness"; // Cmnd/State: set LED brightness 0..255
+		constexpr const char topicAmbientLight[] = "ambient_light"; // Cmnd/State: set ambient light (ON/OFF)
+
+		// Topics (state only)
+		constexpr const char topicTrack[] = "track";          // State: current track info (e.g. "(2/10) /mp3/.../file.mp3")
+		constexpr const char topicCoverChanged[] = "cover_changed"; // State: indicates cover image may have changed
+		constexpr const char topicState[] = "state";         // State: 'Online' when powering on, 'Offline' when powering off
+		constexpr const char topicCurrentIPv4IP[] = "ipv4";  // State: sends current IPv4 address
+		constexpr const char topicPausePlay[] = "pauseplay"; // State: playback state: 'idle', 'play', 'pause'
+		constexpr const char topicPlaymode[] = "playmode";  // State: numeric playmode
+		constexpr const char topicWiFiRssi[] = "wifi_rssi"; // State: WiFi signal strength (dBm)
+		constexpr const char topicSRevision[] = "software_revision"; // State: software revision string
+		#ifdef BATTERY_MEASURE_ENABLE
+		constexpr const char topicBatteryVoltage[] = "battery_voltage"; // State: battery voltage float (e.g. 3.81)
+		constexpr const char topicBatterySOC[]     = "battery_soc"; // State: battery charge percent (e.g. 83.0)
+		#endif
+	#endif
+
+	// !!! MAKE SURE TO EDIT PLATFORM SPECIFIC settings-****.h !!!
+	#if (HAL == 4)
+		#include "settings-lolin_d32_pro.h"                 // Contains all user-relevant settings for Wemos Lolin D32 pro
+	#elif (HAL == 5)
+		#include "settings-ttgo_t8.h"                       // Contains all user-relevant settings for Lilygo TTGO T8 1.7
+	#elif (HAL == 6)
+		#include "settings-complete.h"                      // Contains all user-relevant settings for ESPuino complete
+	#elif (HAL == 7)
+		#include "settings-lolin_d32_pro_sdmmc_pe.h"        // Pre-configured settings for ESPuino Lolin D32 pro with SDMMC + port-expander (https://forum.espuino.de/t/espuino-minid32pro-lolin-d32-pro-mit-sd-mmc-und-port-expander-smd/866)
+	#elif (HAL == 99)
+		#include "settings-custom.h"                        // Contains all user-relevant settings custom-board
+	#endif
+
+
+#endif

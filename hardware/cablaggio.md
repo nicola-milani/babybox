@@ -68,12 +68,15 @@ fanno abbassare la tensione al microcontrollore.
 | NSS | GPIO11 |
 | BUSY | GPIO41 |
 | RST | GPIO48 |
+| IRQ | GPIO1 |
 
 - Se il modulo ha anche un pin **5V/VIN**, provare prima a 3V3. Se la
   distanza di lettura non basta, alimentarlo da VBAT (4,2 V) lasciando i
   segnali a 3,3 V.
 - **GPIO48 sulla DevKitC-1 è il LED RGB.** Verificare sul proprio esemplare:
   se c'è il LED, spostare RST su GPIO1 e aggiornare `pinout.md`.
+- **L'IRQ non è opzionale:** è il filo che sveglia il box quando appoggi la
+  statuina (LPCD). Deve finire su un GPIO RTC, da qui il GPIO1.
 - Cavi del lettore corti (< 10 cm) e lontani dall'altoparlante.
 
 ### Display e-paper — secondo bus SPI

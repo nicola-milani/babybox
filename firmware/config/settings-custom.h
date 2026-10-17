@@ -1,0 +1,80 @@
+// clang-format off
+// ============================================================
+//  settings-custom.h — pin del nostro box (HAL 99)
+// ------------------------------------------------------------
+//  La copia buona sta in boxaudiobimbo/firmware/config/ e arriva nel fork
+//  con ./firmware/applica-config.sh. Fonte dei numeri: hardware/pinout.md.
+//  Scheda: ESP32-S3-DevKitC-1 N16R8.
+//
+//  Da evitare su questa scheda: 35-37 (PSRAM octal), 19-20 (USB nativa),
+//  3/45/46 (strapping). GPIO0 e' strapping ma e' il tasto BOOT, e lo
+//  usiamo apposta come tasto genitori.
+// ============================================================
+
+#ifndef __ESPUINO_SETTINGS_CUSTOM_H__
+    #define __ESPUINO_SETTINGS_CUSTOM_H__
+    #include "Arduino.h"
+
+    // ---------------- microSD ----------------
+    // In SD_MMC 1 bit ESPuino non chiama SD_MMC.setPins(): usa i pin di
+    // default del core Arduino. Su ESP32-S3 vanno verificati alla prima
+    // accensione (vedi "punto aperto" in firmware/config/impostazioni-box.md):
+    // o si adottano quei pin, o serve una riga setPins() in SdCard.cpp.
+
+    // ---------------- lettore NFC PN5180 (SPI dedicato) ----------------
+    #define RST_PIN                         99          // dummy, richiesto da ESPuino
+    #define RFID_CS                         11
+    #define RFID_MOSI                        9
+    #define RFID_MISO                       10
+    #define RFID_SCK                         8
+
+    #if defined(RFID_READER_TYPE_RUNTIME)
+        #define RFID_BUSY                   41
+        #define RFID_RST                    48          // verificare il LED RGB sulla DevKitC-1
+        #define RFID_IRQ                     1          // deve essere un GPIO RTC (0-21): sveglia dal deep sleep
+    #endif
+
+    // ---------------- audio I2S ----------------
+    #define I2S_DOUT                         6
+    #define I2S_BCLK                         4
+    #define I2S_LRC                          5
+
+    // Abilitazione dell'amplificatore: basso = ampli spento (niente "toc")
+    #define GPIO_PA_EN                      18
+
+    // ---------------- tasti ----------------
+    // 99 = disabilitato. Nessuna azione lunga, nessuna combinazione:
+    // le azioni sono in settings-override.h.
+    #define NEXT_BUTTON                     21          // avanti (GPIO RTC: sveglia il box)
+    #define PREVIOUS_BUTTON                 47          // indietro
+    #define PAUSEPLAY_BUTTON                 0          // tasto genitori sul fondo (in parallelo a BOOT)
+    #define ROTARYENCODER_BUTTON            99
+    #define BUTTON_4                        99
+    #define BUTTON_5                        99
+
+    // Risveglio dal deep sleep: il tasto avanti (GPIO RTC).
+    // L'altro risveglio e' l'appoggio della statuina, via RFID_IRQ (LPCD).
+    #define WAKEUP_BUTTON                   NEXT_BUTTON
+
+    // ---------------- misura della batteria ----------------
+    #ifdef MEASURE_BATTERY_VOLTAGE
+        #define VOLTAGE_READ_PIN             7
+        constexpr float s_offsetVoltage = 0.00;         // taratura vera dalla web UI, nel task 1
+        constexpr uint16_t rdiv1 = 100;                 // kOhm verso VBAT
+        constexpr uint16_t rdiv2 = 100;                 // kOhm verso massa
+        constexpr adc_attenuation_t inputAttenuation = ADC_11db;
+    #endif
+
+    // ---------------- nostri, non di ESPuino ----------------
+    // Usati dai moduli nuovi (task 1, 2): non sono nomi che ESPuino conosce.
+    #define BOX_CURSORE_ADC                  2          // cursore volume (ADC1)
+    #define BOX_CURSORE_PWR                 42          // alimenta il cursore solo da svegli
+    #define BOX_EPD_SCK                     12
+    #define BOX_EPD_MOSI                    13
+    #define BOX_EPD_CS                      14
+    #define BOX_EPD_DC                      15
+    #define BOX_EPD_RST                     16
+    #define BOX_EPD_BUSY                    17
+    #define BOX_I2C_SDA                     43          // DS3231 (pin di UART0: log sulla USB nativa)
+    #define BOX_I2C_SCL                     44
+#endif

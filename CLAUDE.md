@@ -13,7 +13,8 @@ Lingua del progetto: italiano (commenti, documentazione, messaggi della web UI).
 - Il codice ESPuino vive in `firmware/ESPuino/` (submodule del nostro fork). Branch `main` allineato periodicamente al master di ESPuino.
 - Personalizzazioni SOLO nei file di configurazione di ESPuino (impostazioni generali e file della scheda) e in moduli nuovi. Il core si tocca solo se indispensabile, e in quel caso con commit piccolo e separato, motivato nel messaggio.
 - Commit piccoli e atomici, un argomento per commit.
-- Opzioni da abilitare: `RFID_READER_TYPE_PN5180`, `PN5180_ENABLE_LPCD`, `PAUSE_WHEN_RFID_REMOVED`, `SAVE_PLAYPOS_BEFORE_SHUTDOWN`, `SAVE_PLAYPOS_WHEN_RFID_CHANGE`, `MEASURE_BATTERY_VOLTAGE`, `SD_MMC_1BIT_MODE`.
+- Configurazione nostra in `firmware/config/` (tre file), applicata al fork con `./firmware/applica-config.sh`. Non modificare quei file dentro il fork.
+- In ESPuino 3.1 quasi tutte le opzioni che ci servono sono passate alla web UI (LPCD, pausa togliendo il tag, salvataggio posizione). Restano `#define` solo `SD_MMC_1BIT_MODE`, `MEASURE_BATTERY_VOLTAGE` e `RFID_READER_TYPE_RUNTIME 3`. Stato verificato e punti aperti: `firmware/config/impostazioni-box.md`.
 
 ## Vincoli che non si negoziano
 - Volume massimo limitato da firmware: il cursore tutto a destra vale il limite impostato dai genitori, mai di più.

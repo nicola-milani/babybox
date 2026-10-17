@@ -20,7 +20,7 @@ if gh repo view "$UTENTE/ESPuino" >/dev/null 2>&1; then
   echo "Fork già presente: $UTENTE/ESPuino"
 else
   echo "Creo il fork di $UPSTREAM..."
-  gh repo fork "$UPSTREAM" --clone=false --remote=false
+  gh repo fork "$UPSTREAM" --clone=false
 fi
 
 if [ -e "$DEST" ]; then

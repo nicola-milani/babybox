@@ -14,13 +14,14 @@ Provvisoria, da confermare sulla breadboard. Evitare GPIO 35–37 (PSRAM), 0, 3,
 | PN5180 | NSS | 11 | |
 | PN5180 | BUSY | 41 | |
 | PN5180 | RST | 48 | Su alcune DevKitC-1 è il LED RGB: verificare |
+| PN5180 | IRQ | 1 | **Serve all'LPCD**: è il pin che sveglia il box quando appoggi la statuina. Deve essere un GPIO RTC (0–21) |
 | E-paper | SCK | 12 | Secondo bus SPI, separato dal PN5180 |
 | E-paper | MOSI | 13 | |
 | E-paper | CS | 14 | |
 | E-paper | DC | 15 | |
 | E-paper | RST | 16 | |
 | E-paper | BUSY | 17 | |
-| microSD | CLK | 39 | SD_MMC 1 bit |
+| microSD | CLK | 39 | SD_MMC 1 bit — **provvisorio**, vedi nota sotto |
 | microSD | CMD | 38 | |
 | microSD | D0 | 40 | |
 | DS3231 | SDA | 43 | Pin UART0: i log passano dalla USB nativa |
@@ -31,7 +32,16 @@ Provvisoria, da confermare sulla breadboard. Evitare GPIO 35–37 (PSRAM), 0, 3,
 | Tasto indietro | — | 47 | Pull-up interno; non è un pin RTC, non sveglia (va bene) |
 | Tasto genitori | — | 0 | In parallelo al tasto BOOT |
 | Batteria | ADC | 7 | Partitore 100 kΩ / 100 kΩ + 100 nF |
-| Libero | — | 1 | Riserva, ADC e RTC |
+| Libero | — | 33, 34 | Riserva (liberi anche con la PSRAM octal) |
+
+## Punto aperto: i pin della microSD
+
+ESPuino chiama `SD_MMC.begin()` senza `setPins()`, quindi sull'ESP32-S3 usa i
+pin di default del core Arduino e non questi. Alla prima accensione si decide:
+adottare i default (e spostare display e cursore, che hanno pin liberi a
+sufficienza) oppure aggiungere una `setPins()` dietro `#ifdef` in `SdCard.cpp`
+e proporla a monte. Finché non è chiuso, 38/39/40 restano provvisori.
+Dettagli in [`../firmware/config/impostazioni-box.md`](../firmware/config/impostazioni-box.md).
 
 ## Verifiche sulla breadboard (spuntare quando confermato)
 
