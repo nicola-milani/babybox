@@ -1,0 +1,17 @@
+{
+  "folders": [
+    { "name": "progetto", "path": "." },
+    { "name": "firmware (ESPuino)", "path": "firmware/ESPuino" }
+  ],
+  "settings": {
+    "files.exclude": { "**/.pio": true }
+  },
+  "extensions": {
+    "recommendations": [
+      "platformio.platformio-ide",
+      "ms-vscode.cpptools",
+      "yzhang.markdown-all-in-one",
+      "mechatroner.rainbow-csv"
+    ]
+  }
+}
