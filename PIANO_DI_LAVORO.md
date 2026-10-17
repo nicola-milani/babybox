@@ -44,9 +44,12 @@ M3 (firmware) e M4 (case) vanno in parallelo dalla settimana 2: se siete in due,
 
 ## Checklist di oggi (sabato 17 ottobre)
 
-- [ ] Ordinare i componenti (vedi `hardware/bom.csv`)
+- [x] `git init` di questo repository e primo commit
+- [x] Progetto meccanico: sorgenti parametrici e STL in `modelli-3d/`
+- [x] Progetto elettrico: `hardware/ordine.md` e `hardware/cablaggio.md`
+- [ ] Ordinare i componenti (vedi `hardware/ordine.md`, parte A su Amazon)
+- [ ] Stampare il **provino NFC** e il calibro parti piccole
 - [ ] Fare il fork di ESPuino su GitHub e aggiungerlo come submodule (`firmware/README.md`)
-- [ ] `git init` di questo repository e primo commit
 - [ ] Installare in VS Code l'estensione PlatformIO
 - [ ] Confermare la lista delle 5 storie e 3 canzoni per la 1.0
 

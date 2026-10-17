@@ -9,6 +9,10 @@ Box audio per bambini dai 2 anni, open source e a batteria. Si appoggia una stat
 
 **Obiettivo:** versione 1.0 funzionante entro **venerdì 20 novembre 2026** → vedi [PIANO_DI_LAVORO.md](PIANO_DI_LAVORO.md).
 
+**Per partire:** cosa comprare → [`hardware/ordine.md`](hardware/ordine.md) · come collegare →
+[`hardware/cablaggio.md`](hardware/cablaggio.md) · cosa stampare →
+[`modelli-3d/stampa.md`](modelli-3d/stampa.md).
+
 ## Struttura
 
 | Cartella | Contenuto |
@@ -16,8 +20,8 @@ Box audio per bambini dai 2 anni, open source e a batteria. Si appoggia una stat
 | `docs/` | Specifiche complete, roadmap, decisioni prese |
 | `tasks/` | Un file per task firmware (1–8), con criteri di accettazione: si passano a Claude Code uno alla volta |
 | `firmware/` | Istruzioni per il fork di ESPuino e le nostre configurazioni/moduli |
-| `hardware/` | Lista componenti (`bom.csv`), pinout, schema KiCad, note di cablaggio |
-| `modelli-3d/` | Case, statuine e vinili: sorgenti CAD + STL |
+| `hardware/` | Lista d'ordine (`ordine.md`), componenti (`bom.csv`), pinout, schema di cablaggio |
+| `modelli-3d/` | Case, statuine e vinili: sorgenti OpenSCAD parametrici + STL, istruzioni di stampa |
 | `audio/` | Regole di registrazione, suoni di sistema, storie (gli MP3 non vanno su git) |
 | `test/` | Checklist di verifica per milestone e test d'uso |
 
