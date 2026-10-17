@@ -1,29 +1,114 @@
 # Modelli 3D
 
-Progettazione parametrica (FreeCAD, Fusion o OpenSCAD). Nel repository vanno **sorgenti + STL**. Licenza proposta CC BY-SA 4.0.
+Tutto è parametrico in **OpenSCAD**: le misure stanno in un unico file,
+`sorgenti/parametri.scad`, e gli STL si rigenerano con un comando.
 
-## Case (`case/`)
-- Circa 110 × 110 × 90 mm, angoli arrotondati (raggio ≥ 5 mm), nessuno spigolo vivo.
-- **Coperchio:** scasso circolare Ø 62 mm, profondo 3 mm, sopra l'antenna del PN5180; fondo dello scasso spesso max 2 mm. Due tacche laterali per sollevare il vinile.
-- **Comandi sul coperchio:** cursore volume, corsa 60 mm, pomello largo, icone in rilievo (altoparlante piccolo a sinistra, grande a destra); fessura max 2 mm con bandella interna anti-briciole. Due tasti arcade 30 mm con frecce in rilievo, distanti ≥ 30 mm.
-- **Frontale:** finestra e-paper con vetrino o parete sottile; griglia altoparlante con fori ≤ 2 mm.
-- **Retro:** USB-C di ricarica e fessura microSD. **Fondo:** interruttore e tasto genitori incassati.
-- **Interno:** inserti a caldo M2,5; vano batteria ventilato con sportellino avvitato; camera chiusa dietro l'altoparlante.
-- **Chiusura:** fondo con viti a testa speciale, non apribile a mano da un bambino.
-- **Materiale:** PETG (PLA per prototipi), riempimento 20–30%, 3 perimetri.
+```bash
+brew install --cask openscad@snapshot   # una volta sola
+./modelli-3d/genera-stl.sh              # rigenera tutti gli STL
+```
 
-## Statuine (`statuine/`)
-- Base: cilindro Ø 40 × 8 mm, incavo per tag 25 mm a 1 mm dal fondo (pausa M600 o tappo incollato).
-- Personaggio 50–80 mm, forme compatte, baricentro basso.
-- **Obbligatorio:** nessun pezzo che passi dal cilindro per parti piccole (Ø 31,7 mm).
-- Finitura multicolore o vernici atossiche EN 71-3. PLA/PETG, riempimento ≥ 40%.
+Licenza proposta: CC BY-SA 4.0.
 
-## Vinili (`vinili/`)
-- Disco Ø 60 × 4 mm, solchi concentrici in rilievo, etichetta centrale colorata con icona.
-- Incavo tag 25 mm al centro a 1 mm dal fondo (M600). Bordi arrotondati, niente foro centrale.
+## Cosa stampare, in che ordine
 
-## Primo stampato da fare (settimana 1)
-**Provino NFC:** piastrina 2 mm + base statuina, per misurare la distanza di lettura prima di stampare il case intero.
+| # | Pezzo | File | Quando |
+| --- | --- | --- | --- |
+| 1 | **Provino NFC** | `provini/stl/provino-nfc.stl` | **Subito**, prima di tutto: dice se il lettore arriva al tag attraverso la plastica |
+| 2 | Calibro parti piccole | `provini/stl/calibro-parti-piccole.stl` | Subito: serve a verificare le statuine (EN 71-1) |
+| 3 | Base statuina + orso | `statuine/stl/` | Settimana 1, per provare tag e lettura |
+| 4 | Vinile | `vinili/stl/vinile.stl` | Settimana 1 |
+| 5 | Scocca + fondo + pezzi interni | `case/stl/` | Quando i componenti sono arrivati e misurati |
 
-## Verifiche sul primo prototipo
-Vedi `../test/checklist-prototipo.md`.
+> Prima di stampare il case: ricontrollare col calibro le misure marcate
+> `[VERIFICARE]` in `sorgenti/parametri.scad` (potenziometro, tasti, display,
+> altoparlante, portabatteria) e rigenerare gli STL. Sono 10 minuti che
+> evitano una stampa da 10 ore buttata.
+
+## Il case
+
+Scatola **130 × 130 × 100 mm**, angoli verticali raggio 8 mm, bordo superiore
+raccordato: nessuno spigolo vivo.
+
+Due pezzi grandi soltanto:
+
+- **`scocca`** — pareti *e* coperchio in un pezzo unico. Si stampa **capovolta**
+  (coperchio sul piano): il coperchio viene liscio come il primo strato, non
+  servono supporti e soprattutto **non c'è nessun coperchio che un bambino
+  possa aprire**.
+- **`fondo`** — l'unica parte smontabile, con 4 viti a testa speciale.
+
+Pezzi piccoli: `piatto-nfc` (il fondo dello scasso dove si appoggia la
+statuina, incollato dall'interno), `pomello-cursore`, `culla-cursore`,
+`camera-altoparlante`, `sportellino-batteria`.
+
+### Cosa c'è su ogni faccia
+
+| Faccia | Contenuto |
+| --- | --- |
+| Coperchio | Scasso Ø62 per statuine e vinili (con due tacche per sollevare il disco), fessura del cursore con icone del volume, due tasti arcade Ø30 con frecce incise |
+| Fronte | Finestra e-paper 50 × 25,5 mm, griglia altoparlante (fori Ø1,8) |
+| Retro | USB-C di ricarica, fessura microSD, sfiati |
+| Fondo | Interruttore generale e tasto genitori **incassati**, sportellino batteria |
+
+### Come stanno dentro i pezzi
+
+```
+      ^ retro (y +)
+  +-------------------------------+   z=95  soffitto: PN5180 sotto lo scasso NFC
+  |  [PN5180 58x47]               |
+  |                               |
+  |   culla cursore --- fessura   |   z=88
+  |                               |
+  |  ####### millefori 90x70 #### |   z=28   (ESP32-S3, MAX98357A, DS3231...)
+  |  #  TP4056 (retro sx)       # |
+  |  camera   [18650 a destra]    |   z=3..23
+  |  altopar.                     |
+  +-------------------------------+   z=0   fondo avvitato
+      v fronte (y -)   display sopra la griglia
+```
+
+La batteria sta a destra con l'asse lungo in profondità; la basetta millefori
+le passa sopra a 28 mm dal fondo, appoggiata su 4 colonnine stampate col fondo.
+L'altoparlante ha la sua camera chiusa: tiene il magnete lontano dall'antenna
+NFC e fa da cassa acustica.
+
+## Statuine
+
+Base Ø40 × 8 mm, sede del tag Ø26,4 a **1 mm dal fondo**: fra tag e antenna
+restano 1 mm di base + 2 mm di piatto NFC.
+
+Il tag si mette **durante la stampa**: pausa (M600 / *change filament*) a
+Z = 2,0 mm, si appoggia l'adesivo nella sede, si riprende. In alternativa si
+stampa con `TAPPO = true` e si incolla il dischetto.
+
+`statuina-orso.scad` è il modello da copiare per gli altri personaggi: forme
+piene ottenute con `hull()` di sfere, niente colli sottili, baricentro basso,
+nessuna parte che possa staccarsi. Altezza totale 61,5 mm.
+
+**Verifica obbligatoria:** nessun pezzo deve entrare tutto nel calibro Ø31,7.
+
+## Vinili
+
+Disco Ø60 × 5,2 mm (4 mm di corpo più solchi ed etichetta in rilievo), bordi
+raccordati, nessun foro centrale, stessa sede del tag delle statuine.
+Con un cambio colore alla quota dell'etichetta viene bicolore.
+
+## Scostamenti dalle specifiche iniziali
+
+Tre, tutti motivati:
+
+1. **Dimensioni 130 × 130 × 100 invece di 110 × 110 × 90.** Sullo stesso
+   coperchio devono convivere lo scasso Ø62, il cursore da 60 mm di corsa e
+   due tasti da 30 mm distanti fra loro: a 110 mm non ci stanno senza
+   stringere i comandi, che è esattamente ciò che non si deve fare a 2 anni.
+   Per riferimento la Toniebox è 120 × 120 × 120.
+2. **Icone incise invece che in rilievo.** La faccia superiore è il primo
+   strato di stampa: un rilievo lì non è stampabile senza dividere il
+   coperchio dalla scocca. Incise restano tattili e si possono evidenziare
+   con un pennarello.
+3. **Fessura del cursore 3,2 mm invece di 2 mm.** Il pomello non infila la
+   levetta del potenziometro nella fessura: ci passa una lama stampata che
+   la afferra sotto. Così la fessura resta stretta e il cappello largo la
+   copre comunque; un collare interno impedisce alle briciole di arrivare
+   all'elettronica.
