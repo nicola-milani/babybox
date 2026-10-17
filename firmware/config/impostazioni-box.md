@@ -56,6 +56,29 @@ invece che nel firmware.
 Lingua: per ora `LANGUAGE EN`. Diventa `IT` quando il task 3 aggiunge
 `LogMessages_IT.cpp`; prima di allora non compilerebbe.
 
+## Stato della compilazione (17 ottobre, verificato)
+
+Il firmware compila per la nostra scheda: **RAM 14,8 %**, **flash 45,5 %**
+della partizione app da 6,25 MB con OTA. Resta molto spazio per i moduli dei
+task 2, 6 e 7.
+
+Ci sono volute sette build. Le quattro trappole, tutte di ESPuino o della
+piattaforma, nessuna del nostro box:
+
+1. **PlatformIO 6.2.0 non va**: tira dentro tool-scons 4.11 e rompe il link.
+   Serve la 6.1.19 su Python 3.12 — vedi `../README.md`.
+2. **`platform = espressif32` nell'ambiente S3 di ESPuino** scavalca la
+   piattaforma pinnata e fa sparire `managed_components/`: la build muore su
+   `https_server.crt not found`. Il nostro ambiente eredita `[env]` e basta.
+3. **L'ESP32-S3 non ha il Bluetooth Classic**: la libreria ESP32-A2DP si
+   rifiuta di compilare, va esclusa con `lib_ignore` (il Bluetooth lo
+   avevamo già spento, ma la libreria sta in `lib_deps`).
+4. **PSRAM octal**: `custom_sdkconfig` di pioarduino viene ignorato quando il
+   framework è `arduino, espidf`. Serve `sdkconfig.defaults.esp32s3`.
+
+Le ultime tre valgono per chiunque compili ESPuino su un S3, perché la loro
+CI prova solo schede ESP32: sono materiale per una pull request a monte.
+
 ## Punti aperti, da chiudere alla prima accensione
 
 1. **Pin della microSD.** ESPuino chiama `SD_MMC.begin()` senza
@@ -70,7 +93,15 @@ Lingua: per ora `LANGUAGE EN`. Diventa `IT` quando il task 3 aggiunge
    resta provvisorio su 38/39/40.
 2. **GPIO48 / LED RGB.** Su molte DevKitC-1 è il LED RGB: se c'è, RST del
    PN5180 si sposta.
-3. **Log sulla USB nativa.** `ARDUINO_USB_CDC_ON_BOOT=1` è già
+3. **Risveglio con la statuina (LPCD), da verificare sul banco.** Compilando
+   esce questo avviso da `src/RfidPn5180.cpp:586`:
+   `'ESP_EXT1_WAKEUP_ALL_LOW' is deprecated: wakeup mode "ALL_LOW" is no
+   longer supported after ESP32, please use ESP_EXT1_WAKEUP_ANY_LOW`.
+   È proprio la riga che arma il risveglio dal deep sleep quando si appoggia
+   la statuina, e con un solo pin `ANY_LOW` fa esattamente la stessa cosa.
+   Se alla prova non si sveglia, è questa: una riga da cambiare, e un'altra
+   candidata per la pull request a monte.
+4. **Log sulla USB nativa.** `ARDUINO_USB_CDC_ON_BOOT=1` è già
    nell'ambiente: da verificare che i log escano davvero, visto che UART0
    (43/44) la usa il DS3231.
 
