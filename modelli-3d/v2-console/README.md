@@ -8,6 +8,8 @@ Nata dal documento `docs/varianti/v3-console-da-viaggio.md` del 18 ottobre e
 modellata la sera stessa, perché la stampa non era ancora partita: adesso si
 può scegliere con gli STL in mano invece che con un disegno.
 
+![La console montata, vista di tre quarti](immagini/col-fronte.png)
+
 ## Come si infila la carta — il punto che decide tutto
 
 La carta CR80 entra **di lato corto**: dentro 44 mm dei suoi 54, fuori un
@@ -139,6 +141,21 @@ chiudono solo con i pezzi in mano:
 - [ ] **La prova che conta**: una CR80 inserita per 44 mm si legge, e una
       carta nel vano sul retro resta zitta? Si misura col provino NFC appena
       arrivano PN5180 e ferrite, in dieci minuti.
+
+## Com'è fatta, in due immagini
+
+| | |
+| --- | --- |
+| ![Il retro chiuso](immagini/col-retro.png) | ![Il retro aperto, con le carte dentro](immagini/col-aperto.png) |
+| Dietro, chiuso: coperchio, interruttore, pozzetto del tasto genitori | Dietro, aperto: sei carte di piatto, una sull'altra |
+
+I render escono da `sorgenti/scena-colori.scad`, che monta gli stessi file
+degli STL insieme ai componenti comprati. Se cambia un pezzo cambiano
+anche le immagini:
+
+    openscad -o immagini/col-fronte.png --imgsize=1500,1050 \
+      --camera=0,20,55,72,0,32,460 --projection=p \
+      --colorscheme="Tomorrow Night" sorgenti/scena-colori.scad
 
 ## Come si sceglie
 

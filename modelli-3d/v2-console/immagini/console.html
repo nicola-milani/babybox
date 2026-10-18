@@ -1,0 +1,190 @@
+<title>Console da viaggio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Public+Sans:wght@400;600&display=swap">
+
+<style>
+  :root {
+    --fondo:    #15171a;
+    --piano:    #1e2125;
+    --filo:     #30343a;
+    --testo:    #eeece6;
+    --spento:   #9aa1a8;
+    --bianco:   #fbfaf6;
+    --rosso:    #e2574c;
+    --verde:    #2fb3a8;
+    --giallo:   #f4b63f;
+    --ocra:     #e9a23b;
+    --antra:    #333a3f;
+    --grigio:   #d7dad4;
+  }
+
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--testo);
+    font-family: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .foglio {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: clamp(28px, 6vw, 72px) clamp(20px, 5vw, 48px) 96px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(40px, 7vw, 72px);
+  }
+
+  header { display: flex; flex-direction: column; gap: 14px; }
+
+  h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 7vw, 4.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .misure {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: clamp(1rem, 2.4vw, 1.25rem);
+    color: var(--ocra);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .occhiello { color: var(--spento); max-width: 56ch; margin: 0; }
+
+  figure { margin: 0; display: flex; flex-direction: column; gap: 14px; }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #1d1f21;
+  }
+
+  figcaption { color: var(--spento); font-size: 0.95rem; max-width: 62ch; }
+  figcaption b { color: var(--testo); font-weight: 600; }
+
+  .coppia {
+    display: grid;
+    gap: clamp(28px, 5vw, 44px);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 760px) { .coppia { grid-template-columns: 1fr 1fr; } }
+
+  h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 0 0 18px;
+  }
+
+  .materiali {
+    display: grid;
+    gap: 2px;
+    grid-template-columns: 1fr;
+    border: 1px solid var(--filo);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  @media (min-width: 620px) { .materiali { grid-template-columns: 1fr 1fr; } }
+
+  .riga {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 13px 18px;
+    background: var(--piano);
+  }
+
+  .pastiglia {
+    flex: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 4px;
+    transform: translateY(2px);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  }
+
+  .riga span { color: var(--spento); font-size: 0.93rem; }
+  .riga b { font-weight: 600; }
+
+  footer {
+    color: var(--spento);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--filo);
+    padding-top: 22px;
+  }
+  code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.86em;
+    color: var(--testo);
+  }
+</style>
+
+<div class="foglio">
+
+  <header>
+    <h1>Console da viaggio</h1>
+    <p class="misure">180 &times; 110 &times; 45 mm &middot; corpo bianco &middot; 5 pezzi stampati</p>
+    <p class="occhiello">La variante v2 di babybox, montata. La carta della storia si infila
+      dal bordo superiore e ne sporge un centimetro, come una cartuccia.</p>
+  </header>
+
+  <figure>
+    <img src="col-fronte.png" alt="La console vista di tre quarti da davanti: corpo bianco, tasto rosso a sinistra, tasto verde a destra, cursore giallo del volume, griglia dell'altoparlante in basso a destra, carta arancione infilata in alto.">
+    <figcaption><b>Davanti.</b> Tasti ai pollici, LED di stato in alto a sinistra, cursore del
+      volume in basso con le icone incise ai due capi, griglia dell'altoparlante a destra.
+      Gli angoli morbidi sono quattro pezzi separati in TPU.</figcaption>
+  </figure>
+
+  <div class="coppia">
+    <figure>
+      <img src="col-retro.png" alt="Il retro chiuso: coperchio grigio del vano, interruttore nero in basso, pozzetto del tasto genitori, tre sfiati laterali.">
+      <figcaption><b>Dietro, chiuso.</b> Il coperchio del vano, l&rsquo;interruttore generale e il
+        pozzetto del tasto genitori: comandi da adulto, sulla faccia che guarda il tavolo.</figcaption>
+    </figure>
+    <figure>
+      <img src="col-aperto.png" alt="Il retro con il coperchio tolto: dentro il vano si vedono le carte impilate di piatto.">
+      <figcaption><b>Dietro, aperto.</b> Sei carte o tre dischi, di piatto uno sull&rsquo;altro. In
+        piedi non ci starebbero: il vano &egrave; profondo 13 mm.</figcaption>
+    </figure>
+  </div>
+
+  <section>
+    <h2>Di che colore &egrave; cosa</h2>
+    <div class="materiali">
+      <div class="riga"><i class="pastiglia" style="background: var(--bianco)"></i>
+        <div><b>Gusci</b> <span>&mdash; PETG bianco, ~150 g in due pezzi</span></div></div>
+      <div class="riga"><i class="pastiglia" style="background: var(--grigio)"></i>
+        <div><b>Coperchio del vano</b> <span>&mdash; PETG grigio, a scatto</span></div></div>
+      <div class="riga"><i class="pastiglia" style="background: var(--rosso)"></i>
+        <div><b>Tasto indietro</b> <span>&mdash; arcade 30 mm, comprato</span></div></div>
+      <div class="riga"><i class="pastiglia" style="background: var(--verde)"></i>
+        <div><b>Tasto avanti</b> <span>&mdash; arcade 30 mm, comprato</span></div></div>
+      <div class="riga"><i class="pastiglia" style="background: var(--giallo)"></i>
+        <div><b>Pomello del volume</b> <span>&mdash; stampato, sul potenziometro a slitta</span></div></div>
+      <div class="riga"><i class="pastiglia" style="background: var(--antra)"></i>
+        <div><b>Paracolpi</b> <span>&mdash; TPU 95A, 20 g in tutto</span></div></div>
+      <div class="riga"><i class="pastiglia" style="background: var(--ocra)"></i>
+        <div><b>Carta della storia</b> <span>&mdash; PVC CR80 con NTAG213, comprata</span></div></div>
+      <div class="riga"><i class="pastiglia" style="background: #7bd389"></i>
+        <div><b>LED di stato</b> <span>&mdash; WS2812B dietro 0,8 mm di parete</span></div></div>
+    </div>
+  </section>
+
+  <footer>
+    Immagini generate da <code>modelli-3d/v2-console/sorgenti/scena-colori.scad</code> con
+    OpenSCAD: sono gli stessi file degli STL, non un disegno a parte. Restano due prove da
+    fare col lettore in mano &mdash; se una CR80 infilata per 44 mm si legge, e se con la
+    ferrite le carte nel vano restano zitte.
+  </footer>
+
+</div>
