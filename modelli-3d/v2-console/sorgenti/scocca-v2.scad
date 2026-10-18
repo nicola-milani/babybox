@@ -217,12 +217,12 @@ module fessura_cursore_v2() {
 }
 
 module pad_led() {
-    translate([-V2_TASTO_X - 8, V2_PARETE + 2, V2_LED_Z])
+    translate([V2_LED_X, V2_PARETE + 2, V2_LED_Z])
         cube([LED_SEDE_D + 4, 4.4, LED_SEDE_D + 4], center = true);
 }
 
 module finestra_led_v2() {
-    x = -V2_TASTO_X - 8;
+    x = V2_LED_X;
     translate([x, LED_PARETE, V2_LED_Z])
         rotate([-90, 0, 0])
             cylinder(h = V2_PARETE - LED_PARETE + LED_SEDE_PROF, d = LED_FINESTRA_D);

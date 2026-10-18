@@ -20,6 +20,9 @@ NOMI = ["V2_X", "V2_Z", "V2_Y", "V2_PARETE", "V2_SPLIT", "V2_FESS_LARG",
         "V2_VANO_X0", "V2_VANO_Z0", "V2_BATT_X", "V2_BATT_Z", "V2_BATT_Y",
         "V2_BASETTA_X", "V2_BASETTA_Z", "V2_BASETTA_CX", "V2_BASETTA_CZ",
         "V2_USB_X", "V2_TP_X", "V2_TP_Z", "V2_FERRITE_Z",
+        "V2_SW_X", "V2_SW_Z", "V2_GEN_X", "V2_GEN_Z", "V2_LED_X", "V2_RAGGIO",
+        "V2_SPORT_X1", "V2_SPORT_X2", "V2_SPORT_GOLA", "V2_SPORT_PAD",
+        "SW_VITI", "SW_FORO_Y", "GEN_POZZO_D",
         "ALT_TUBO_OD", "ALT_TUBO_LUNG", "PN_X", "PN_Y", "PN_ALT",
         "TASTO_CAPPUCCIO", "CURSORE_CORSA", "CURSORE_LARG", "CURSORE_ALT", "CURSORE_Z_SOTTO", "BATT_HOLDER_X",
         "BATT_HOLDER_Y", "BATT_HOLDER_Z", "LED_SEDE_D", "LED_SEDE_PROF"]
@@ -73,7 +76,7 @@ pezzi = [
     ("cursore volume, culla compresa", v["V2_CURSORE_X"] - v["V2_CURSORE_VITI"] - 4, v["V2_CURSORE_X"] + v["V2_CURSORE_VITI"] + 4,
      0, v["V2_PARETE"] + v["CURSORE_Z_SOTTO"] + v["CURSORE_ALT"],
      v["V2_CURSORE_Z"] - (v["CURSORE_LARG"]+7)/2, v["V2_CURSORE_Z"] + (v["CURSORE_LARG"]+7)/2),
-    ("LED di stato", -v["V2_TASTO_X"] - 8 - v["LED_SEDE_D"]/2, -v["V2_TASTO_X"] - 8 + v["LED_SEDE_D"]/2,
+    ("LED di stato", v["V2_LED_X"] - v["LED_SEDE_D"]/2, v["V2_LED_X"] + v["LED_SEDE_D"]/2,
      0, v["V2_PARETE"] + v["LED_SEDE_PROF"],
      v["V2_LED_Z"] - v["LED_SEDE_D"]/2, v["V2_LED_Z"] + v["LED_SEDE_D"]/2),
     ("batteria", v["V2_BATT_X"] - v["BATT_HOLDER_X"]/2, v["V2_BATT_X"] + v["BATT_HOLDER_X"]/2,
@@ -93,6 +96,33 @@ pezzi = [
      v["V2_VANO_Z0"], v["V2_VANO_Z0"] + v["V2_VANO_Z"]),
     ("modulo di ricarica", v["V2_TP_X"] - 15, v["V2_TP_X"] + 15,
      v["V2_SPLIT"], v["V2_SPLIT"] + 12, v["V2_TP_Z"] - 11, v["V2_TP_Z"] + 11),
+    # la gola della porticina mangia i primi 5,8 mm del bordo inferiore per
+    # 64 mm di lunghezza: e' li' che il modulo di ricarica rischia di finirci
+    # sopra
+    ("porticina USB, gola e ispessimento",
+     v["V2_SPORT_X1"] - 6, v["V2_SPORT_X2"] + 6,
+     v["V2_SPLIT"] + (v["V2_Y"] - v["V2_SPLIT"])/2 - (v["V2_SPORT_GOLA"] + 6)/2,
+     v["V2_SPLIT"] + (v["V2_Y"] - v["V2_SPLIT"])/2 + (v["V2_SPORT_GOLA"] + 6)/2,
+     0, v["V2_PARETE"] + v["V2_SPORT_PAD"]),
+    ("interruttore generale", v["V2_SW_X"] - (v["SW_VITI"] + 6)/2, v["V2_SW_X"] + (v["SW_VITI"] + 6)/2,
+     v["V2_Y"] - 12, v["V2_Y"],
+     v["V2_SW_Z"] - (v["SW_FORO_Y"] + 6)/2, v["V2_SW_Z"] + (v["SW_FORO_Y"] + 6)/2),
+]
+
+# le quattro colonnine delle viti attraversano la console da parte a parte:
+# e' facile dimenticarsele e piazzarci sopra un comando
+for sx in (-1, 1):
+    for sz in (-1, 1):
+        cx = sx * (v["V2_X"]/2 - 9)
+        cz = v["V2_Z"]/2 + sz * (v["V2_Z"]/2 - 9)
+        pezzi.append((f"vite d'angolo {'sx' if sx < 0 else 'dx'} "
+                      f"{'basso' if sz < 0 else 'alto'}",
+                      cx - 4.5, cx + 4.5, 0, v["V2_Y"], cz - 4.5, cz + 4.5))
+
+pezzi += [
+    ("tasto genitori", v["V2_GEN_X"] - v["GEN_POZZO_D"]/2, v["V2_GEN_X"] + v["GEN_POZZO_D"]/2,
+     v["V2_Y"] - 8, v["V2_Y"],
+     v["V2_GEN_Z"] - v["GEN_POZZO_D"]/2, v["V2_GEN_Z"] + v["GEN_POZZO_D"]/2),
 ]
 
 # Coppie che si toccano apposta: la culla stringe il portabatteria, e un

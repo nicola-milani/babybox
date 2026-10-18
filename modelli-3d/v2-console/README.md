@@ -31,10 +31,13 @@ davanti all'antenna.
 | `retro-v2` | 180 × 110 × 19 | faccia posteriore in giù |
 | `coperchio-vano` | 103 × 70 × 4 | appoggiato, ganci in alto |
 | `paracolpi-v2` | 4 angoli, 26 × 26 × 45 | in TPU 95A, 20 mm/s, retrazione a zero |
+| `sportello-usb-v2` | 24 × 11 × 3,4 | appoggiata, bottoncino in alto |
 
 Si riusano dal cubo: `pomello-cursore`, `culla-cursore`,
-`camera-altoparlante`, `sportello-usb`. Le carte si comprano, i dischi si
-stampano da `vinili/`.
+`camera-altoparlante`. La porticina della USB invece è sua: il bordo della
+console è profondo 19 mm e la gola di quella del cubo ne vuole 16, che
+lascerebbe due binari da un millimetro e mezzo. Le carte si comprano, i
+dischi si stampano da `vinili/`.
 
 ## Scelte diverse dal cubo, e perché
 
@@ -55,6 +58,18 @@ sua corsa.
 
 **Il LED di stato** sta in alto a sinistra invece che al centro, per la
 stessa ragione: la tasca della fessura occupa tutta la parte alta.
+
+**Interruttore e tasto genitori stanno sul retro**, nella fascia sotto il
+vano. Sul cubo sono sotto il fondo, dove la mano di un bambino non arriva
+mentre gioca; qui un sotto non c'è, e il retro è la faccia che guarda il
+tavolo quando la console è appoggiata. Per premere il tasto genitori
+bisogna sollevarla: è esattamente il gesto che serve, e un bambino di due
+anni che la ribalta trova un foro da 6 mm in un pozzetto, non un pulsante.
+
+**Il tunnel della USB-C è più largo** che sul cubo (13 × 7,5 invece di
+11 × 6). Sotto la presa passa l'ispessimento della gola della porticina,
+quindi il connettore resta quattro millimetri dentro: deve entrarci il
+guscio dello spinotto, non solo la punta.
 
 ## La ferrite, spiegata
 
@@ -103,11 +118,13 @@ chiudono solo con i pezzi in mano:
       alla presa, culla e collare del cursore.
 - [x] **Angoli in TPU**: `paracolpi-v2.stl`, quattro pezzi da infilare sugli
       spigoli.
-- [x] **Verifica degli ingombri**: `verifica-ingombri.py` confronta dodici
+- [x] **Verifica degli ingombri**: `verifica-ingombri.py` confronta ventuno
       volumi a coppie e contro il guscio. Oggi dà zero problemi; ha trovato
-      tre collisioni che nei render non si vedevano (la tasca che tagliava la
-      camera acustica, la batteria che in orizzontale non ci stava, la culla
-      del cursore fuori dal guscio). Va rilanciato dopo ogni modifica ai
+      cinque collisioni che nei render non si vedevano (la tasca che
+      tagliava la camera acustica, la batteria che in orizzontale non ci
+      stava, la culla del cursore fuori dal guscio, il cursore contro il
+      braccio della culla della batteria, il pozzetto del tasto genitori
+      sopra una vite d'angolo). Va rilanciato dopo ogni modifica ai
       parametri, e rifatto col calibro quando arrivano i pezzi veri.
 - [ ] **Pulizia della fessura**: oggi la tasca è chiusa in fondo. Un bambino
       ci infila briciole, e per toglierle bisogna aprire i due gusci. Va

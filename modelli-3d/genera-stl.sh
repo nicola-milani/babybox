@@ -30,7 +30,8 @@ genera vinili vinile
 # PVC comprate gia' pronte. I sorgenti restano in modelli-3d/statuine/ per
 # chi volesse stampare un personaggio.
 echo "Console v2 (variante):"
-for n in scocca-v2 retro-v2 coperchio-vano paracolpi-v2; do genera v2-console "$n"; done
+for n in scocca-v2 retro-v2 coperchio-vano paracolpi-v2 sportello-usb-v2; do
+  genera v2-console "$n"; done
 
 echo "Provini:"
 for n in provino-nfc calibro-parti-piccole; do genera provini "$n"; done

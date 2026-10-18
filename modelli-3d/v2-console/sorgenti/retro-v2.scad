@@ -28,10 +28,16 @@ module retro_v2() {
         union() {
             guscio_retro();
             pareti_vano();
+            pad_sportello_v2();
+            sede_tasto_genitori_v2();
         }
         sedi_coperchio();
         apertura_vano();
+        cava_sportello_v2();
         foro_usb_v2();
+        taglio_interruttore_v2();
+        foro_tasto_genitori_v2();
+        sfiati_batteria();
         fori_viti_retro();
     }
     culla_batteria_retro();
@@ -181,11 +187,84 @@ module sedi_coperchio() {
 }
 
 // ------------------------------------------------------------------
-// USB-C sul bordo inferiore, con la stessa porticina del cubo
+// USB-C sul bordo inferiore, con la porticina scorrevole
 // ------------------------------------------------------------------
+// La presa resta un po' arretrata (sotto ci passa l'ispessimento della
+// gola), quindi il tunnel e' piu' generoso che sul cubo: ci deve entrare
+// il guscio dello spinotto, non solo la punta.
 module foro_usb_v2() {
-    translate([V2_USB_X, V2_RETRO_PROF/2, -0.1])
-        cube([USB_W, USB_H, V2_PARETE + 2], center = true);
+    translate([V2_USB_X, V2_RETRO_PROF/2, (V2_PARETE + V2_SPORT_PAD)/2 - 0.1])
+        cube([V2_USB_W, V2_USB_H, V2_PARETE + V2_SPORT_PAD + 2], center = true);
+}
+
+// Ispessimento interno sopra la corsa: una parete da 2,4 non contiene una
+// gola da 3.
+module pad_sportello_v2() {
+    lung = V2_SPORT_X2 - V2_SPORT_X1 + 12;
+    translate([(V2_SPORT_X1 + V2_SPORT_X2)/2, V2_RETRO_PROF/2,
+               V2_PARETE + V2_SPORT_PAD/2])
+        cube([lung, V2_SPORT_GOLA + 6, V2_SPORT_PAD], center = true);
+}
+
+// Cava della porticina: dentro e' piu' alta della fessura a vista, cosi'
+// la piastrina resta prigioniera e non diventa un pezzo che si stacca.
+module cava_sportello_v2() {
+    centro = (V2_SPORT_X1 + V2_SPORT_X2) / 2;
+    corsa  = V2_SPORT_X2 - V2_SPORT_X1;
+    translate([centro, V2_RETRO_PROF/2, V2_SPORT_PROF_GOLA/2 - 0.01])
+        cube([corsa, V2_SPORT_GOLA, V2_SPORT_PROF_GOLA], center = true);
+    translate([centro, V2_RETRO_PROF/2, V2_SPORT_PROF_APE/2 - 0.06])
+        cube([corsa, V2_SPORT_APERTURA, V2_SPORT_PROF_APE + 0.1], center = true);
+}
+
+// ------------------------------------------------------------------
+// Comandi dell'adulto: interruttore generale e tasto genitori
+// ------------------------------------------------------------------
+module taglio_interruttore_v2() {
+    // passaggio della levetta
+    translate([V2_SW_X, V2_RETRO_PROF - V2_PARETE/2, V2_SW_Z])
+        cava_y(SW_FORO_X, SW_FORO_Y, V2_PARETE + 1, r = 1);
+    // incasso del corpo dall'esterno: la levetta non sporge dal profilo
+    translate([V2_SW_X, V2_RETRO_PROF - SW_INCASSO/2 + 0.05, V2_SW_Z])
+        cava_y(SW_VITI + 6, SW_FORO_Y + 6, SW_INCASSO + 0.1, r = 1.5);
+    // viti di fissaggio
+    for (sx = [-1, 1])
+        translate([V2_SW_X + sx * SW_VITI/2, V2_RETRO_PROF + 0.5, V2_SW_Z])
+            rotate([90, 0, 0])
+                cylinder(h = V2_PARETE + 1, d = 2.4);
+}
+
+// Foro da 6 mm in un pozzetto: ci entra il polpastrello di un adulto, non
+// il dito di un bambino di due anni.
+module foro_tasto_genitori_v2() {
+    translate([V2_GEN_X, V2_RETRO_PROF + 0.5, V2_GEN_Z])
+        rotate([90, 0, 0])
+            cylinder(h = V2_PARETE + 1, d = GEN_FORO_D);
+    translate([V2_GEN_X, V2_RETRO_PROF + 0.05, V2_GEN_Z])
+        rotate([90, 0, 0])
+            cylinder(h = GEN_POZZO_H + 0.1, d = GEN_POZZO_D);
+}
+
+// Nicchia che tiene fermo il micropulsante 6x6, con un lato aperto per i
+// due fili.
+module sede_tasto_genitori_v2() {
+    lato = 6.6;
+    sp   = 1.8;
+    h    = 3.5;
+    translate([V2_GEN_X, V2_RETRO_PROF - V2_PARETE - h/2, V2_GEN_Z])
+        difference() {
+            cube([lato + 2*sp, h, lato + 2*sp], center = true);
+            translate([0, -0.2, 0]) cube([lato, h + 0.3, lato], center = true);
+            translate([0, 0, -(lato/2 + sp/2)]) cube([4, h + 0.4, sp + 0.4], center = true);
+        }
+}
+
+// Sfiati dietro la batteria, come sul cubo: una cella che si carica scalda
+// poco, ma l'aria deve poter uscire.
+module sfiati_batteria() {
+    for (i = [-1, 0, 1])
+        translate([V2_BATT_X, V2_RETRO_PROF - V2_PARETE/2, V2_BATT_Z + i * 20])
+            cava_y(6, 16, V2_PARETE + 1, r = 2);
 }
 
 module fori_viti_retro() {
