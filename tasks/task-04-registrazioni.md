@@ -2,7 +2,7 @@
 
 Vedi `audio/README.md` per le regole di registrazione.
 
-Suoni di sistema in italiano: avvio, statuina sconosciuta, batteria scarica, WiFi attivo, spegnimento.
+Suoni di sistema in italiano: avvio, carta sconosciuta, batteria scarica, WiFi attivo, spegnimento.
 
 > **«Batteria scarica» non è più facoltativo.** Tolto il display (task 2
 > annullato), è l'unico modo che il box ha di dirlo da solo: ESPuino sa

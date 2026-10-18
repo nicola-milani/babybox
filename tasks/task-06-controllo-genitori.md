@@ -10,12 +10,12 @@ Nuovo modulo che decide se il box può riprodurre, impostabile solo dalla web UI
 - Messaggio di blocco: audio registrato dai genitori, più versioni riprodotte a caso.
 
 ## Comportamento in fascia di riposo
-1. La prima statuina avvia normalmente la sua storia.
+1. La prima carta avvia normalmente la sua storia.
 2. Finita la storia → stato **Riposo bloccato**. Senza display (task 2 annullato) non c'è nessuna luna da mostrare: lo dice il messaggio registrato dai genitori, e la web UI lo segna.
-3. Ogni tentativo successivo (altra statuina, stessa rimessa, tasti) → messaggio a volume basso, poi sleep.
-4. Togliere e rimettere la stessa statuina *durante* la storia concessa non conta: riprende.
+3. Ogni tentativo successivo (altra carta, stessa rimessa, tasti) → messaggio a volume basso, poi sleep.
+4. Togliere e rimettere la stessa carta *durante* la storia concessa non conta: riprende.
 5. A fine fascia il box torna normale.
-6. Una canzone (vinile) conta come una storia.
+6. Una canzone (disco) conta come una storia.
 
 ## Requisiti
 - Regole e stato in memoria non volatile: spegnere e riaccendere non azzera il blocco.

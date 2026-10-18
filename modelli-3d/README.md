@@ -14,11 +14,13 @@ Licenza proposta: CC BY-SA 4.0.
 
 | # | Pezzo | File | Quando |
 | --- | --- | --- | --- |
-| 1 | **Provino NFC** | `provini/stl/provino-nfc.stl` | **Subito**, prima di tutto: dice se il lettore arriva al tag attraverso la plastica |
-| 2 | Calibro parti piccole | `provini/stl/calibro-parti-piccole.stl` | Subito: serve a verificare le statuine (EN 71-1) |
-| 3 | Base statuina + orso | `statuine/stl/` | Settimana 1, per provare tag e lettura |
-| 4 | Vinile | `vinili/stl/vinile.stl` | Settimana 1 |
-| 5 | Scocca + fondo + pezzi interni | `case/stl/` | Quando i componenti sono arrivati e misurati |
+| 1 | **Provino NFC** | `provini/stl/provino-nfc.stl` | **Subito**: dice se il lettore arriva al tag attraverso la plastica |
+| 2 | Calibro parti piccole | `provini/stl/calibro-parti-piccole.stl` | Subito: serve a verificare i pezzi (EN 71-1) |
+| 3 | Disco della musica | `vinili/stl/vinile.stl` | Settimana 1, per provare tag e lettura |
+| 4 | Scocca, fondo e pezzi interni | `case/stl/` | Quando i componenti sono arrivati e misurati |
+| 5 | I due raccoglitori | `raccoglitori/stl/` | Per ultimi: sono comodità, non servono a far suonare il box |
+
+Le **carte delle storie non si stampano**: si comprano già con il tag dentro.
 
 > Prima di stampare il case: ricontrollare col calibro le misure marcate
 > `[VERIFICARE]` in `sorgenti/parametri.scad` (potenziometro, tasti,
@@ -39,7 +41,7 @@ Due pezzi grandi soltanto:
 - **`fondo`** — l'unica parte smontabile, con 4 viti a testa speciale.
 
 Pezzi piccoli: `piatto-nfc` (il fondo dello scasso dove si appoggia la
-statuina, incollato dall'interno), `pomello-cursore`, `culla-cursore`,
+carta, incollato dall'interno), `pomello-cursore`, `culla-cursore`,
 `camera-altoparlante`, `sportellino-batteria`.
 
 Il **display e-paper è stato tolto** il 18 ottobre: il fronte è chiuso, con la
@@ -50,9 +52,9 @@ sola griglia dell'altoparlante. Per rimetterlo basta `CON_DISPLAY = true` in
 
 | Faccia | Contenuto |
 | --- | --- |
-| Coperchio | Scasso Ø62 per statuine e vinili (con due tacche per sollevare il disco), fessura del cursore con icone del volume, due tasti arcade Ø30 con frecce incise |
+| Coperchio | **Vassoio 88 × 62** che accetta sia una carta CR80 sia un disco Ø60, con due tacche per sollevarli; fessura del cursore con icone del volume; due tasti arcade Ø30 con frecce incise |
 | Fronte | Solo la griglia dell'altoparlante (fori Ø1,8), centrata. Nessuna finestra: il display è stato tolto il 18 ottobre |
-| Retro | USB-C di ricarica, fessura microSD, sfiati |
+| Retro | USB-C dietro una **porticina scorrevole** che non si sfila (un tappo si perderebbe), sfiati in alto. La microSD è interna: si raggiunge svitando il fondo |
 | Fondo | Interruttore generale e tasto genitori **incassati**, sportellino batteria |
 
 ### Come stanno dentro i pezzi
@@ -77,22 +79,20 @@ le passa sopra a 28 mm dal fondo, appoggiata su 4 colonnine stampate col fondo.
 L'altoparlante ha la sua camera chiusa: tiene il magnete lontano dall'antenna
 NFC e fa da cassa acustica.
 
-## Statuine
+## Carte delle storie — non si stampano
 
-Base Ø40 × 8 mm, sede del tag Ø26,4 a **1 mm dal fondo**: fra tag e antenna
-restano 1 mm di base + 2 mm di piatto NFC.
+Sono carte di PVC **CR80** (85,6 × 54 mm, la misura di una carta di credito)
+comprate già con il tag **NTAG213** dentro: nessun incavo da modellare,
+nessuna pausa in stampa, nessun tag da incollare. Si disegnano con un adesivo
+sopra, oppure si comprano stampabili a getto d'inchiostro.
 
-Il tag si mette **durante la stampa**: pausa (M600 / *change filament*) a
-Z = 2,0 mm, si appoggia l'adesivo nella sede, si riprende. In alternativa si
-stampa con `TAPPO = true` e si incolla il dischetto.
+Fino al 18 ottobre al loro posto c'erano statuine stampate in 3D con il tag
+annegato nella base: due ore di stampa e una pausa a metà per ogni
+personaggio. I sorgenti restano in `statuine/sorgenti/` per chi volesse
+stamparne una, ma non fanno più parte della 1.0 e `genera-stl.sh` non le
+produce più.
 
-`statuina-orso.scad` è il modello da copiare per gli altri personaggi: forme
-piene ottenute con `hull()` di sfere, niente colli sottili, baricentro basso,
-nessuna parte che possa staccarsi. Altezza totale 61,5 mm.
-
-**Verifica obbligatoria:** nessun pezzo deve entrare tutto nel calibro Ø31,7.
-
-## Vinili
+## Dischi
 
 Disco Ø60 × 5,2 mm (4 mm di corpo più solchi ed etichetta in rilievo), bordi
 raccordati, nessun foro centrale, stessa sede del tag delle statuine.

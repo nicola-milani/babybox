@@ -1,7 +1,8 @@
 rif,componente,modello_consigliato,qta_per_box,qta_da_ordinare,prezzo_indicativo_eur,fornitore,note
 A1,Microcontrollore,ESP32-S3-DevKitC-1 N16R8 (16MB flash 8MB PSRAM octal),1,2,12-20,Amazon subito,PSRAM obbligatoria per ESPuino; verificare la sigla N16R8
 A2,Lettore NFC,PN5180 SPI con antenna sul PCB,1,2,9-14,Amazon subito,Unico con risveglio all'appoggio (LPCD); servono SCK MOSI MISO NSS BUSY RST
-A3,Tag NFC,NTAG213 adesivi 25 mm,1 per personaggio,50,8-12,Amazon subito,ISO 14443A; non NTAG215/216 ne Mifare Classic
+A3,Carte delle storie,Carte PVC CR80 con NTAG213 (85.6x54),1 per storia,20,8-14,Amazon subito,Gia' pronte: niente tag da incollare. Stampabili a getto d'inchiostro oppure con un adesivo sopra
+A3b,Tag per i dischi,NTAG213 adesivi 25 mm,1 per disco,rotolo da 50,8-12,Amazon subito,Servono solo ai dischi della musica che stampiamo noi
 A4,Amplificatore,MAX98357A I2S 3W,1,2,6-10,Amazon subito,Alimentato da VBAT non da 3V3
 A5,Altoparlante,4 ohm 3W diametro 40 mm altezza max 6 mm,1,2,6-10,Amazon subito,Misurare appena arriva: il case e' disegnato su Ø40x6
 A7,Batteria,18650 protetta Samsung 35E o LG MJ1 3000-3500 mAh,1,2,10-18,Amazon/negozio,Venditore serio; diffidare delle celle da 9900 mAh

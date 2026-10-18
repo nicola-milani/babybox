@@ -7,16 +7,22 @@ Stampante: Anycubic Kobra S2 / S3 Max (ci stanno tutti i pezzi in un pezzo solo)
 | --- | --- | --- | --- | --- | --- |
 | `provino-nfc` | PLA o PETG | appoggiato | 20% | no | 30 min |
 | `calibro-parti-piccole` | PLA | in piedi | 20% | no | 1 h |
-| `base-statuina` | PLA/PETG | appoggiata | 40% | no | 25 min |
-| `statuina-orso` | PLA/PETG | in piedi | 40% | no | 2 h |
-| `vinile` | PLA/PETG | appoggiato | 30% | no | 35 min |
+| `vinile` (disco della musica) | PLA/PETG | appoggiato | 30% | no | 35 min |
 | `scocca` | **PETG** | **capovolta**, coperchio sul piano | 25% | no | 10–14 h |
 | `fondo` | PETG | faccia esterna sul piano | 25% | no | 2 h |
-| `piatto-nfc` | PETG (altro colore) | appoggiato | 30% | no | 10 min |
+| `piatto-nfc` | PETG (altro colore) | appoggiato | 30% | no | 15 min |
+| `sportello-usb` | PETG | appoggiato, bottoncino in alto | 40% | no | 5 min |
 | `pomello-cursore` | PETG | **su un fianco** | 40% | no | 15 min |
 | `culla-cursore` | PETG | lato aperto in alto | 30% | no | 25 min |
 | `camera-altoparlante` | PETG | fondo chiuso sul piano | 30% | no | 35 min |
 | `sportellino-batteria` | PETG | faccia esterna sul piano | 30% | no | 20 min |
+| `raccoglitore-carte` | PETG | sulla schiena, fessure in alto | 20% | no | 1,5 h |
+| `raccoglitore-dischi` | PETG | sulla schiena, fessure in alto | 20% | no | 2 h |
+
+> Le **carte delle storie non si stampano**: si comprano già con il tag NFC
+> dentro (CR80, 85,6 × 54). Si disegnano con un adesivo sopra, oppure si
+> comprano stampabili a getto d'inchiostro. Una statuina stampata costava due
+> ore e una pausa a metà per infilare il tag.
 
 Nessun pezzo ha bisogno di supporti: è un vincolo di progetto, non un caso.
 Se lo slicer ne propone, c'è qualcosa fuori posto — meglio capire cosa prima
@@ -26,12 +32,12 @@ di stampare.
 
 - **Case:** PETG. Regge il calore di un'auto d'estate e si scheggia meno.
   Temperature tipiche: 240 °C ugello, 80 °C piano, ventola al 40–50 %.
-- **Statuine e provini:** PLA, più facile e più preciso; tanto non scaldano.
+- **Carte e provini:** PLA, più facile e più preciso; tanto non scaldano.
 
 ## La pausa per infilare il tag NFC
 
-Statuine e vinili hanno una sede chiusa per il tag: il tag va messo **durante**
-la stampa.
+I **dischi della musica** hanno una sede chiusa per il tag: il tag va messo
+**durante** la stampa. (Le carte il tag ce l'hanno già dentro.)
 
 1. Nello slicer, a **Z = 2,0 mm**, inserisci una pausa
    (*Add pause at height* / *Inserisci pausa*: genera il comando giusto per la
@@ -43,7 +49,7 @@ la stampa.
 Se preferisci non fermare la stampa: in `base-statuina.scad` metti
 `TAPPO = true`, stampa anche il tappo e incollalo dopo aver messo il tag.
 
-**Prima di stampare 5 statuine, provane una** e verifica col box (o col
+**Prima di stampare sei dischi, provane uno** e verifica col box (o col
 provino NFC) che il tag si legga.
 
 ## Dopo la stampa
@@ -61,8 +67,8 @@ provino NFC) che il tag si legga.
 
 ## Verifiche obbligatorie sui pezzi stampati
 
-- [ ] Nessun pezzo (statuina, pomello, piatto, orecchio rotto) entra tutto nel
+- [ ] Nessun pezzo (disco, pomello, piatto, sportello) entra tutto nel
       calibro Ø31,7 → vedi `provini/`
 - [ ] Il fondo si avvita e resta a filo, senza bordi che tagliano
-- [ ] La statuina sta in piedi da sola sullo scasso e non scivola
-- [ ] Il vinile si solleva con un dito dalle due tacche
+- [ ] La carta e il disco stanno fermi nel vassoio e si sollevano con un dito
+- [ ] I raccoglitori si infilano nelle code di rondine e non ballano

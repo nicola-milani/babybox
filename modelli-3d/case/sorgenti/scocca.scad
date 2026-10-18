@@ -23,14 +23,16 @@ module scocca() {
             }
             if (CON_DISPLAY) pad_display();
             tubo_altoparlante();
+            pad_sportello();   // ispessisce la parete dove corre la porticina
+            pad_code();        // ... e dove sono scavate le code di rondine
         }
         tagli_coperchio();
         tagli_frontale();
         tagli_retro();
+        tagli_fiancate();
     }
     appoggio_fondo();
     pilastrini_fondo();
-    nervature_pn5180();
     collare_cursore();
     bosses_cursore();
 }
@@ -44,23 +46,31 @@ module cavita_interna() {
 
 // ---------- coperchio: zona NFC, cursore, tasti ----------
 module tagli_coperchio() {
-    // Foro passante a gradino per il piatto NFC:
-    // Ø NFC_D per NFC_PROF dall'alto, poi Ø (NFC_D - 2*spalla) passante.
-    // Il foro è passante (niente isole in stampa) e si chiude con il
-    // piatto-nfc incollato: sotto lo scasso si restringe, così il piatto
-    // si incastra dal basso e non può essere spinto dentro.
+    // Il vassoio è un foro passante (niente isole da stampare in aria) e si
+    // chiude con il piatto-nfc, che entra dal basso: sotto si restringe di
+    // mezzo millimetro per lato, così il piatto si incastra e non può essere
+    // spinto dentro. Il PN5180 sta incollato sotto al piatto.
+    lx = NFC_X_LUNG + GIOCO_FORO;
+    ly = NFC_Y_LARG + GIOCO_FORO;
     translate([NFC_X, NFC_Y, BOX_Z - NFC_PROF])
-        cylinder(h = NFC_PROF + 0.1, d = NFC_D + GIOCO_FORO);
+        piastra(lx, ly, NFC_PROF + 0.1, NFC_RAGGIO);
     translate([NFC_X, NFC_Y, BOX_Z - TOP_SP - 0.01])
-        cylinder(h = TOP_SP - NFC_PROF + 0.02,
-                 d1 = NFC_D + GIOCO_FORO - 0.9, d2 = NFC_D + GIOCO_FORO);
-    // tacche laterali per sollevare il vinile con un dito
-    for (sx = [-1, 1])
-        translate([NFC_X + sx * NFC_D/2, NFC_Y, BOX_Z - NFC_PROF])
+        hull() {
+            piastra(lx - 0.9, ly - 0.9, 0.02, NFC_RAGGIO - 0.45);
+            translate([0, 0, TOP_SP - NFC_PROF])
+                piastra(lx, ly, 0.02, NFC_RAGGIO);
+        }
+    // tacche sui lati lunghi: con un dito si solleva la carta o il disco
+    for (sy = [-1, 1])
+        translate([NFC_X, NFC_Y + sy * ly/2, BOX_Z - NFC_PROF])
             cylinder(h = NFC_PROF + 0.1, d = NFC_TACCA_D);
-    // smusso di invito sul bordo del piatto
-    translate([NFC_X, NFC_Y, BOX_Z - 0.8])
-        cylinder(h = 0.9, d1 = NFC_D + GIOCO_FORO, d2 = NFC_D + GIOCO_FORO + 1.6);
+    // smusso di invito sul bordo del vassoio
+    translate([NFC_X, NFC_Y, BOX_Z - 0.9])
+        hull() {
+            piastra(lx, ly, 0.02, NFC_RAGGIO);
+            translate([0, 0, 1.0])
+                piastra(lx + 1.6, ly + 1.6, 0.02, NFC_RAGGIO + 0.8);
+        }
 
     // fessura del cursore (passante)
     translate([0, CURSORE_Y, BOX_Z - TOP_SP - 0.1])
@@ -130,22 +140,63 @@ module tagli_frontale() {
 }
 
 // ---------- parete di fondo: USB-C, microSD, sfiati ----------
+// Ispessimento interno attorno alla porticina: la parete da 2,4 non basta
+// a contenere una cava da 3 mm.
+PAD_SPORT_SP = 3.4;
+
+module pad_sportello() {
+    lung = SPORT_CORSA_X2 - SPORT_CORSA_X1 + 12;
+    translate([(SPORT_CORSA_X1 + SPORT_CORSA_X2)/2,
+               BOX_Y/2 - PARETE - PAD_SPORT_SP/2, USB_Z])
+        cube([lung, PAD_SPORT_SP, SPORT_GOLA + 10], center = true);
+}
+
 module tagli_retro() {
-    // USB-C del modulo di ricarica
-    translate([USB_X, BOX_Y/2 - PARETE/2 - 0.1, USB_Z])
-        cava_y(USB_W, USB_H, PARETE + 1, r = 1.2);
-    // svasatura esterna per infilare il cavo senza forzare
-    translate([USB_X, BOX_Y/2 - 0.6, USB_Z])
-        cava_y(USB_W + 3, USB_H + 3, 1.4, r = 1.2);
-    // fessura microSD
-    translate([SD_X, BOX_Y/2 - PARETE/2 - 0.1, SD_Z])
-        cava_y(SD_W, SD_H, PARETE + 1, r = 1.0);
-    translate([SD_X, BOX_Y/2 - 0.6, SD_Z])
-        cava_y(SD_W + 4, SD_H + 3, 1.4, r = 1.0);
-    // sfiati dietro la batteria
+    centro = (SPORT_CORSA_X1 + SPORT_CORSA_X2) / 2;
+    corsa = SPORT_CORSA_X2 - SPORT_CORSA_X1;
+
+    // Cava della porticina: dentro è più alta della fessura a vista, così
+    // la porticina resta prigioniera e non si può sfilare.
+    translate([centro, BOX_Y/2 - SPORT_PROF_GOLA/2 + 0.01, USB_Z])
+        cube([corsa, SPORT_PROF_GOLA, SPORT_GOLA], center = true);
+    translate([centro, BOX_Y/2 - SPORT_PROF_APE/2 + 0.01, USB_Z])
+        cube([corsa, SPORT_PROF_APE + 0.1, SPORT_APERTURA], center = true);
+
+    // USB-C del modulo di ricarica, in fondo alla corsa
+    translate([USB_X, BOX_Y/2 - PARETE - PAD_SPORT_SP/2, USB_Z])
+        cava_y(USB_W, USB_H, PARETE + PAD_SPORT_SP + 1, r = 1.2);
+    // Sfiati dietro la batteria, sopra la corsa della porticina: più in
+    // basso si fonderebbero con la sua cava.
     for (i = [0 : 4])
-        translate([-24 + i * 12, BOX_Y/2 - PARETE/2 - 0.1, 34])
-            cava_y(6, 20, PARETE + 1, r = 2);
+        translate([-24 + i * 12, BOX_Y/2 - PARETE/2 - 0.1, 48])
+            cava_y(6, 22, PARETE + 1, r = 2);
+}
+
+// ---------- code di rondine per i raccoglitori ----------
+// La cava si allarga verso il fondo: il raccoglitore si infila dall'alto e
+// non si stacca tirandolo di lato. Verticale, quindi si stampa da sola.
+module pad_code() {
+    for (sx = [-1, 1], sy = [-1, 1])
+        translate([sx * (BOX_X/2 - PARETE - CODA_PAD/2),
+                   sy * CODA_INTERASSE/2, (CODA_Z1 + CODA_Z2)/2])
+            cube([CODA_PAD, CODA_FONDO + 8, CODA_Z2 - CODA_Z1 + 8], center = true);
+}
+
+module tagli_fiancate() {
+    for (sx = [-1, 1], sy = [-1, 1])
+        translate([sx * BOX_X/2, sy * CODA_INTERASSE/2, 0])
+            rotate([0, 0, sx > 0 ? 0 : 180])
+                coda_cava();
+}
+
+// Cava a sezione trapezia, aperta verso l'esterno (+X) e verso l'alto.
+module coda_cava() {
+    translate([-CODA_PROF, 0, CODA_Z1])
+        rotate([0, 0, 0])
+            linear_extrude(height = CODA_Z2 - CODA_Z1 + 40)
+                polygon([[0, -CODA_FONDO/2], [0, CODA_FONDO/2],
+                         [CODA_PROF + 0.2, CODA_BOCCA/2],
+                         [CODA_PROF + 0.2, -CODA_BOCCA/2]]);
 }
 
 // ---------- appoggio e viti del fondo ----------
@@ -175,21 +226,6 @@ module appoggio_fondo() {
             piastra(BOX_X - 2*PARETE - 2*lar, BOX_Y - 2*PARETE - 2*lar,
                     alt + 0.2, max(RAGGIO_VERT - PARETE - lar, 0.6));
     }
-}
-
-// ---------- nervature di contenimento del PN5180 ----------
-module nervature_pn5180() {
-    sp = 2;
-    alt = 7;
-    translate([NFC_X, NFC_Y, BOX_Z - TOP_SP - alt])
-        difference() {
-            piastra(PN_X + 2*sp + GIOCO, PN_Y + 2*sp + GIOCO, alt, 2);
-            translate([0, 0, -0.1])
-                piastra(PN_X + GIOCO, PN_Y + GIOCO, alt + 0.2, 1);
-            // lato aperto verso il davanti: il modulo entra a scorrere
-            translate([0, -(PN_Y/2 + sp), -0.1])
-                cube([PN_X - 14, 2*sp + 1, alt + 0.2], center = true);
-        }
 }
 
 // ---------- cursore: collare anti-briciole e pilastrini della culla ----------

@@ -1,28 +1,43 @@
 // ============================================================
-// piatto-nfc.scad — fondo dello scasso di appoggio
+// piatto-nfc.scad — fondo del vassoio di appoggio
 // ------------------------------------------------------------
-// Disco che chiude dal basso il foro del coperchio: è la
-// superficie su cui si appoggiano statuine e vinili, ed è
-// l'unico diaframma fra tag e antenna (2 mm).
-// Si incolla dall'interno; il modulo PN5180 subito sotto fa
-// da battuta di sicurezza.
+// È la superficie su cui si appoggiano le carte delle storie e i
+// dischi della musica, e l'unico diaframma fra tag e antenna: 2 mm.
+// Entra dal basso e si incastra (il foro si restringe), poi si
+// incolla. Il PN5180 va fissato con biadesivo sotto, centrato.
 //
-// STAMPA: appoggiato, faccia a vista sul piano. Ottimo in un
-// colore diverso dalla scocca.
+// STAMPA: appoggiato, faccia a vista sul piano. Bello in un colore
+// diverso dalla scocca: è la parte che si guarda di più.
 // ============================================================
 include <../../sorgenti/libreria.scad>
 
 piatto_nfc();
 
 module piatto_nfc() {
-    h = TOP_SP - NFC_PROF;                    // 2,0 mm
-    d_basso = NFC_D + GIOCO_FORO - 0.9 - 0.3;
-    d_alto  = NFC_D + GIOCO_FORO - 0.3;
+    h = TOP_SP - NFC_PROF;                        // 2,0 mm
+    lx_basso = NFC_X_LUNG + GIOCO_FORO - 0.9 - GIOCO;
+    ly_basso = NFC_Y_LARG + GIOCO_FORO - 0.9 - GIOCO;
+    lx_alto  = NFC_X_LUNG + GIOCO_FORO - GIOCO;
+    ly_alto  = NFC_Y_LARG + GIOCO_FORO - GIOCO;
+
     difference() {
         union() {
-            cylinder(h = h - 0.4, d1 = d_basso, d2 = d_alto - 0.2);
+            // tronco di piramide: si incastra nel foro che si restringe
+            hull() {
+                piastra(lx_basso, ly_basso, 0.02, NFC_RAGGIO - 0.45);
+                translate([0, 0, h - 0.4])
+                    piastra(lx_alto, ly_alto, 0.02, NFC_RAGGIO);
+            }
+            // ultimo scalino, a filo del fondo del vassoio
             translate([0, 0, h - 0.4])
-                cylinder(h = 0.4, d1 = d_alto - 0.2, d2 = d_alto - 0.8);
+                piastra(lx_alto, ly_alto, 0.4, NFC_RAGGIO);
         }
+        // segno leggero che dice dove appoggiare: il contorno di una carta
+        translate([0, 0, h - 0.35])
+            difference() {
+                piastra(CARTA_X + 1.2, CARTA_Y + 1.2, 0.45, 4);
+                translate([0, 0, -0.1])
+                    piastra(CARTA_X - 0.4, CARTA_Y - 0.4, 0.65, 3.4);
+            }
     }
 }

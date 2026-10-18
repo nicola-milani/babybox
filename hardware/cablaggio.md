@@ -75,13 +75,13 @@ fanno abbassare la tensione al microcontrollore.
 - **GPIO48 sulla DevKitC-1 è il LED RGB.** Verificare sul proprio esemplare:
   se c'è il LED, spostare RST su GPIO1 e aggiornare `pinout.md`.
 - **L'IRQ non è opzionale:** è il filo che sveglia il box quando appoggi la
-  statuina (LPCD). Deve finire su un GPIO RTC, da qui il GPIO1.
+  carta (LPCD). Deve finire su un GPIO RTC, da qui il GPIO1.
 - Cavi del lettore corti (< 10 cm) e lontani dall'altoparlante.
 
 ### Display e-paper — tolto
 
 Il display è uscito dal progetto il 18 ottobre: lo stato si legge dalla web UI,
-al bambino lo dice la statuina che ha in mano, e la batteria scarica la annuncia
+al bambino lo dice la carta che ha in mano, e la batteria scarica la annuncia
 il box a voce. I **GPIO 12–17 restano liberi**, e con loro cade il vincolo del
 secondo bus SPI separato dal lettore.
 

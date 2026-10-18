@@ -30,13 +30,26 @@ RAGGIO_TOP   = 3;     // raccordo del bordo superiore
 FONDO_SP     = 3.0;   // spessore della piastra di fondo
 FONDO_INCASSO = FONDO_SP;  // il fondo è incassato e a filo con le pareti
 
-// ---------- Zona NFC sul coperchio ----------
-NFC_D        = 62;    // diametro dello scasso di appoggio
-NFC_PROF     = 3.0;   // profondità dello scasso
+// ---------- Vassoio di appoggio sul coperchio ----------
+// Ci si appoggiano due cose diverse, e il vassoio deve accettarle entrambe:
+//   - le carte delle storie, PVC formato CR80 (85,6 x 54, come una carta
+//     di credito), con il tag NTAG213 dentro;
+//   - i dischi della musica, stampati da noi, Ø60.
+// Da qui le misure: lungo quanto una carta con un filo di gioco, largo
+// quanto un disco. La carta balla 4 mm sul lato corto: è un vassoio, non
+// un alloggiamento, e a due anni infilare una carta in una fessura esatta
+// sarebbe una pretesa.
+CARTA_X      = 85.6;  // CR80, misura standard
+CARTA_Y      = 54;
+CARTA_SP     = 0.84;
+NFC_X_LUNG   = CARTA_X + 2.4;   // 88,0
+NFC_Y_LARG   = 62;  // tanto quanto il disco più il gioco
+NFC_RAGGIO   = 6;     // raccordo degli angoli del vassoio
+NFC_PROF     = 3.0;   // profondità
 NFC_X        = 0;     // posizione del centro (X=0 = centro scatola)
 NFC_Y        = 28;    // spostato verso il retro, davanti ci stanno i comandi
-NFC_TACCA_D  = 14;    // tacche laterali per sollevare il vinile con un dito
-// Fondo dello scasso = TOP_SP - NFC_PROF = 2,0 mm (limite di specifica)
+NFC_TACCA_D  = 14;    // tacche sui lati lunghi per sollevare carta e disco
+// Fondo del vassoio = il pezzo piatto-nfc, 2,0 mm (limite di specifica)
 
 // ---------- Cursore volume (potenziometro a slitta B10K) ----------
 CURSORE_CORSA   = 60;    // corsa utile [VERIFICARE sul pezzo]
@@ -90,15 +103,24 @@ PN_X         = 58;    // ingombro del modulo, lato X [VERIFICARE]
 PN_Y         = 47;    // ingombro del modulo, lato Y [VERIFICARE]
 PN_ALT       = 8;     // altezza totale coi componenti [VERIFICARE]
 
-// ---------- Retro: USB-C e microSD ----------
-USB_X        = -28;   // posizione del centro sulla parete di fondo
+// ---------- Retro: solo la USB-C, dietro una porticina ----------
+// La microSD sta dentro: si raggiunge svitando il fondo. Fuori resta la
+// sola presa di ricarica, chiusa da una porticina che scorre e non si
+// sfila: un tappo si perderebbe, e passerebbe dal calibro delle parti
+// piccole.
+USB_X        = -40;   // il foro sta a un'estremità della corsa
 USB_Z        = 18;
 USB_W        = 11.0;  // foro per il connettore USB-C del TP4056
 USB_H        = 6.0;
-SD_X         = 28;
-SD_Z         = 18;
-SD_W         = 14.0;  // fessura di inserimento della microSD
-SD_H         = 3.4;
+SPORT_CORSA_X1 = -52; // la cava della porticina va da qui...
+SPORT_CORSA_X2 = 0;   // ...a qui: 52 mm, la porticina ne occupa 24
+SPORT_APERTURA = 13;  // altezza della fessura a vista
+SPORT_GOLA     = 16;  // altezza della cava interna: la porticina non esce
+SPORT_PROF_APE = 1.6; // profondità della fessura
+SPORT_PROF_GOLA = 3.0;// profondità della cava
+SPORT_PIASTRA_L = 24; // lunghezza della porticina
+SPORT_SPESS    = 1.2; // spessore della porticina
+SPORT_PRESA    = 2.2; // quanto sporge il bottoncino per il dito
 
 // ---------- Fondo: interruttore, tasto genitori, vano batteria ----------
 SW_X         = -40;   // interruttore a slitta da pannello
@@ -168,3 +190,22 @@ VIN_RAGGIO   = 1.2;   // raccordo del bordo
 CAL_D        = 31.7;
 CAL_H_MIN    = 25.4;
 CAL_H_MAX    = 57.1;
+
+// ---------- Aggancio dei raccoglitori sulle fiancate ----------
+// Due code di rondine verticali per lato, scavate nella parete: il box da
+// solo resta liscio e largo 130, i raccoglitori si infilano dall'alto e
+// stanno su da soli. Si stampano senza supporti perché la cava corre nella
+// direzione di crescita della stampa.
+CODA_INTERASSE = 60;   // distanza fra le due code, lungo Y
+CODA_BOCCA     = 7;    // larghezza della cava in superficie
+CODA_FONDO     = 11;   // larghezza in fondo: è questa che trattiene
+CODA_PROF      = 2.6;
+CODA_Z1        = 10;   // da che quota parte
+CODA_Z2        = 74;   // a che quota arriva
+CODA_PAD       = 3.2;  // ispessimento interno, se no la parete è troppo sottile
+
+// ---------- Raccoglitori ----------
+RACC_CARTE_N   = 6;
+RACC_CARTE_PASSO = 3.4;   // spazio per carta: CR80 è 0,84, il resto è dito
+RACC_DISCHI_N  = 6;
+RACC_DISCHI_PASSO = 7.0;  // disco 4-5 mm più il gioco

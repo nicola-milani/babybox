@@ -20,11 +20,15 @@ genera() {              # genera <cartella> <nome>
 
 echo "Case:"
 for n in scocca fondo piatto-nfc pomello-cursore culla-cursore \
-         camera-altoparlante sportellino-batteria; do genera case "$n"; done
-echo "Statuine:"
-for n in base-statuina statuina-orso; do genera statuine "$n"; done
-echo "Vinili:"
+         camera-altoparlante sportellino-batteria sportello-usb; do genera case "$n"; done
+echo "Raccoglitori:"
+for n in raccoglitore-carte raccoglitore-dischi; do genera raccoglitori "$n"; done
+echo "Dischi della musica:"
 genera vinili vinile
+
+# Le statuine non fanno piu' parte della 1.0: le storie stanno su carte di
+# PVC comprate gia' pronte. I sorgenti restano in modelli-3d/statuine/ per
+# chi volesse stampare un personaggio.
 echo "Provini:"
 for n in provino-nfc calibro-parti-piccole; do genera provini "$n"; done
 echo "Fatto."

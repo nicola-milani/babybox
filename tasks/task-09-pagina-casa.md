@@ -17,7 +17,7 @@ Far sparire dalla pagina ciò che il firmware ha spento, usando il meccanismo
 ### 9b · La pagina "casa"
 Nuova pagina servita su `/`, pensata per il telefono: in alto il coperchio
 disegnato con lo stato reale (cosa suona, batteria, WiFi, ora), sotto quattro
-azioni — **nuova statuina**, **nuovo vinile**, **nanna**, **carica storie** —
+azioni — **nuova carta**, **nuovo disco**, **nanna**, **carica storie** —
 e in fondo un link discreto alle impostazioni avanzate, che restano quelle di
 ESPuino.
 
@@ -31,8 +31,8 @@ fuso orario, ora. ESPuino ha già la pagina dell'access point: va rivestita.
 - Scura di partenza: si usa alle 7 del mattino e alle 20:30.
 
 ## Accettazione
-- [ ] Una statuina nuova si associa dal telefono in meno di 30 s
-- [ ] Un vinile nuovo suona in meno di 60 s
+- [ ] Una carta nuova si associa dal telefono in meno di 30 s
+- [ ] Un disco nuovo suona in meno di 60 s
 - [ ] La pagina si apre e funziona con il telefono collegato alla rete del box,
       senza internet
 - [ ] Un genitore che non ha mai visto il box arriva in fondo al primo avvio

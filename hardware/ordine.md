@@ -10,7 +10,8 @@ minuteria su AliExpress (10–20 giorni, arrivano per la settimana 3).
 | --- | --- | --- | --- | --- |
 | A1 | `ESP32-S3-DevKitC-1 N16R8` (16 MB flash, 8 MB PSRAM **octal**) | 2 | 12–20 | La PSRAM serve a ESPuino. Verificare la sigla **N16R8**: le versioni N8R2/N8R8 hanno meno flash. Prendere il modello con i pin già saldati |
 | A2 | `PN5180 NFC modulo ISO15693 SPI` con antenna sul PCB | 2 | 9–14 | È l'unico lettore che fa il risveglio all'appoggio (LPCD). Deve avere i 6 segnali SCK/MOSI/MISO/NSS/BUSY/RST |
-| A3 | `NTAG213 adesivi 25 mm` | 50 | 8–12 | NTAG213 (ISO 14443A). **Non** NTAG215/216 "amiibo", non Mifare Classic |
+| A3 | `Carte NFC NTAG213 PVC CR80` (85,6 × 54) | 20 | 8–14 | Sono le **carte delle storie**: si comprano già con il tag dentro, niente da incollare. Cercare «carte NFC NTAG213 stampabili» se le vuoi stampare a getto d'inchiostro |
+| A3b | `NTAG213 adesivi 25 mm` | rotolo da 50 | 8–12 | Solo per i **dischi della musica**, che stampiamo noi. NTAG213 (ISO 14443A): **non** NTAG215/216 «amiibo», non Mifare Classic |
 | A4 | `MAX98357A modulo I2S amplificatore` | 2 | 6–10 | Breakout con morsettiera o pad per l'altoparlante |
 | A5 | `Altoparlante 4 Ω 3 W Ø40 mm` (h ≤ 6 mm) | 2 | 6–10 | **Misurare diametro e altezza appena arriva**: il case è disegnato su Ø40 × 6 |
 | A7 | `18650 Samsung 35E / LG MJ1 protetta` 3000–3500 mAh | 2 | 10–18 | Comprare da venditore serio, non celle "9900 mAh" |
@@ -23,7 +24,7 @@ minuteria su AliExpress (10–20 giorni, arrivano per la settimana 3).
 **Totale A: circa 78–117 €** (ci sono dentro i ricambi di quasi tutto).
 
 > Il display e-paper è stato tolto dal progetto il 18 ottobre: lo stato si
-> legge dalla web UI, al bambino lo dice la statuina che ha in mano e la
+> legge dalla web UI, al bambino lo dice la carta che ha in mano e la
 > batteria scarica il box la annuncia a voce. Sono 12–18 € e una settimana di
 > lavoro in meno. Se un domani lo si rivuole, la voce era
 > `Waveshare e-Paper 2.13" 250x122 SPI`.

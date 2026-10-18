@@ -13,5 +13,5 @@ Ordine e settimane in `../PIANO_DI_LAVORO.md`.
 | 5 · allineamento ESPuino | settimana 4, poi mensile |
 | 6 · controllo genitori | **software fatto**, manca la prova sul box |
 | 7 · esporta e importa | da fare, non serve hardware |
-| 8 · musica e vinili | da fare |
+| 8 · musica e dischi | da fare |
 | 9 · pagina "casa" | nuovo: mockup pronto, pagina da scrivere |

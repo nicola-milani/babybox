@@ -8,8 +8,8 @@ Partenza: sabato 17 ottobre 2026. Aggiornato **domenica 18 ottobre**: mancano
 Un box completo e funzionante (milestone M1–M5 in versione essenziale):
 
 - case in PETG chiuso, elettronica su millefori, batteria 18650 con ricarica USB-C;
-- almeno **5 statuine** con storie registrate e **3 vinili** con canzoni;
-- firmware: statuine, pausa/ripresa, cursore volume, tasti, deep sleep, web UI in italiano con pagina casa, controllo genitori;
+- almeno **5 carte** con storie registrate e **3 dischi** con canzoni;
+- firmware: carte, pausa/ripresa, cursore volume, tasti, deep sleep, web UI in italiano con pagina casa, controllo genitori;
 - test d'uso con un bambino superato; repository pubblico con README e STL.
 
 **Fuori dal 20 novembre** (dopo la 1.0): PCB custom, M6 kit per altre famiglie, esportazione "personaggio" in TAR se il tempo stringe.
@@ -30,7 +30,7 @@ si è concentrato in un punto solo: la data in cui arrivano i pezzi.
 | Firmware | **Compila** per ESP32-S3 N16R8: RAM 15,1 %, flash 46,0 %, zero avvisi |
 | Task 3 · italiano | **Finito** (era previsto per la settimana 1): 0 etichette non tradotte su 2426 |
 | Task 6 · controllo genitori | **Software finito** (era previsto per la settimana 3): logica con 47 verifiche, innesto nel firmware, pagina web. Manca la prova sul box |
-| Modelli 3D | **12 STL pronti**: case in 7 pezzi, statuina, vinile, provino NFC, calibro parti piccole |
+| Modelli 3D | **12 STL pronti**: case in 7 pezzi, carta, disco, provino NFC, calibro parti piccole |
 | Progetto elettrico | Lista d'ordine, schema di cablaggio, pinout chiuso |
 | Banco di prova | Verifiche che girano sul Mac in un secondo; web UI navigabile senza hardware |
 | Mockup | Pagina "casa" per i genitori, provabile dal telefono |
@@ -59,10 +59,10 @@ di stampa del case.
 | Settimana | Firmware (io) | Hardware / 3D (tu) | Contenuti (tu) | Uscita (gate) |
 | --- | --- | --- | --- | --- |
 | ~~0 · 17–18 ott~~ | ~~fork, compilazione~~ **+ task 3 e 6** | ordine **da fare** | elenco **da fare** | ✅ firmware compila |
-| **1 · 19–25 ott** | Pagina "casa" vera; sfoltire la web UI; fuso orario in memoria; modulo DS3231 | **Ordine lunedì.** Stampa provino NFC, calibro, statuina, vinile. Breadboard appena arrivano i pezzi | Elenco definitivo; registrare 2 storie | **M1:** statuina → storia in meno di 1 s |
+| **1 · 19–25 ott** | Pagina "casa" vera; sfoltire la web UI; fuso orario in memoria; modulo DS3231 | **Ordine lunedì.** Stampa provino NFC, calibro, carta, vinile. Breadboard appena arrivano i pezzi | Elenco definitivo; registrare 2 storie | **M1:** carta → storia in meno di 1 s |
 | **2 · 26 ott–1 nov** | Task 1: cursore, tasti, deep sleep, taratura batteria. Prova dell'LPCD | Alimentazione su breadboard; stampa case v1 | Altre 2 storie; suoni di sistema | **M2:** sleep < 1 mA, batteria ±3 punti. **Avviare il test di autonomia** (serve una giornata) |
-| **3 · 2–8 nov** | Task 8 (vinili); prova sul banco del task 6 + dissolvenza; annuncio vocale della batteria | Correzioni → case v2; statuine e vinili col tag (pausa M600) | 5ª storia; 3 canzoni; messaggi della nanna | Blocco nanna vero sul box |
-| **4 · 9–15 nov** | Task 7 (export/import); task 5 (allineamento ESPuino); OTA | Montaggio su millefori dentro il case; verifiche del prototipo | Normalizzazione a −16 LUFS | **M3 + M4:** statuina associata dal telefono in 30 s; verifiche superate |
+| **3 · 2–8 nov** | Task 8 (dischi); prova sul banco del task 6 + dissolvenza; annuncio vocale della batteria | Correzioni → case v2; carte e dischi col tag (pausa M600) | 5ª storia; 3 canzoni; messaggi della nanna | Blocco nanna vero sul box |
+| **4 · 9–15 nov** | Task 7 (export/import); task 5 (allineamento ESPuino); OTA | Montaggio su millefori dentro il case; verifiche del prototipo | Normalizzazione a −16 LUFS | **M3 + M4:** carta associata dal telefono in 30 s; verifiche superate |
 | **5 · 16–20 nov** | Solo correzioni. **Freeze mercoledì 18** | Ritocchi, verniciatura EN 71-3 | — | **M5:** test con un bambino, README, release venerdì 20 |
 
 M3 (firmware) e M4 (case) vanno in parallelo dalla settimana 2.
@@ -72,7 +72,7 @@ M3 (firmware) e M4 (case) vanno in parallelo dalla settimana 2.
 | Chi | Come |
 | --- | --- |
 | Il genitore | Web UI: cosa suona, traccia, batteria, se è in fascia di riposo |
-| Il bambino | La statuina che ha in mano: non sa leggere, l'adesivo gli dice più di un titolo |
+| Il bambino | La carta che ha in mano: non sa leggere, l'adesivo gli dice più di un titolo |
 | Batteria scarica | **Annuncio vocale**, funzione già presente in ESPuino: va accesa dalla web UI e serve il file in `/sistema` (task 4) |
 | Riposo bloccato | Il messaggio della nanna registrato dai genitori (task 6) |
 | Primo avvio e indirizzo | Pagina del primo avvio (task 9), e il comando «annuncia l'indirizzo IP» |
@@ -86,7 +86,7 @@ M3 (firmware) e M4 (case) vanno in parallelo dalla settimana 2.
 | 3 | **Fuso orario in memoria** (oggi è compilato nel firmware) e primo avvio | no | sett. 1 |
 | 4 | **Modulo DS3231**: ESPuino non lo supporta, usa l'RTC interno via NTP | si scrive senza, si prova con | sett. 1–2 |
 | 5 | ~~Task 2: display e-paper~~ **annullato il 18 ottobre** | — | — |
-| 6 | **Task 8**: tipo del tag e flusso "nuovo vinile" | in parte | sett. 3 |
+| 6 | **Task 8**: tipo del tag e flusso "nuovo disco" | in parte | sett. 3 |
 | 7 | **Dissolvenza** negli ultimi 30 s: il controllo genitori la chiede già, il player non la fa | sì | sett. 3 |
 | 8 | **Task 7**: esporta e importa la configurazione in JSON | no | sett. 4 |
 | 9 | **Task 5**: primo allineamento col master di ESPuino | no | sett. 4 |

@@ -91,7 +91,7 @@ si aprono pull request verso progetti altrui.
    `BOX_SD_CLK/CMD/D0` da `settings-custom.h`: 38/39/40 sono definitivi.
 2. **GPIO48 / LED RGB.** Su molte DevKitC-1 è il LED RGB: se c'è, RST del
    PN5180 si sposta.
-3. ~~**Risveglio con la statuina (LPCD).**~~ **Chiuso il 18 ottobre, ed era
+3. ~~**Risveglio con la carta (LPCD).**~~ **Chiuso il 18 ottobre, ed era
    meno grave di come l'avevamo scritto.** Nell'header dell'IDF, fuori
    dall'ESP32, `ESP_EXT1_WAKEUP_ALL_LOW` è un alias deprecato di
    `ANY_LOW` con lo stesso valore: il risveglio avrebbe funzionato lo stesso,

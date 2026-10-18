@@ -123,3 +123,14 @@ module boss_soffitto(h = 7) {
         translate([0, 0, -h - 0.1]) cylinder(h = INSERTO_H + 0.1, d = INSERTO_D);
     }
 }
+
+// Maschio della coda di rondine: si infila nella cava della fiancata.
+// Si stampa in verticale insieme al raccoglitore, quindi senza supporti.
+module coda_maschio(altezza) {
+    gioco = 0.35;
+    rotate([-90, 0, 0])
+        linear_extrude(height = altezza)
+            polygon([[0, -(CODA_FONDO - gioco)/2], [0, (CODA_FONDO - gioco)/2],
+                     [CODA_PROF - 0.3, (CODA_BOCCA - gioco)/2],
+                     [CODA_PROF - 0.3, -(CODA_BOCCA - gioco)/2]]);
+}
