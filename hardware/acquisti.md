@@ -103,9 +103,20 @@ e il mercato è pieno di celle riciclate rimarchiate.
 
 **Se su Amazon non esce niente di decente** — succede, la vendita di celle
 sfuse è limitata e quello che resta sono pacchi precablati senza marca —
-la strada seria è un negozio specializzato: **nkon.nl** ha le Samsung 35E
-e le LG MJ1 vere a 5–6 €, spedisce in Italia in pochi giorni. È un terzo
-ordine, ma su questo componente ne vale la pena.
+la strada seria è un negozio specializzato: **nkon.nl** ha le Samsung vere
+a 3–6 € e spedisce in Italia. È un terzo ordine, ma su questo componente ne
+vale la pena.
+
+Lì vanno bene, in ordine di preferenza: **35E** (3500 mAh), **30Q** (3000),
+**29E** (2900). Sono tutte Samsung nuove, tutte flat top da 65 mm, tutte
+senza protezione — e va bene così: la protezione ce la mette il DW01 del
+TP4056 ora che il carico esce da OUT+/OUT−. La corrente massima dichiarata
+(8 o 15 A) non ci riguarda: il box ne tira 0,15.
+
+**Una sola cosa da evitare: le «reclaimed».** Sono celle vere ma recuperate
+da pacchi usati, con un numero di cicli che non sai. Costano due euro meno
+e invecchiano prima, e l'invecchiamento è il modo in cui una cella al litio
+finisce male. Questa sta in camera di un bambino a caricarsi di notte.
 
 ### A4 · MicroSD 32 GB — 1 pezzo, 8–12 €
 
