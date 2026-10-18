@@ -36,8 +36,8 @@ python3.12 -m venv .venv-pio                      # NON 3.13 o 3.14
   Arduino non ha `idf_component.yml`, quindi non nasce `managed_components/`
   e la build muore su `https_server.crt not found`. La CI di ESPuino non se
   ne accorge perché compila solo schede ESP32: l'ambiente S3 non lo prova
-  nessuno. **Candidato per una pull request a monte**, insieme alla
-  traduzione del task 3.
+  nessuno. La correzione resta nel nostro fork: su questo progetto non si
+  aprono pull request verso progetti altrui.
 
 ## Dove vanno le nostre modifiche
 

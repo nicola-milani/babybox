@@ -15,8 +15,8 @@ Stanno **qui**, non dentro il fork, e ci arrivano con `./firmware/applica-config
 | `settings-custom.h` | `ESPuino/src/settings-custom.h` | copia — questo file è tracciato dal fork, la modifica si vede come differenza del submodule (voluto) |
 
 Così il fork resta pulito: l'unica differenza rispetto al master di ESPuino è
-il file dei pin. Comoda per la pull request della traduzione (task 3) e per
-gli allineamenti mensili (task 5).
+il file dei pin, più il ramo `italiano` con la traduzione. Comodo per gli
+allineamenti mensili (task 5).
 
 > `settings-override.h`, quando esiste, **sostituisce del tutto** `settings.h`:
 > è una copia di quello di ESPuino 3.1 con le nostre righe marcate `[BOX]`.
@@ -77,7 +77,8 @@ piattaforma, nessuna del nostro box:
    framework è `arduino, espidf`. Serve `sdkconfig.defaults.esp32s3`.
 
 Le ultime tre valgono per chiunque compili ESPuino su un S3, perché la loro
-CI prova solo schede ESP32: sono materiale per una pull request a monte.
+CI prova solo schede ESP32. Restano nel nostro fork: su questo progetto non
+si aprono pull request verso progetti altrui.
 
 ## Punti aperti, da chiudere alla prima accensione
 
@@ -87,8 +88,8 @@ CI prova solo schede ESP32: sono materiale per una pull request a monte.
    liberi, ma vanno impostati. Due strade:
    a. adottare i pin di default e spostare display e cursore (sono liberi
       12, 13, 16, 17, 33, 34 e l'ADC1 su GPIO1);
-   b. aggiungere tre righe `setPins()` in `SdCard.cpp` dietro un `#ifdef`, e
-      proporle a monte: ESPuino un ambiente S3 ce l'ha già.
+   b. aggiungere tre righe `setPins()` in `SdCard.cpp` dietro un `#ifdef`
+      (modifica al core: commit piccolo e separato, come da regole del fork).
    La scelta si fa col primo boot: finché non è chiusa, `hardware/pinout.md`
    resta provvisorio su 38/39/40.
 2. **GPIO48 / LED RGB.** Su molte DevKitC-1 è il LED RGB: se c'è, RST del
@@ -99,8 +100,7 @@ CI prova solo schede ESP32: sono materiale per una pull request a monte.
    longer supported after ESP32, please use ESP_EXT1_WAKEUP_ANY_LOW`.
    È proprio la riga che arma il risveglio dal deep sleep quando si appoggia
    la statuina, e con un solo pin `ANY_LOW` fa esattamente la stessa cosa.
-   Se alla prova non si sveglia, è questa: una riga da cambiare, e un'altra
-   candidata per la pull request a monte.
+   Se alla prova non si sveglia, è questa: una riga da cambiare nel fork.
 4. **Log sulla USB nativa.** `ARDUINO_USB_CDC_ON_BOOT=1` è già
    nell'ambiente: da verificare che i log escano davvero, visto che UART0
    (43/44) la usa il DS3231.

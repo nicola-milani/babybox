@@ -1,6 +1,6 @@
 # Task 3 · Italiano nella web UI
 
-Aggiungere l'italiano alle lingue della web UI e ai messaggi di log visibili all'utente, con il meccanismo di traduzione già presente in ESPuino. Si può fare subito, senza hardware.
+Aggiungere l'italiano alle lingue della web UI e ai messaggi di log visibili all'utente, con il meccanismo di traduzione già presente in ESPuino. Si può fare subito, senza hardware. La traduzione resta nel nostro fork: non si propone a monte.
 
 **Dove mettere le mani (verificato su ESPuino 3.1):**
 - Web UI: `html/locales/` contiene `de.json`, `en.json`, `fr.json` → aggiungere `it.json`.
@@ -13,8 +13,11 @@ Aggiungere l'italiano alle lingue della web UI e ai messaggi di log visibili all
 - [x] Verifica automatica: `python3 test/verifica-traduzione.py` (chiavi,
       segnaposto, simboli dei log e specificatori printf)
 - [x] Compila con `LANGUAGE IT`: il linker non segnala simboli mancanti
-- [ ] Pull request a monte: ramo `italiano` già pronto e spinto sul fork,
-      resta da aprirla su github.com/biologist79/ESPuino
+- [x] ~~Pull request a monte~~ — **annullato**: su questo progetto non si
+      aprono pull request verso progetti altrui (decisione del 18 ottobre).
+      Il ramo `italiano` resta comunque staccato da `master`, perché tiene la
+      traduzione separata dalle personalizzazioni del box e rende più
+      semplici gli allineamenti mensili del task 5.
 
 ## Fatto il 17-18 ottobre
 

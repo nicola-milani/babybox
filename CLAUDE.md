@@ -13,6 +13,7 @@ Lingua del progetto: italiano (commenti, documentazione, messaggi della web UI).
 - Il codice ESPuino vive in `firmware/ESPuino/` (submodule del nostro fork). Branch `main` allineato periodicamente al master di ESPuino.
 - Personalizzazioni SOLO nei file di configurazione di ESPuino (impostazioni generali e file della scheda) e in moduli nuovi. Il core si tocca solo se indispensabile, e in quel caso con commit piccolo e separato, motivato nel messaggio.
 - Commit piccoli e atomici, un argomento per commit.
+- **Niente pull request verso progetti altrui.** Le nostre correzioni e la traduzione restano nel fork. Vale anche per il ramo `italiano`, che resta un ramo pulito del fork e non si propone a monte.
 - Configurazione nostra in `firmware/config/` (tre file), applicata al fork con `./firmware/applica-config.sh`. Non modificare quei file dentro il fork.
 - In ESPuino 3.1 quasi tutte le opzioni che ci servono sono passate alla web UI (LPCD, pausa togliendo il tag, salvataggio posizione). Restano `#define` solo `SD_MMC_1BIT_MODE`, `MEASURE_BATTERY_VOLTAGE` e `RFID_READER_TYPE_RUNTIME 3`. Stato verificato e punti aperti: `firmware/config/impostazioni-box.md`.
 

@@ -40,7 +40,7 @@ ESPuino chiama `SD_MMC.begin()` senza `setPins()`, quindi sull'ESP32-S3 usa i
 pin di default del core Arduino e non questi. Alla prima accensione si decide:
 adottare i default (e spostare display e cursore, che hanno pin liberi a
 sufficienza) oppure aggiungere una `setPins()` dietro `#ifdef` in `SdCard.cpp`
-e proporla a monte. Finché non è chiuso, 38/39/40 restano provvisori.
+nel fork. Finché non è chiuso, 38/39/40 restano provvisori.
 Dettagli in [`../firmware/config/impostazioni-box.md`](../firmware/config/impostazioni-box.md).
 
 ## Verifiche sulla breadboard (spuntare quando confermato)

@@ -11,7 +11,9 @@ Un box completo e funzionante (milestone M1–M5 in versione essenziale):
 - firmware: statuine, pausa/ripresa, cursore volume, tasti, deep sleep, e-paper, web UI in italiano, controllo genitori;
 - test d'uso con un bambino superato; repository pubblico con README e STL.
 
-**Fuori dal 20 novembre** (dopo la 1.0): PCB custom, M6 kit per altre famiglie, PR della traduzione a ESPuino (si può aprire, non serve che venga accettata), esportazione "personaggio" in TAR se il tempo stringe.
+**Fuori dal 20 novembre** (dopo la 1.0): PCB custom, M6 kit per altre famiglie, esportazione "personaggio" in TAR se il tempo stringe.
+
+**Non si fa:** nessuna pull request verso ESPuino o altri progetti altrui. Correzioni e traduzione restano nel fork.
 
 ## Il rischio principale: i tempi di spedizione
 
@@ -51,7 +53,7 @@ M3 (firmware) e M4 (case) vanno in parallelo dalla settimana 2: se siete in due,
 - [ ] Stampare il **provino NFC** e il calibro parti piccole
 - [x] Fork di ESPuino, submodule e configurazione del box
 - [x] Prima compilazione per ESP32-S3 N16R8 (gate della settimana 0)
-- [x] Task 3 (italiano) completato in anticipo: resta solo da aprire la PR a monte
+- [x] Task 3 (italiano) completato in anticipo
 - [ ] Installare in VS Code l'estensione PlatformIO
 - [ ] Confermare la lista delle 5 storie e 3 canzoni per la 1.0
 
