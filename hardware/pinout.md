@@ -1,6 +1,17 @@
 # Assegnazione dei pin — ESP32-S3 DevKitC-1 N16R8
 
-Provvisoria, da confermare sulla breadboard. Evitare GPIO 35–37 (PSRAM), 0, 3, 45, 46 (strapping) e 19–20 (USB nativa).
+Da confermare sulla breadboard.
+
+**Pin da evitare su questa scheda:** 33–37 (con la PSRAM **octal** della N16R8
+il chip li usa tutti e cinque, non solo 35–37 come si legge in giro), 3, 45, 46
+(strapping), 19–20 (USB nativa). GPIO0 è strapping ma è il tasto BOOT, e lo
+usiamo apposta come tasto genitori.
+
+**Conseguenza:** il pinout è pieno. Tolti quelli sopra restano esattamente i
+GPIO che abbiamo assegnato: non c'è una riserva. Se serve un pin per qualcosa
+di nuovo, bisogna toglierlo a qualcos'altro — per esempio rinunciando a un
+tasto o mettendo display e lettore sullo stesso bus SPI (sconsigliato: è il
+vincolo che tiene l'audio senza salti).
 
 | Periferica | Segnale | GPIO | Note |
 | --- | --- | --- | --- |
@@ -21,7 +32,7 @@ Provvisoria, da confermare sulla breadboard. Evitare GPIO 35–37 (PSRAM), 0, 3,
 | E-paper | DC | 15 | |
 | E-paper | RST | 16 | |
 | E-paper | BUSY | 17 | |
-| microSD | CLK | 39 | SD_MMC 1 bit — **provvisorio**, vedi nota sotto |
+| microSD | CLK | 39 | SD_MMC 1 bit, impostati con `setPins()` (vedi nota) |
 | microSD | CMD | 38 | |
 | microSD | D0 | 40 | |
 | DS3231 | SDA | 43 | Pin UART0: i log passano dalla USB nativa |
@@ -32,21 +43,24 @@ Provvisoria, da confermare sulla breadboard. Evitare GPIO 35–37 (PSRAM), 0, 3,
 | Tasto indietro | — | 47 | Pull-up interno; non è un pin RTC, non sveglia (va bene) |
 | Tasto genitori | — | 0 | In parallelo al tasto BOOT |
 | Batteria | ADC | 7 | Partitore 100 kΩ / 100 kΩ + 100 nF |
-| Libero | — | 33, 34 | Riserva (liberi anche con la PSRAM octal) |
 
-## Punto aperto: i pin della microSD
 
-ESPuino chiama `SD_MMC.begin()` senza `setPins()`, quindi sull'ESP32-S3 usa i
-pin di default del core Arduino e non questi. Alla prima accensione si decide:
-adottare i default (e spostare display e cursore, che hanno pin liberi a
-sufficienza) oppure aggiungere una `setPins()` dietro `#ifdef` in `SdCard.cpp`
-nel fork. Finché non è chiuso, 38/39/40 restano provvisori.
-Dettagli in [`../firmware/config/impostazioni-box.md`](../firmware/config/impostazioni-box.md).
+## I pin della microSD: risolto il 18 ottobre
+
+Non erano provvisori per scelta, ma per un problema vero: ESPuino chiama
+`SD_MMC.begin()` senza `setPins()`, e sull'ESP32-S3 i pin di SD_MMC passano
+dalla matrice GPIO — il core Arduino, per la variante `esp32s3`, **non ne
+assegna nessuno**. Non c'erano default da adottare: senza `setPins()` la
+scheda non si monta, qualunque GPIO si scelga.
+
+Risolto con tre righe nel fork (`SdCard.cpp`, marcate `[BOX]`) che leggono
+`BOX_SD_CLK/CMD/D0` dal file dei pin. 38/39/40 sono quindi definitivi, e si
+cambiano da `firmware/config/settings-custom.h` come tutti gli altri.
 
 ## Verifiche sulla breadboard (spuntare quando confermato)
 
 - [ ] GPIO48 libero (nessun LED RGB collegato) oppure spostare RST del PN5180
-- [ ] SD_MMC su 38/39/40 funziona con la PSRAM octal
+- [ ] SD_MMC su 38/39/40 funziona con la PSRAM octal (i pin ora sono dichiarati nel firmware)
 - [ ] Log su USB nativa con UART0 occupata dal DS3231
 - [ ] Partitore batteria: lettura tarata con multimetro
 - [ ] Modulo microSD a 3,3 V nativo (quelli con AMS1117 + 74LVC125 non vanno)

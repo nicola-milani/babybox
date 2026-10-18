@@ -17,9 +17,12 @@ Lingua del progetto: italiano (commenti, documentazione, messaggi della web UI).
 - Configurazione nostra in `firmware/config/` (tre file), applicata al fork con `./firmware/applica-config.sh`. Non modificare quei file dentro il fork.
 - In ESPuino 3.1 quasi tutte le opzioni che ci servono sono passate alla web UI (LPCD, pausa togliendo il tag, salvataggio posizione). Restano `#define` solo `SD_MMC_1BIT_MODE`, `MEASURE_BATTERY_VOLTAGE` e `RFID_READER_TYPE_RUNTIME 3`. Stato verificato e punti aperti: `firmware/config/impostazioni-box.md`.
 
+## Hardware
+- Finché i componenti non sono acquistati, **pinout e scelte hardware si possono ancora cambiare**: davanti a un attrito fra firmware e hardware, prima di contorcere il firmware valutare se conviene spostare un pin o cambiare modulo. Dopo l'ordine il vincolo si inverte.
+
 ## Vincoli che non si negoziano
 - Volume massimo limitato da firmware: il cursore tutto a destra vale il limite impostato dai genitori, mai di più.
 - Nessuna funzione a pressione lunga o combinazione di tasti per il bambino.
 - Il display non deve mai causare salti audio (task FreeRTOS a bassa priorità, bus SPI separato dal PN5180).
 - Stato del controllo genitori in memoria non volatile; ora non affidabile → regola più restrittiva.
-- Evitare GPIO 35–37 (PSRAM), 0/3/45/46 (strapping, salvo il tasto genitori su GPIO0 già previsto), 19–20 (USB).
+- Evitare GPIO **33–37** (con la PSRAM octal della N16R8 il chip li usa tutti e cinque: SPIIO4–SPIIO7 e SPIDQS), 0/3/45/46 (strapping, salvo il tasto genitori su GPIO0 già previsto), 19–20 (USB).

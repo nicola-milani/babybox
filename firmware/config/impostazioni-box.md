@@ -82,25 +82,23 @@ si aprono pull request verso progetti altrui.
 
 ## Punti aperti, da chiudere alla prima accensione
 
-1. **Pin della microSD.** ESPuino chiama `SD_MMC.begin()` senza
-   `SD_MMC.setPins()` (`src/SdCard.cpp`), quindi usa i default del core
-   Arduino, pensati per l'ESP32 classico (14 / 15 / 2). Sull'S3 i pin sono
-   liberi, ma vanno impostati. Due strade:
-   a. adottare i pin di default e spostare display e cursore (sono liberi
-      12, 13, 16, 17, 33, 34 e l'ADC1 su GPIO1);
-   b. aggiungere tre righe `setPins()` in `SdCard.cpp` dietro un `#ifdef`
-      (modifica al core: commit piccolo e separato, come da regole del fork).
-   La scelta si fa col primo boot: finché non è chiusa, `hardware/pinout.md`
-   resta provvisorio su 38/39/40.
+1. ~~**Pin della microSD.**~~ **Risolto il 18 ottobre.** Si era detto che
+   ESPuino usasse i default del core: non è così. Sull'ESP32-S3 i pin di
+   SD_MMC passano dalla matrice GPIO e per la variante `esp32s3` il core
+   **non ne assegna nessuno**, quindi senza `setPins()` la scheda non si
+   monta e basta — non c'era nessun default da adottare. Risolto con tre
+   righe in `src/SdCard.cpp` (marcate `[BOX]`) che leggono
+   `BOX_SD_CLK/CMD/D0` da `settings-custom.h`: 38/39/40 sono definitivi.
 2. **GPIO48 / LED RGB.** Su molte DevKitC-1 è il LED RGB: se c'è, RST del
    PN5180 si sposta.
-3. **Risveglio con la statuina (LPCD), da verificare sul banco.** Compilando
-   esce questo avviso da `src/RfidPn5180.cpp:586`:
-   `'ESP_EXT1_WAKEUP_ALL_LOW' is deprecated: wakeup mode "ALL_LOW" is no
-   longer supported after ESP32, please use ESP_EXT1_WAKEUP_ANY_LOW`.
-   È proprio la riga che arma il risveglio dal deep sleep quando si appoggia
-   la statuina, e con un solo pin `ANY_LOW` fa esattamente la stessa cosa.
-   Se alla prova non si sveglia, è questa: una riga da cambiare nel fork.
+3. ~~**Risveglio con la statuina (LPCD).**~~ **Chiuso il 18 ottobre, ed era
+   meno grave di come l'avevamo scritto.** Nell'header dell'IDF, fuori
+   dall'ESP32, `ESP_EXT1_WAKEUP_ALL_LOW` è un alias deprecato di
+   `ANY_LOW` con lo stesso valore: il risveglio avrebbe funzionato lo stesso,
+   l'avviso era solo rumore. Sostituito comunque con una costante scelta in
+   base al chip, così la compilazione resta pulita e si legge cosa succede.
+   **Resta da provare sul banco** che l'LPCD svegli davvero il box: quello
+   dipende dal PN5180 e dai suoi ponticelli, non da questa riga.
 4. **Log sulla USB nativa.** `ARDUINO_USB_CDC_ON_BOOT=1` è già
    nell'ambiente: da verificare che i log escano davvero, visto che UART0
    (43/44) la usa il DS3231.
