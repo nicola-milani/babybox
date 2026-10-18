@@ -61,3 +61,7 @@ impostazioni. Rotte `/genitori` (GET e POST) in `Web.cpp`.
   segnato nel codice (`adesso()` in `ControlloGenitoriBox.cpp`).
 - La dissolvenza finale: il modulo dice *quando* sfumare, il player non la fa
   ancora.
+- Il **fuso orario** è una costante compilata nel firmware (`settings.h`): va
+  spostato in memoria non volatile ed esposto nella pagina, altrimenti le fasce
+  orarie di un box spostato di fuso restano sbagliate e il primo avvio non può
+  chiederlo.
