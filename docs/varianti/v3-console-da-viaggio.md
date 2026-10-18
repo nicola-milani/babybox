@@ -1,6 +1,17 @@
 # Variante v3 — console da viaggio
 
-**Stato:** variante esplorata il 18 ottobre 2026, alternativa al box a cubo descritto nel resto del repository. Non sostituisce il progetto principale finché non si decide di adottarla.
+**Stato:** variante esplorata il 18 ottobre 2026 e **modellata la sera stessa**,
+perché la stampa non era ancora partita: gli STL sono in
+`modelli-3d/v2-console/` e il confronto con il cubo sta nel suo README.
+Non sostituisce il progetto principale finché non si decide di adottarla.
+
+**Cambiato rispetto a questo documento:** la carta si infila **di lato corto**
+lasciandone fuori un centimetro, non a metà di lato lungo. Così la spira del
+tag, che corre lungo tutto il bordo della CR80, finisce tutta davanti
+all'antenna e la lettura smette di essere un'incognita; e la tasca scende da
+78 a 50 mm di profondità. Anche il coperchio del vano è cambiato: a scatto
+invece che scorrevole, perché 96 × 64 non passa dal calibro delle parti
+piccole e una corsa da 96 mm non ci stava nella console.
 
 ![Mock v3](v3-console-da-viaggio.png)
 

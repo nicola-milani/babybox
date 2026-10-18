@@ -29,6 +29,9 @@ genera vinili vinile
 # Le statuine non fanno piu' parte della 1.0: le storie stanno su carte di
 # PVC comprate gia' pronte. I sorgenti restano in modelli-3d/statuine/ per
 # chi volesse stampare un personaggio.
+echo "Console v2 (variante):"
+for n in scocca-v2 retro-v2 coperchio-vano; do genera v2-console "$n"; done
+
 echo "Provini:"
 for n in provino-nfc calibro-parti-piccole; do genera provini "$n"; done
 echo "Fatto."
