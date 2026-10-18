@@ -31,7 +31,8 @@ si è concentrato in un punto solo: la data in cui arrivano i pezzi.
 | Firmware | **Compila** per ESP32-S3 N16R8: RAM 15,3 %, flash 46,6 %, zero avvisi |
 | Task 3 · italiano | **Finito** (era previsto per la settimana 1): 0 etichette non tradotte su 2426 |
 | Task 6 · controllo genitori | **Software finito** (era previsto per la settimana 3): logica con 47 verifiche, innesto nel firmware, pagina web. Manca la prova sul box |
-| Modelli 3D | **13 STL pronti**: case in 8 pezzi, disco, i due raccoglitori, provino NFC, calibro parti piccole |
+| Modelli 3D | **18 STL pronti**: cubo in 8 pezzi, disco, i due raccoglitori, provino NFC, calibro parti piccole, **più la console v2 in 5 pezzi** |
+| Console v2 | **Completa e alla pari col cubo** (18 ott, sera): sostegni interni, sede della ferrite, paracolpi in TPU, interruttore e tasto genitori sul retro, porticina USB sua, carta che entra tutta con la tacca di estrazione. `verifica-ingombri.py` confronta 21 volumi e dà zero collisioni |
 | Progetto elettrico | Lista d'ordine, schema di cablaggio, pinout chiuso |
 | Banco di prova | Verifiche che girano sul Mac in un secondo; web UI navigabile senza hardware |
 | Mockup | Pagina "casa" per i genitori, provabile dal telefono |
@@ -44,7 +45,7 @@ si è concentrato in un punto solo: la data in cui arrivano i pezzi.
 
 ### Non fatto, e blocca tutto
 
-- [ ] **Ordinare i componenti martedì 20** (`hardware/ordine.md`, parte A su Amazon). Rispetto a ieri: niente display, **20 carte NFC CR80** al posto degli adesivi per le statuine, un **WS2812** in più
+- [ ] **Ordinare i componenti martedì 20** (`hardware/ordine.md`, parte A su Amazon). Rispetto a ieri: niente display, **20 carte NFC CR80** al posto degli adesivi per le statuine, un **WS2812** in più, il **foglio di ferrite** (A13) e **500 g di TPU**. La lista non dipende dalla scelta fra cubo e console: stessa elettronica, stesso pinout — ferrite e TPU sono gli unici pezzi della sola console, e costano 20 € in tutto
 - [ ] Stampare provino NFC e calibro parti piccole
 - [ ] Confermare l'elenco delle 5 storie e 3 canzoni
 - [ ] Installare l'estensione PlatformIO in VS Code (per compilare senza riga di comando)
