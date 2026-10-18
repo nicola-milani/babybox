@@ -30,6 +30,7 @@ davanti all'antenna.
 | `scocca-v2` | 180 × 112 × 26 | faccia in giù, nessun supporto |
 | `retro-v2` | 180 × 110 × 19 | faccia posteriore in giù |
 | `coperchio-vano` | 103 × 70 × 4 | appoggiato, ganci in alto |
+| `paracolpi-v2` | 4 angoli, 26 × 26 × 45 | in TPU 95A, 20 mm/s, retrazione a zero |
 
 Si riusano dal cubo: `pomello-cursore`, `culla-cursore`,
 `camera-altoparlante`, `sportello-usb`. Le carte si comprano, i dischi si
@@ -43,43 +44,88 @@ più lunga della console. E un coperchio di 96 × 64 **non passa dal calibro
 delle parti piccole** (Ø31,7): qui un pezzo removibile è sicuro, a differenza
 del tappo della USB, che resta scorrevole proprio perché è piccolo.
 
-**Serve un foglio di ferrite** dietro l'antenna: senza, il lettore vedrebbe
-le carte nel vano sul retro e farebbe partire storie da solo. È la cosa più
-importante da ricordare se si sceglie questa strada, e non serve al cubo.
+**Serve un foglio di ferrite** dietro l'antenna. Vedi sotto: è la cosa più
+importante da ricordare se si sceglie questa strada, e al cubo non serve.
 
 **Il LED di stato** sta in alto a sinistra invece che al centro: la tasca
 della fessura occupa tutta la parte alta della faccia.
 
+## La ferrite, spiegata
+
+Un foglio di ferrite è un adesivo nero, morbido, spesso mezzo millimetro:
+polvere di ferrite in un legante. Non è uno schermo nel senso di una lamiera,
+è una **scorciatoia per il campo magnetico**. L'antenna del PN5180 genera un
+campo a 13,56 MHz che si chiude ad anello davanti e dietro il lettore. Le
+linee che passano dietro non servono a niente, ma leggono lo stesso: un
+foglio di ferrite appoggiato sul retro offre loro una strada a bassissima
+riluttanza, le raccoglie e le rimanda avanti. Il risultato è doppio — più
+portata davanti, quasi niente campo dietro.
+
+Nel cubo non serve perché dietro l'antenna c'è solo aria e l'elettronica.
+Nella console, invece, a 12–18 mm dietro l'antenna c'è il vano con sei carte:
+senza ferrite il lettore ne vedrebbe una e farebbe partire una storia da solo,
+col bambino che non ha appoggiato niente. È il motivo per cui questa variante
+costa 5 € in più.
+
+Come si monta, in pratica:
+
+1. Ritagliarlo **5–10 mm più grande della spira** dell'antenna per ogni lato
+   (la spira è il rettangolo di rame stampato sul PCB, non il bordo del
+   modulo). Il nostro alloggiamento è 60 × 50 mm.
+2. Incollarlo sul **retro** del PCB dell'antenna, lato componenti. Se qualche
+   componente sporge, prima un giro di Kapton: la ferrite conduce poco, ma non
+   è un isolante.
+3. Infilare il tutto nella sede stampata (`sedi_antenna`), che tiene il
+   pacchetto PCB + ferrite a 14,4 mm dalla faccia, cioè appoggiato alla
+   parete della tasca.
+4. Provare **prima** di chiudere: carta inserita per 44 mm deve leggere,
+   carta nel vano sul retro non deve leggere. Sono due minuti col provino.
+
+Marche che vanno bene: qualsiasi «ferrite sheet NFC / anti-metal», 0,3–0,5 mm.
+Quelle da ricarica wireless (Qi, 100–200 kHz) sono un materiale diverso e
+rendono meno a 13,56 MHz, ma funzionano: se è quello che arriva, va provato.
+
 ## Cosa manca ancora, se la scegliamo
 
-Questo è un primo giro, fatto in una sera per poter decidere. Prima di
-stampare per davvero:
+Dei cinque punti aperti del primo giro ne restano due, e sono i due che si
+chiudono solo con i pezzi in mano:
 
-- [ ] **Sostegni interni**: batteria, basetta e PN5180 non hanno ancora
-      colonnine né fermi. Nel cubo ci sono.
-- [ ] **Verifica degli ingombri**: sulla carta non si pestano i piedi
-      (fessura y 6,8–12,2, altoparlante fino a y 14,4, vano dal 32), ma va
-      controllato con i componenti veri in mano.
-- [ ] **Angoli in TPU**: previsti dal documento, non ancora modellati. Si
-      possono fare come pezzi separati da infilare sui quattro spigoli.
+- [x] **Sostegni interni**: fatti. Cornice e sede della ferrite per il
+      PN5180, culla della batteria divisa fra i due gusci (il portabatteria
+      resta stretto quando si chiude, più due asole per una fascetta),
+      quattro colonnine per la basetta 36 × 80, sede del TP4056 allineata
+      alla presa, culla e collare del cursore.
+- [x] **Angoli in TPU**: `paracolpi-v2.stl`, quattro pezzi da infilare sugli
+      spigoli.
+- [x] **Verifica degli ingombri**: `verifica-ingombri.py` confronta dodici
+      volumi a coppie e contro il guscio. Oggi dà zero problemi; ha trovato
+      tre collisioni che nei render non si vedevano (la tasca che tagliava la
+      camera acustica, la batteria che in orizzontale non ci stava, la culla
+      del cursore fuori dal guscio). Va rilanciato dopo ogni modifica ai
+      parametri, e rifatto col calibro quando arrivano i pezzi veri.
 - [ ] **Pulizia della fessura**: oggi la tasca è chiusa in fondo. Un bambino
       ci infila briciole, e per toglierle bisogna aprire i due gusci. Va
       deciso se farci un'uscita.
-- [ ] **La prova che conta**: una CR80 inserita per 44 mm si legge? Si
-      misura col provino NFC appena arriva il PN5180, in dieci minuti.
+- [ ] **La prova che conta**: una CR80 inserita per 44 mm si legge, e una
+      carta nel vano sul retro resta zitta? Si misura col provino NFC appena
+      arrivano PN5180 e ferrite, in dieci minuti.
 
 ## Come si sceglie
 
 | | Cubo (v1) | Console (v2) |
 | --- | --- | --- |
-| Pronto a stampare | **sì**, 13 STL verificati | 3 STL, mancano i sostegni interni |
+| Pronto a stampare | **sì**, 13 STL verificati | **sì**, 4 STL, ingombri verificati |
 | Gesto | appoggi la carta sul vassoio | la infili nella fessura |
 | Collezione | due raccoglitori ai lati, 6+6 | vano sul retro, 6 carte o 3 dischi |
 | In viaggio | i raccoglitori si sfilano e si perdono | tutto dentro |
 | Sul tavolo | sta fermo, il bambino lo guarda dall'alto | va tenuto o appoggiato di piatto |
 | Rischi aperti | nessuno grosso | lettura a 44 mm, briciole nella fessura |
-| Componenti in più | — | ferrite (~4 €) |
+| Componenti in più | — | ferrite (~5–9 €) e 20 g di TPU |
 
-Il cubo è la scelta sicura per il 20 novembre. La console è più bella da
-portare in giro e più divertente da usare, ma ha due incognite che si
-chiudono solo col lettore in mano.
+Il cubo resta la scelta prudente: è lo stesso progetto da più giorni e
+qualcuno di quei millimetri è già stato ricontrollato due volte. La console
+adesso è pari come completezza — sostegni, paracolpi, ingombri verificati —
+ed è più bella da portare in giro, ma porta con sé due incognite che si
+chiudono solo col PN5180 sul tavolo. Entrambe si risolvono in un pomeriggio
+appena arrivano i pezzi: non serve decidere oggi, serve ordinare la ferrite
+insieme al resto per potersi tenere la porta aperta.

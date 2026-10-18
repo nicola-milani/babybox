@@ -67,6 +67,8 @@ module scocca_v2() {
     }
     colonnine_viti();
     sedi_antenna();
+    culla_cursore_v2();
+    culla_batteria_v2();
 }
 
 module guscio() {
@@ -117,12 +119,72 @@ module cava_fessura() {
 }
 
 // Sede del PN5180 e del foglio di ferrite, subito dietro la guida.
+//
+// La ferrite e' un foglio magnetico adesivo che si incolla sul retro
+// dell'antenna: concentra il campo verso la carta infilata e fa da
+// schermo verso il vano, altrimenti il lettore leggerebbe le carte in
+// deposito a 12-18 mm e partirebbe una storia da sola. Qui c'e' la sede
+// che la tiene piatta; si ritaglia con le forbici 5-10 mm piu' grande
+// della spira.
+V2_ANT_Y = V2_CARTA_Y + V2_FESS_SPESS/2 + 2.4;   // 14,4: subito dietro la guida
+
 module sedi_antenna() {
-    y = V2_CARTA_Y + V2_FESS_SPESS/2 + 2.4;
+    // telaio che trattiene il modulo: tre lati chiusi, il quarto aperto
+    // per infilarlo dall'alto a guscio aperto
+    translate([0, V2_ANT_Y + PN_ALT/2, V2_FONDO_TASCA + PN_Y/2 - 2])
+        difference() {
+            cube([PN_X + 5, PN_ALT, PN_Y + 5], center = true);
+            cube([PN_X + GIOCO, PN_ALT + 1, PN_Y + GIOCO], center = true);
+            translate([0, 0, PN_Y/2 + 2]) cube([PN_X - 12, PN_ALT + 2, 6], center = true);
+        }
+    // appoggio della ferrite, dietro l'antenna
+    translate([0, V2_ANT_Y + PN_ALT + V2_FERRITE_SP/2 + 0.3,
+               V2_FONDO_TASCA + PN_Y/2 - 2])
+        difference() {
+            cube([V2_FERRITE_X + 4, V2_FERRITE_SP + 0.6, V2_FERRITE_Z + 4], center = true);
+            cube([V2_FERRITE_X + GIOCO, V2_FERRITE_SP + 1.6, V2_FERRITE_Z + GIOCO], center = true);
+        }
+}
+
+// ------------------------------------------------------------------
+// Culla del cursore e collare anti-briciole, come sul cubo
+// ------------------------------------------------------------------
+module culla_cursore_v2() {
+    // pilastrini con inserto a caldo: ci si avvita la culla del
+    // potenziometro, cosi' la levetta resta allineata alla fessura
     for (sx = [-1, 1])
-        translate([sx * (PN_X/2 + 1.6), y + PN_ALT/2,
-                   V2_FONDO_TASCA + PN_Y/2 + 4])
-            cube([3, PN_ALT + 2, PN_Y + 2], center = true);
+        translate([V2_CURSORE_X + sx * V2_CURSORE_VITI, V2_CURSORE_Y, V2_PARETE])
+            difference() {
+                cylinder(h = CURSORE_Z_SOTTO, d = BOSS_D);
+                translate([0, 0, CURSORE_Z_SOTTO - INSERTO_H])
+                    cylinder(h = INSERTO_H + 0.1, d = INSERTO_D);
+            }
+    // collare: le briciole che entrano dalla fessura restano qui
+    sp = 2;
+    translate([V2_CURSORE_X, V2_CURSORE_Y, V2_PARETE])
+        difference() {
+            piastra(V2_CURSORE_COLLARE, CURSORE_LARG + 2*sp + 3, TOP_SP + 1, 2);
+            translate([0, 0, -0.1])
+                piastra(V2_CURSORE_COLLARE - 2*sp, CURSORE_LARG + 3, TOP_SP + 1.2, 1);
+        }
+}
+
+// ------------------------------------------------------------------
+// Culla anteriore della batteria
+// ------------------------------------------------------------------
+// Il portabatteria e' alto 20 mm e la meta' posteriore ne offre 16,6:
+// sta a cavallo dei due gusci, con una culla per parte. In una versione
+// da viaggio e' anche piu' solido che appoggiarlo da un lato solo.
+module culla_batteria_v2() {
+    // la batteria sta in piedi: le culle sono due, sopra e sotto
+    for (sz = [-1, 1])
+        translate([V2_BATT_X, V2_PARETE + (V2_SPLIT - V2_PARETE)/2,
+                   V2_BATT_Z + sz * (BATT_HOLDER_Y/2 - 4)])
+            difference() {
+                cube([BATT_HOLDER_X + 2*2.4, V2_SPLIT - V2_PARETE, 6], center = true);
+                translate([0, 2, 0])
+                    cube([BATT_HOLDER_X + GIOCO, V2_SPLIT, 7], center = true);
+            }
 }
 
 // ------------------------------------------------------------------
@@ -135,15 +197,16 @@ module fori_tasti() {
                 cylinder(h = V2_PARETE + 2, d = TASTO_FORO + GIOCO_FORO);
 }
 
+// Il cursore sta sul bordo inferiore: sulla faccia, fra la camera acustica
+// e la tasca della fessura, restavano 32 mm e ne servono 52. Sul bordo il
+// pollice lo trova da solo e non lo si preme appoggiando la console.
 module fessura_cursore_v2() {
-    translate([0, -1, V2_CURSORE_Z])
-        rotate([-90, 0, 0])
-            fessura(CURSORE_CORSA + 9, CURSORE_FESSURA_W, V2_PARETE + 2);
-    // icone del volume incise, come sul cubo
+    translate([V2_CURSORE_X, V2_CURSORE_Y, -1])
+        fessura(CURSORE_CORSA + 9, CURSORE_FESSURA_W, V2_PARETE + 2);
     for (sx = [-1, 1])
-        translate([sx * (CURSORE_CORSA/2 + 8), 0.7, V2_CURSORE_Z])
-            rotate([90, 0, 0])
-                icona_volume(n = sx > 0 ? 3 : 1, alt = 0.9,
+        translate([V2_CURSORE_X + sx * (CURSORE_CORSA/2 + 8), V2_CURSORE_Y, 0.9])
+            rotate([0, 180, 0])
+                icona_volume(n = sx > 0 ? 3 : 1, alt = 1.0,
                              passo = 4.4, base = 3.5, cresc = 2.5);
 }
 
@@ -166,23 +229,23 @@ module finestra_led_v2() {
 // Altoparlante
 // ------------------------------------------------------------------
 module tubo_altoparlante_v2() {
-    translate([0, V2_PARETE + ALT_TUBO_LUNG/2, V2_ALT_Z])
+    translate([V2_ALT_X, V2_PARETE + ALT_TUBO_LUNG/2, V2_ALT_Z])
         rotate([-90, 0, 0])
             cylinder(h = ALT_TUBO_LUNG, d = ALT_TUBO_OD, center = true);
 }
 
 module sede_altoparlante_v2() {
     sede = ALT_ALT + 1;
-    translate([0, V2_PARETE + sede/2 - 0.05, V2_ALT_Z])
+    translate([V2_ALT_X, V2_PARETE + sede/2 - 0.05, V2_ALT_Z])
         rotate([-90, 0, 0])
             cylinder(h = sede + 0.1, d = ALT_D + GIOCO_FORO, center = true);
-    translate([0, V2_PARETE + sede + (ALT_TUBO_LUNG - sede)/2, V2_ALT_Z])
+    translate([V2_ALT_X, V2_PARETE + sede + (ALT_TUBO_LUNG - sede)/2, V2_ALT_Z])
         rotate([-90, 0, 0])
             cylinder(h = ALT_TUBO_LUNG - sede + 0.2, d = ALT_CAMERA_SEDE, center = true);
 }
 
 module griglia_v2() {
-    translate([0, -0.1, V2_ALT_Z])
+    translate([V2_ALT_X, -0.1, V2_ALT_Z])
         rotate([-90, 0, 0])
             griglia_tonda(ALT_D - 4, V2_PARETE + 0.4);
 }

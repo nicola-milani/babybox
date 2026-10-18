@@ -101,15 +101,26 @@ M3 (firmware) e M4 (case) vanno in parallelo dalla settimana 2.
 | 9 | **Task 5**: primo allineamento col master di ESPuino | no | sett. 4 |
 | 10 | **OTA**: aggiornamento dal browser | sì | sett. 4 |
 
-## Variante tenuta da parte
+## Due forme, si sceglie quando arrivano i pezzi
 
-Il 18 ottobre è stata esplorata una **console da viaggio** orizzontale con
-fessura, vano interno e angoli in TPU
-(`docs/varianti/v3-console-da-viaggio.md`). Non entra nella 1.0: il cubo è
-finito e rifare la meccanica costerebbe due o tre giorni più le ristampe, a
-33 giorni dalla consegna. Resta un buon candidato per una v2, e la prova che
-la deciderà — se una carta CR80 inserita a metà si legge — costa dieci minuti
-col provino NFC quando arriva il lettore.
+Il 18 ottobre, visto che la stampa non era ancora partita, la **console da
+viaggio** di `docs/varianti/v3-console-da-viaggio.md` è stata modellata per
+intero invece che tenuta da parte: 180 × 110 × 45, carta che entra di lato
+corto lasciando fuori un centimetro, vano della collezione sul retro,
+paracolpi in TPU (`modelli-3d/v2-console/`, 4 STL).
+
+Oggi le due forme sono alla pari: stessa elettronica, stesso firmware,
+sostegni interni completi in entrambe e `verifica-ingombri.py` che dà zero
+collisioni sulla console. Restano due incognite, tutte e due della console e
+tutte e due da chiudere col lettore in mano:
+
+- una CR80 infilata per 44 mm si legge?
+- con la ferrite dietro l'antenna, le carte riposte nel vano restano zitte?
+
+Sono dieci minuti col provino NFC. **Quello che cambia oggi è l'ordine**: va
+aggiunto il foglio di ferrite (A13, 5–9 €) e 500 g di TPU, altrimenti la
+porta si chiude da sola. La decisione su cosa stampare si prende in
+settimana 2, dopo la prova.
 
 ## Margini e piano B
 

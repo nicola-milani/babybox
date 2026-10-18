@@ -34,6 +34,57 @@ module retro_v2() {
         foro_usb_v2();
         fori_viti_retro();
     }
+    culla_batteria_retro();
+    colonnine_basetta();
+    sede_ricarica();
+}
+
+// ------------------------------------------------------------------
+// Sostegni interni
+// ------------------------------------------------------------------
+// Culla posteriore della batteria: l'altra meta' sta nel guscio
+// anteriore. Chiudendo i due gusci il portabatteria resta stretto fra
+// le due culle e non si muove negli urti, che su una versione da
+// viaggio e' il caso normale, non l'eccezione.
+module culla_batteria_retro() {
+    for (sz = [-1, 1])
+        translate([V2_BATT_X, (V2_RETRO_PROF - V2_PARETE)/2 + V2_PARETE,
+                   V2_BATT_Z + sz * (BATT_HOLDER_Y/2 - 4)])
+            difference() {
+                cube([BATT_HOLDER_X + 2*2.4, V2_RETRO_PROF - V2_PARETE, 6], center = true);
+                translate([0, -2, 0])
+                    cube([BATT_HOLDER_X + GIOCO, V2_RETRO_PROF, 7], center = true);
+            }
+    // asole per una fascetta: la cella non salta via se la console cade
+    for (sz = [-1, 1])
+        translate([V2_BATT_X, V2_PARETE + 1.5, V2_BATT_Z + sz * (BATT_HOLDER_Y/2 + 5)])
+            cube([BATT_HOLDER_X + 8, 3, 2.5], center = true);
+}
+
+// Colonnine della basetta millefori: 60 x 68, piu' piccola di quella
+// del cubo perche' qui il vano della collezione si prende meta' spazio.
+module colonnine_basetta() {
+    for (sx = [-1, 1], sz = [-1, 1])
+        translate([V2_BASETTA_CX + sx * (V2_BASETTA_X/2 - 4), V2_PARETE,
+                   V2_BASETTA_CZ + sz * (V2_BASETTA_Z/2 - 4)])
+            rotate([-90, 0, 0])
+                difference() {
+                    union() {
+                        cylinder(h = V2_BASETTA_Y, d = 7);
+                        cylinder(h = 2.5, d1 = 10, d2 = 7);
+                    }
+                    translate([0, 0, 1]) cylinder(h = V2_BASETTA_Y, d = AUTOFIL_D);
+                }
+}
+
+// Sede del modulo di ricarica, allineata alla presa sul bordo inferiore:
+// se balla, la USB-C non si infila piu' dritta.
+module sede_ricarica() {
+    for (sx = [-1, 1])
+        translate([V2_TP_X + sx * 14, V2_PARETE + 4, V2_TP_Z])
+            cube([2.4, 8, 22], center = true);
+    translate([V2_TP_X, V2_PARETE + 4, V2_TP_Z - 11])
+        cube([30, 8, 2.4], center = true);
 }
 
 module sezione_faccia(x, z, altezza, r) {

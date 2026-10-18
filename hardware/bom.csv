@@ -11,6 +11,7 @@ A9,Cursore volume,Potenziometro a slitta lineare B10K corsa 60 mm,1,2,6-10,Amazo
 A10,Tasti,Pulsanti arcade 30 mm bassa forza,2,4,6-10,Amazon subito,Due colori; verificare il foro di montaggio (28 o 30 mm)
 A11,MicroSD,32 GB classe 10,1,1,6-9,Amazon,Formattare FAT32
 A12,Lettore microSD,Modulo microSD 3.3V nativo o portacard nudo,1,2,3-5,Amazon,NON i moduli con AMS1117 + 74LVC125 (sono per 5V)
+A13,Ferrite schermante,Foglio di ferrite flessibile adesivo 60x60 mm sp. 0.3-0.5 mm (tipo NFC shielding),1,2,5-9,Amazon subito,Serve SOLO alla console v2: senza, il lettore vede le carte nel vano dietro. Va anche bene come prova sul cubo
 B1,Orologio,Modulo RTC DS3231,1,2,4,AliExpress,Dissaldare la resistenza di carica da 200 ohm se si usa una CR2032
 B2,Regolatore 3.3V,ME6211C33 o AP2112K-3.3 (500-600 mA),1,5,3,AliExpress,Evitare AMS1117 (caduta 1.1 V) e HT7333 (solo 250 mA)
 B3,Portabatteria,Supporto 18650 contatti a molla,1,3,3,AliExpress,Misurare: il vano e' 24x78x20
@@ -24,3 +25,4 @@ B9,Viti di sicurezza,Torx pin o triwing M2.5x8,4,20,5,AliExpress,Chiusura del fo
 B10,Cablaggio,Cavetto siliconico 26 AWG e connettori JST-XH,1 set,kit,8,AliExpress,
 B11,Varie,Rete anti-polvere e biadesivo,1 set,1,5,AliExpress,Rete dietro la griglia dell'altoparlante
 C1,Filamento,PETG per il case PLA per provini e statuine,~150 g,1 kg,20,,Colori diversi per piatto NFC ed etichette dei vinili
+C2,Filamento TPU,TPU 95A per i paracolpi degli angoli,~20 g,500 g,15,,Solo console v2: quattro angoli morbidi. Stampare lento (20 mm/s) e senza retrazione

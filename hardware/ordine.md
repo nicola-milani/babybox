@@ -1,6 +1,6 @@
 # Lista d'ordine — un box completo + ricambi
 
-Aggiornata al 17 ottobre 2026. I prezzi sono indicativi (IVA inclusa).
+Aggiornata al 18 ottobre 2026. I prezzi sono indicativi (IVA inclusa).
 Regola del piano di lavoro: **i pezzi critici su Amazon oggi**, i ricambi e la
 minuteria su AliExpress (10–20 giorni, arrivano per la settimana 3).
 
@@ -20,8 +20,9 @@ minuteria su AliExpress (10–20 giorni, arrivano per la settimana 3).
 | A10 | `Pulsanti arcade 30 mm` a bassa forza | 4 | 6–10 | Due colori diversi. Verificare il foro di montaggio (28 o 30 mm) |
 | A11 | `MicroSD 32 GB classe 10` | 1 | 6–9 | Da formattare FAT32 |
 | A12 | `Modulo microSD per Arduino` (SPI/SD_MMC) | 2 | 3–5 | Serve solo il lettore meccanico; si cablano i pin in modalità SD_MMC 1 bit |
+| A13 | `Foglio ferrite NFC schermante adesivo` 60 × 60, spessore 0,3–0,5 mm | 2 | 5–9 | **Solo per la console v2**: va dietro l'antenna, altrimenti il lettore legge le carte riposte nel vano sul retro e fa partire storie da solo. Cercare «ferrite sheet NFC anti-metal»: il foglio deve essere *più grande* della spira dell'antenna di 5–10 mm per lato |
 
-**Totale A: circa 78–117 €** (ci sono dentro i ricambi di quasi tutto).
+**Totale A: circa 83–126 €** (ci sono dentro i ricambi di quasi tutto).
 
 > Il display e-paper è stato tolto dal progetto il 18 ottobre: lo stato si
 > legge dalla web UI, al bambino lo dice la carta che ha in mano e la
@@ -50,9 +51,11 @@ minuteria su AliExpress (10–20 giorni, arrivano per la settimana 3).
 
 ## C · Già in casa o da stampare
 
-- Filamento **PETG** per il case (~150 g) e **PLA** per provini e statuine.
+- Filamento **PETG** per il case (~150 g) e **PLA** per provini e dischi.
+- Filamento **TPU 95A** (~20 g) solo se si sceglie la console v2: sono i quattro
+  paracolpi degli angoli. Si stampano lenti, 20 mm/s, retrazione a zero.
 - Stagno, flussante, termorestringente.
-- Vernici atossiche **EN 71-3** se si dipingono le statuine.
+- Vernici atossiche **EN 71-3** se si colorano i dischi.
 
 ## Attrezzi che servono davvero
 
