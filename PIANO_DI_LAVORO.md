@@ -49,7 +49,9 @@ M3 (firmware) e M4 (case) vanno in parallelo dalla settimana 2: se siete in due,
 - [x] Progetto elettrico: `hardware/ordine.md` e `hardware/cablaggio.md`
 - [ ] Ordinare i componenti (vedi `hardware/ordine.md`, parte A su Amazon)
 - [ ] Stampare il **provino NFC** e il calibro parti piccole
-- [ ] Fare il fork di ESPuino su GitHub e aggiungerlo come submodule (`firmware/README.md`)
+- [x] Fork di ESPuino, submodule e configurazione del box
+- [x] Prima compilazione per ESP32-S3 N16R8 (gate della settimana 0)
+- [x] Task 3 (italiano) completato in anticipo: resta solo da aprire la PR a monte
 - [ ] Installare in VS Code l'estensione PlatformIO
 - [ ] Confermare la lista delle 5 storie e 3 canzoni per la 1.0
 

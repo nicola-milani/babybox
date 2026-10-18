@@ -8,5 +8,26 @@ Aggiungere l'italiano alle lingue della web UI e ai messaggi di log visibili all
 - Poi `#define LANGUAGE IT` in `firmware/config/settings-override.h` (adesso è `EN` apposta: senza il file italiano non compila).
 
 ## Accettazione
-- [ ] Ogni testo delle pagine è in italiano
-- [ ] Traduzione proposta al progetto originale con una pull request (aprirla basta per la 1.0)
+- [x] Ogni testo delle pagine è in italiano — verificato caricando la web UI
+      in locale: **0 etichette non tradotte su 2426**
+- [x] Verifica automatica: `python3 test/verifica-traduzione.py` (chiavi,
+      segnaposto, simboli dei log e specificatori printf)
+- [x] Compila con `LANGUAGE IT`: il linker non segnala simboli mancanti
+- [ ] Pull request a monte: ramo `italiano` già pronto e spinto sul fork,
+      resta da aprirla su github.com/biologist79/ESPuino
+
+## Fatto il 17-18 ottobre
+
+Cinque file nel fork, sul ramo `italiano` staccato da `master` (così la PR
+contiene solo la traduzione, senza le personalizzazioni del nostro box):
+
+| File | Cosa |
+| --- | --- |
+| `html/locales/it.json` | traduzione completa di `en.json` |
+| `src/LogMessages_IT.cpp` | messaggi di log |
+| `src/values.h` | `#define IT 4` |
+| `processHtml.py` | incorpora `it.json` nel firmware |
+| `html/management.html` | «Italiano» nel selettore della lingua |
+
+Per rivedere le pagine senza hardware: `python3 test/webui-locale/server.py`
+e poi `http://localhost:8081`.

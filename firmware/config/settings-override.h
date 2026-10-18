@@ -51,7 +51,7 @@
 	//#define MQTT_ENABLE                   // [BOX] spento: non ci serve e libera risorse                     // Make sure to configure mqtt-server and (optionally) username+pwd
 	//#define FTP_ENABLE                    // [BOX] spento: si attiva con una combinazione di tasti, che non vogliamo                      // Enables FTP-server; DON'T FORGET TO ACTIVATE AFTER BOOT BY PRESSING PAUSE + NEXT-BUTTONS (IN PARALLEL)!
 	//#define NEOPIXEL_ENABLE               // [BOX] spento: al posto dell'anello LED c'e' l'e-paper (task 2)                 // Don't forget configuration of NUM_LEDS if enabled
-	#define LANGUAGE EN                     // [BOX] diventa IT col task 3 (LogMessages_IT.cpp). Originale: DE                     // DE = deutsch; EN = english: FR = french
+	#define LANGUAGE IT                     // [BOX] italiano (task 3). Originale: DE                     // DE = deutsch; EN = english: FR = french
 	//#define HEADPHONE_ADJUST_ENABLE       // [BOX] spento: non c'e' presa cuffie         // Used to adjust (lower) volume for optional headphone-pcb (refer maxVolumeSpeaker / maxVolumeHeadphone) and to enable stereo (headphones are always stereo, even if mono-playback is enabled via GUI)
 	#define SHUTDOWN_IF_SD_BOOT_FAILS       // Will put ESP to deepsleep if boot fails due to SD. Really recommend this if there's in battery-mode no other way to restart ESP! Interval adjustable via deepsleepTimeAfterBootFails.
 	#define MEASURE_BATTERY_VOLTAGE         // Enables battery-measurement via GPIO (ADC) and voltage-divider
