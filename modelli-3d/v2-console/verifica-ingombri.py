@@ -16,12 +16,12 @@ P = Path(__file__).parent / "sorgenti"
 
 NOMI = ["V2_X", "V2_Z", "V2_Y", "V2_PARETE", "V2_SPLIT", "V2_FESS_LARG",
         "V2_FESS_SPESS", "V2_FESS_PROF", "V2_TASTO_X", "V2_TASTO_Z", "V2_ALT_Z",
-        "V2_CURSORE_Z", "V2_CURSORE_Y", "V2_CURSORE_X", "V2_ALT_X", "V2_CURSORE_COLLARE", "V2_CURSORE_VITI", "V2_LED_Z", "V2_VANO_X", "V2_VANO_Z", "V2_VANO_PROF",
+        "V2_CURSORE_Z", "V2_CURSORE_X", "V2_ALT_X", "V2_CURSORE_COLLARE", "V2_CURSORE_VITI", "V2_LED_Z", "V2_VANO_X", "V2_VANO_Z", "V2_VANO_PROF",
         "V2_VANO_X0", "V2_VANO_Z0", "V2_BATT_X", "V2_BATT_Z", "V2_BATT_Y",
         "V2_BASETTA_X", "V2_BASETTA_Z", "V2_BASETTA_CX", "V2_BASETTA_CZ",
         "V2_USB_X", "V2_TP_X", "V2_TP_Z", "V2_FERRITE_Z",
         "ALT_TUBO_OD", "ALT_TUBO_LUNG", "PN_X", "PN_Y", "PN_ALT",
-        "TASTO_CAPPUCCIO", "CURSORE_CORSA", "CURSORE_LARG", "BATT_HOLDER_X",
+        "TASTO_CAPPUCCIO", "CURSORE_CORSA", "CURSORE_LARG", "CURSORE_ALT", "CURSORE_Z_SOTTO", "BATT_HOLDER_X",
         "BATT_HOLDER_Y", "BATT_HOLDER_Z", "LED_SEDE_D", "LED_SEDE_PROF"]
 
 
@@ -71,14 +71,20 @@ pezzi = [
     ("tasto destro", v["V2_TASTO_X"] - v["TASTO_CAPPUCCIO"]/2, v["V2_TASTO_X"] + v["TASTO_CAPPUCCIO"]/2,
      0, 12, v["V2_TASTO_Z"] - v["TASTO_CAPPUCCIO"]/2, v["V2_TASTO_Z"] + v["TASTO_CAPPUCCIO"]/2),
     ("cursore volume, culla compresa", v["V2_CURSORE_X"] - v["V2_CURSORE_VITI"] - 4, v["V2_CURSORE_X"] + v["V2_CURSORE_VITI"] + 4,
-     v["V2_CURSORE_Y"] - (v["CURSORE_LARG"]+7)/2, v["V2_CURSORE_Y"] + (v["CURSORE_LARG"]+7)/2,
-     0, 16),
+     0, v["V2_PARETE"] + v["CURSORE_Z_SOTTO"] + v["CURSORE_ALT"],
+     v["V2_CURSORE_Z"] - (v["CURSORE_LARG"]+7)/2, v["V2_CURSORE_Z"] + (v["CURSORE_LARG"]+7)/2),
     ("LED di stato", -v["V2_TASTO_X"] - 8 - v["LED_SEDE_D"]/2, -v["V2_TASTO_X"] - 8 + v["LED_SEDE_D"]/2,
      0, v["V2_PARETE"] + v["LED_SEDE_PROF"],
      v["V2_LED_Z"] - v["LED_SEDE_D"]/2, v["V2_LED_Z"] + v["LED_SEDE_D"]/2),
     ("batteria", v["V2_BATT_X"] - v["BATT_HOLDER_X"]/2, v["V2_BATT_X"] + v["BATT_HOLDER_X"]/2,
      v["V2_BATT_Y"] - v["BATT_HOLDER_Z"]/2, v["V2_BATT_Y"] + v["BATT_HOLDER_Z"]/2,
      v["V2_BATT_Z"] - v["BATT_HOLDER_Y"]/2, v["V2_BATT_Z"] + v["BATT_HOLDER_Y"]/2),
+    ("culla batteria, braccio basso", v["V2_BATT_X"] - v["BATT_HOLDER_X"]/2 - 2.4, v["V2_BATT_X"] + v["BATT_HOLDER_X"]/2 + 2.4,
+     v["V2_PARETE"], v["V2_SPLIT"],
+     v["V2_BATT_Z"] - v["BATT_HOLDER_Y"]/2 + 1, v["V2_BATT_Z"] - v["BATT_HOLDER_Y"]/2 + 7),
+    ("culla batteria, braccio alto", v["V2_BATT_X"] - v["BATT_HOLDER_X"]/2 - 2.4, v["V2_BATT_X"] + v["BATT_HOLDER_X"]/2 + 2.4,
+     v["V2_PARETE"], v["V2_SPLIT"],
+     v["V2_BATT_Z"] + v["BATT_HOLDER_Y"]/2 - 7, v["V2_BATT_Z"] + v["BATT_HOLDER_Y"]/2 - 1),
     ("basetta millefori", v["V2_BASETTA_CX"] - v["V2_BASETTA_X"]/2, v["V2_BASETTA_CX"] + v["V2_BASETTA_X"]/2,
      v["V2_SPLIT"] + 2, v["V2_SPLIT"] + 18,
      v["V2_BASETTA_CZ"] - v["V2_BASETTA_Z"]/2, v["V2_BASETTA_CZ"] + v["V2_BASETTA_Z"]/2),
@@ -88,6 +94,14 @@ pezzi = [
     ("modulo di ricarica", v["V2_TP_X"] - 15, v["V2_TP_X"] + 15,
      v["V2_SPLIT"], v["V2_SPLIT"] + 12, v["V2_TP_Z"] - 11, v["V2_TP_Z"] + 11),
 ]
+
+# Coppie che si toccano apposta: la culla stringe il portabatteria, e un
+# riquadro non sa disegnare una C. Tutto il resto deve stare separato.
+AMMESSE = {
+    ("batteria", "culla batteria, braccio basso"),
+    ("batteria", "culla batteria, braccio alto"),
+}
+
 
 def sovrappone(a, b):
     s = []
@@ -102,6 +116,8 @@ def sovrappone(a, b):
 print("Ingombri interni della console v2\n")
 problemi = 0
 for a, b in itertools.combinations(pezzi, 2):
+    if (a[0], b[0]) in AMMESSE or (b[0], a[0]) in AMMESSE:
+        continue
     s = sovrappone(a, b)
     if s:
         problemi += 1

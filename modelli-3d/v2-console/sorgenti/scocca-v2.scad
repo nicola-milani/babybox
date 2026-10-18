@@ -153,20 +153,22 @@ module culla_cursore_v2() {
     // pilastrini con inserto a caldo: ci si avvita la culla del
     // potenziometro, cosi' la levetta resta allineata alla fessura
     for (sx = [-1, 1])
-        translate([V2_CURSORE_X + sx * V2_CURSORE_VITI, V2_CURSORE_Y, V2_PARETE])
-            difference() {
-                cylinder(h = CURSORE_Z_SOTTO, d = BOSS_D);
-                translate([0, 0, CURSORE_Z_SOTTO - INSERTO_H])
-                    cylinder(h = INSERTO_H + 0.1, d = INSERTO_D);
-            }
+        translate([V2_CURSORE_X + sx * V2_CURSORE_VITI, V2_PARETE, V2_CURSORE_Z])
+            rotate([-90, 0, 0])
+                difference() {
+                    cylinder(h = CURSORE_Z_SOTTO, d = BOSS_D);
+                    translate([0, 0, CURSORE_Z_SOTTO - INSERTO_H])
+                        cylinder(h = INSERTO_H + 0.1, d = INSERTO_D);
+                }
     // collare: le briciole che entrano dalla fessura restano qui
     sp = 2;
-    translate([V2_CURSORE_X, V2_CURSORE_Y, V2_PARETE])
-        difference() {
-            piastra(V2_CURSORE_COLLARE, CURSORE_LARG + 2*sp + 3, TOP_SP + 1, 2);
-            translate([0, 0, -0.1])
-                piastra(V2_CURSORE_COLLARE - 2*sp, CURSORE_LARG + 3, TOP_SP + 1.2, 1);
-        }
+    translate([V2_CURSORE_X, V2_PARETE, V2_CURSORE_Z])
+        rotate([-90, 0, 0])
+            difference() {
+                piastra(V2_CURSORE_COLLARE, CURSORE_LARG + 2*sp + 3, TOP_SP + 1, 2);
+                translate([0, 0, -0.1])
+                    piastra(V2_CURSORE_COLLARE - 2*sp, CURSORE_LARG + 3, TOP_SP + 1.2, 1);
+            }
 }
 
 // ------------------------------------------------------------------
@@ -197,16 +199,20 @@ module fori_tasti() {
                 cylinder(h = V2_PARETE + 2, d = TASTO_FORO + GIOCO_FORO);
 }
 
-// Il cursore sta sul bordo inferiore: sulla faccia, fra la camera acustica
-// e la tasca della fessura, restavano 32 mm e ne servono 52. Sul bordo il
-// pollice lo trova da solo e non lo si preme appoggiando la console.
+// Il cursore sta sulla faccia, come sul cubo: in basso a sinistra, sotto il
+// tasto, con le icone del volume incise ai due capi. Era finito sul bordo
+// inferiore quando la griglia dell'altoparlante stava al centro e sulla
+// faccia non restavano i 52 mm che servono; spostata la griglia a destra,
+// lo spazio c'e' e il comando torna dove il bambino lo vede.
 module fessura_cursore_v2() {
-    translate([V2_CURSORE_X, V2_CURSORE_Y, -1])
-        fessura(CURSORE_CORSA + 9, CURSORE_FESSURA_W, V2_PARETE + 2);
+    translate([V2_CURSORE_X, -1, V2_CURSORE_Z])
+        rotate([-90, 0, 0])
+            fessura(CURSORE_CORSA + 9, CURSORE_FESSURA_W, V2_PARETE + 2);
+    prof = 0.8;
     for (sx = [-1, 1])
-        translate([V2_CURSORE_X + sx * (CURSORE_CORSA/2 + 8), V2_CURSORE_Y, 0.9])
-            rotate([0, 180, 0])
-                icona_volume(n = sx > 0 ? 3 : 1, alt = 1.0,
+        translate([V2_CURSORE_X + sx * (CURSORE_CORSA/2 + 8), -0.1, V2_CURSORE_Z])
+            rotate([-90, 0, 0])
+                icona_volume(n = sx > 0 ? 3 : 1, alt = prof + 0.1,
                              passo = 4.4, base = 3.5, cresc = 2.5);
 }
 

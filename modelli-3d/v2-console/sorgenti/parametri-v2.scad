@@ -39,19 +39,18 @@ V2_TASTO_Z    = 70;   // alti: sotto restano liberi i 52 mm della camera
 // Altoparlante in basso e un po' a destra: sopra c'e' la tasca della
 // fessura (la sua cava taglierebbe la camera acustica) e a sinistra passa
 // il cursore. Fuori centro si nota appena, e il suono non cambia.
-V2_ALT_X      = 32;
+V2_ALT_X      = 38;
 V2_ALT_Z      = 26;
 V2_LED_Z      = 100;  // sopra il tasto sinistro
 // Il cursore del volume passa sul bordo INFERIORE, non sulla faccia: sulla
 // faccia, fra camera acustica e tasca, restavano 32 mm e ne servono 52.
 // Sul bordo sta comodo al pollice e non si preme appoggiando la console.
-V2_CURSORE_X  = -41;  // sul bordo in basso a sinistra, lontano dalla camera
+V2_CURSORE_X  = -41;  // in basso a sinistra, lontano dalla camera acustica
 V2_CURSORE_VITI = CURSORE_LUNG/2 + 4.5;   // dove si avvita la culla
 V2_CURSORE_COLLARE = CURSORE_CORSA + 14;  // piu' stretto che sul cubo: il
                                           // bordo e' lungo 180 e il collare
                                           // largo non ci starebbe
-V2_CURSORE_Y  = 9;    // quanto e' arretrato dal fronte
-V2_CURSORE_Z  = 0;    // sul bordo inferiore
+V2_CURSORE_Z  = 34;   // sulla faccia, sotto i tasti e a sinistra della griglia
 
 // ---------- vano della collezione, sul retro ----------
 V2_VANO_X     = 96;   // ci stanno 6 carte in piedi, o 3 dischi

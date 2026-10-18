@@ -47,8 +47,14 @@ del tappo della USB, che resta scorrevole proprio perché è piccolo.
 **Serve un foglio di ferrite** dietro l'antenna. Vedi sotto: è la cosa più
 importante da ricordare se si sceglie questa strada, e al cubo non serve.
 
-**Il LED di stato** sta in alto a sinistra invece che al centro: la tasca
-della fessura occupa tutta la parte alta della faccia.
+**La faccia e' divisa in due**: comandi a sinistra (cursore del volume in
+basso, tasto, LED di stato in alto), griglia dell'altoparlante a destra. Sul
+cubo la griglia sta al centro; qui al centro passa la tasca della fessura, e
+spostandola a destra restano i 69 mm che il cursore del volume vuole per la
+sua corsa.
+
+**Il LED di stato** sta in alto a sinistra invece che al centro, per la
+stessa ragione: la tasca della fessura occupa tutta la parte alta.
 
 ## La ferrite, spiegata
 
