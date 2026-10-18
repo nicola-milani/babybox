@@ -1,0 +1,409 @@
+<title>Spesa del 20 ottobre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Public+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --fondo:   #f3f4f1;
+    --carta:   #ffffff;
+    --filo:    #dcdfd8;
+    --testo:   #22262a;
+    --spento:  #6b7279;
+    --accento: #16837c;
+    --prezzo:  #9a6b14;
+    --allerta: #c0472f;
+    --allerta-fondo: #fdf0ec;
+    --fatto:   #eef1ec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --fondo:   #15171a;
+      --carta:   #1e2124;
+      --filo:    #30343a;
+      --testo:   #ecebe6;
+      --spento:  #99a0a7;
+      --accento: #4ec9bd;
+      --prezzo:  #e3ae55;
+      --allerta: #f08a72;
+      --allerta-fondo: #2a1d19;
+      --fatto:   #191c1e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --fondo:   #15171a;
+    --carta:   #1e2124;
+    --filo:    #30343a;
+    --testo:   #ecebe6;
+    --spento:  #99a0a7;
+    --accento: #4ec9bd;
+    --prezzo:  #e3ae55;
+    --allerta: #f08a72;
+    --allerta-fondo: #2a1d19;
+    --fatto:   #191c1e;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--testo);
+    font-family: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .foglio { max-width: 760px; margin: 0 auto; padding: 28px 18px 80px; }
+
+  h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 7vw, 2.9rem);
+    line-height: 1.05;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .sotto { color: var(--spento); margin: 0 0 24px; }
+
+  .conto {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    background: var(--carta);
+    border: 1px solid var(--filo);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 26px;
+    font-variant-numeric: tabular-nums;
+  }
+  .conto b { font-weight: 600; }
+  .conto .euro { font-family: "Fraunces", Georgia, serif; font-size: 1.2rem; color: var(--prezzo); }
+
+  .allerta {
+    background: var(--allerta-fondo);
+    border-left: 3px solid var(--allerta);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin-bottom: 30px;
+  }
+  .allerta h2 { font-size: 1rem; margin: 0 0 6px; color: var(--allerta); font-family: inherit; font-weight: 600; }
+  .allerta p { margin: 0 0 8px; font-size: 0.94rem; }
+  .allerta p:last-child { margin-bottom: 0; }
+
+  h2.gruppo {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 1.35rem;
+    margin: 34px 0 4px;
+  }
+  .gruppo-nota { color: var(--spento); font-size: 0.92rem; margin: 0 0 14px; }
+
+  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+
+  li {
+    background: var(--carta);
+    border: 1px solid var(--filo);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 26px 1fr auto;
+    gap: 4px 12px;
+    align-items: start;
+    transition: opacity .15s ease, background .15s ease;
+  }
+  li.preso { opacity: .5; background: var(--fatto); }
+  li.preso .nome { text-decoration: line-through; }
+
+  .spunta {
+    grid-row: 1 / span 3;
+    width: 22px; height: 22px;
+    margin: 2px 0 0;
+    accent-color: var(--accento);
+    cursor: pointer;
+  }
+  .nome { font-weight: 600; }
+  .qta { color: var(--spento); font-weight: 400; }
+  .euro-riga {
+    font-variant-numeric: tabular-nums;
+    color: var(--prezzo);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .criterio { grid-column: 2 / span 2; color: var(--spento); font-size: 0.9rem; }
+  .criterio b { color: var(--testo); font-weight: 600; }
+  .link { grid-column: 2 / span 2; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+
+  a.bottone {
+    display: inline-block;
+    padding: 5px 12px;
+    border: 1px solid var(--accento);
+    border-radius: 999px;
+    color: var(--accento);
+    text-decoration: none;
+    font-size: 0.86rem;
+    font-weight: 500;
+  }
+  a.bottone:hover, a.bottone:focus-visible { background: var(--accento); color: var(--carta); }
+  a.bottone.ricerca { border-style: dashed; }
+  a:focus-visible, input:focus-visible { outline: 2px solid var(--accento); outline-offset: 2px; }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--filo);
+    color: var(--spento);
+    font-size: 0.9rem;
+  }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: 0.86em; color: var(--testo); }
+</style>
+
+<div class="foglio">
+  <h1>Spesa del 20 ottobre</h1>
+  <p class="sotto">Un box solo, niente scorte. Prezzi visti il 19 ottobre 2026: cambiano.</p>
+
+  <div class="conto">
+    <span><b id="n-presi">0</b> <span class="qta">di <span id="n-tot">0</span> presi</span></span>
+    <span class="euro" id="totale">145–205 €</span>
+  </div>
+
+  <div class="allerta">
+    <h2>L'altoparlante è l'unico pezzo che non si trova</h2>
+    <p>Il case è disegnato su un <b>Ø40 alto 6 mm</b>. I «40 mm 4 Ω 3 W» che si trovano su
+      Amazon sono alti <b>18–20 mm</b>: nella console non ci stanno, il guscio anteriore è
+      profondo 26 e il tubo ne occupa 12.</p>
+    <p>Serve il tipo <b>ultrasottile</b>, quello dei tablet: su AliExpress si trova, su Amazon
+      quasi mai. Siccome sta sul percorso critico, prenderei il sottile su AliExpress e uno
+      qualsiasi su Amazon come riserva. Limite da rispettare: <b>spessore ≤ 10 mm</b>.</p>
+  </div>
+
+  <div id="lista"></div>
+
+  <footer>
+    Lista completa con le note di scelta in <code>hardware/acquisti.md</code>; il perché delle
+    quantità e della divisione fra i due negozi in <code>hardware/ordine.md</code>.
+    Appena arriva la parte A: misurare altoparlante, PN5180 e portabatteria col calibro,
+    rigenerare gli STL, e provare l'LPCD — è la domanda che decide il piano B.
+  </footer>
+</div>
+
+<script>
+const GRUPPI = [
+  {
+    titolo: "A · Amazon, martedì 20",
+    nota: "Arriva in 48 ore e si rimanda indietro. Con questi soli si fanno tutte le prove delle settimane 1 e 2.",
+    voci: [
+      { id: "a1", nome: "ESP32-S3-DevKitC-1 N16R8", qta: "1", euro: "10–17 €",
+        criterio: "La sigla deve essere <b>N16R8</b>: N8R2 e N8R8 hanno meno flash e manca la PSRAM octal, che a ESPuino serve. Due prese USB-C, pin già saldati.",
+        link: [["Ulegqin, singolo ~10 €", "https://www.amazon.it/Ulegqin-ESP32-S3-DevKitC-1-Bluetooth-connettore-compatibile/dp/B0G4W9KRB1"],
+               ["iHaospace, 2 pz ~17 €", "https://www.amazon.it/iHaospace-ESP32-S3-DevKitC-1-N16R8-microcontroller-Bluetooth/dp/B0D1CBV999"],
+               ["ricerca", "https://www.amazon.it/s?k=ESP32-S3-DevKitC-1+N16R8", 1]] },
+      { id: "a2", nome: "PN5180 NFC con antenna", qta: "1", euro: "10–13 €",
+        criterio: "Deve arrivare con la <b>scheda antenna separata</b>, il PCB quadrato con la spira. Pin SCK, MOSI, MISO, NSS, BUSY, RST. Il case è disegnato su 58 × 47 × 8: misuralo.",
+        link: [["RAKSTORE ~10 €", "https://www.amazon.it/RAKSTORE-Modulo-Supporto-ISO15693-frequenza/dp/B0C1SXFG8Z"],
+               ["Lonrtesw ~12,78 €", "https://www.amazon.it/Lonrtesw-Pn5180-Iso15693-Lettore-Frequenza/dp/B0DXDVTVKZ"],
+               ["ricerca", "https://www.amazon.it/s?k=PN5180+NFC+ISO15693+module", 1]] },
+      { id: "a3", nome: "Batteria 18650 protetta", qta: "1", euro: "8–14 €",
+        criterio: "Qui conta il venditore, non il prezzo. <b>«Protetta»</b> nel titolo (circuito sul polo negativo), marca Samsung / LG / Sony, <b>3000–3500 mAh</b>. Qualunque 18650 che dichiari 5000 o 9900 mAh è falsa. Mai dalla Cina: celle sfuse spesso non spedibili, e mercato pieno di celle rimarchiate.",
+        link: [["ricerca: 18650 protetta", "https://www.amazon.it/s?k=batteria+18650+protetta+3500mAh", 1],
+               ["ricerca: Samsung 35E", "https://www.amazon.it/s?k=Samsung+INR18650+35E+protetta", 1]] },
+      { id: "a4", nome: "MicroSD 32 GB classe 10", qta: "1", euro: "8–12 €",
+        criterio: "<b>Venduta e spedita da Amazon</b>, non da terzi: è il modo più semplice di non prendere una contraffatta. Da formattare FAT32.",
+        link: [["SanDisk Ultra 32 GB", "https://www.amazon.it/SanDisk-Ultra-microSDHC-100MB-SDSQUNR-032G-GN3MN/dp/B08HYDH7JF"],
+               ["ricerca", "https://www.amazon.it/s?k=SanDisk+Ultra+microSDHC+32GB", 1]] },
+      { id: "a5", nome: "Altoparlante Ø40 + riserva", qta: "1 + 1", euro: "6–10 €",
+        criterio: "Vedi l'avvertenza in alto. <b>Spessore totale ≤ 10 mm</b>, meglio 5–6. È uno dei cinque pezzi da misurare col calibro appena arriva.",
+        link: [["AliExpress: ultrasottile", "https://it.aliexpress.com/w/wholesale-40mm-ultra-thin-speaker-4ohm-3w.html", 1],
+               ["Amazon: riserva", "https://www.amazon.it/s?k=altoparlante+40mm+4+ohm+3W", 1]] },
+      { id: "a6", nome: "MAX98357A amplificatore I2S", qta: "1", euro: "7–11 €",
+        criterio: "Versione <b>già saldata</b>: alcune arrivano coi pin sciolti. Si alimenta da VBAT, non da 3V3.",
+        link: [["AZDelivery ~11 €", "https://www.amazon.it/AZDelivery-MAX98357A-amplificatore-Breakout-applicazioni/dp/B09PL7DSK5"],
+               ["3 pezzi ~13 €", "https://www.amazon.it/MAX98357A-Amplifier-Breakout-Decodificatore-applicazione/dp/B0F21T7Q3P"],
+               ["ricerca", "https://www.amazon.it/s?k=MAX98357A+I2S", 1]] },
+      { id: "a7", nome: "Regolatore 3,3 V ME6211 o AP2112K", qta: "conf. 5", euro: "5–8 €",
+        criterio: "<b>Evitare AMS1117</b> (caduta 1,1 V: a batteria scarica il box si spegne prima) e HT7333 (solo 250 mA). Serve a misurare il deep sleep sotto 1 mA, che sulla DevKit alimentata da USB non si misura.",
+        link: [["ricerca ME6211", "https://www.amazon.it/s?k=ME6211+3.3V+modulo", 1],
+               ["ricerca AP2112K", "https://www.amazon.it/s?k=AP2112K+3.3V+breakout", 1]] },
+      { id: "a8", nome: "Portabatteria 18650", qta: "conf. 2–5", euro: "5–7 €",
+        criterio: "Contatti a molla, fili già saldati. Misura <b>24 × 78 × 20</b>: è quella su cui sono disegnate le culle. Serve al test di autonomia della settimana 2 — alla cella non si salda mai direttamente.",
+        link: [["ricerca", "https://www.amazon.it/s?k=portabatteria+18650+contatti+molla", 1]] },
+      { id: "a9", nome: "WS2812B singolo", qta: "1", euro: "6–8 €",
+        criterio: "Va bene anche un pezzo di striscia tagliato a un LED. M2 chiede il deep sleep <b>col LED alimentato</b>: senza, la misura non vale.",
+        link: [["ricerca breakout", "https://www.amazon.it/s?k=WS2812B+modulo+singolo+breakout", 1],
+               ["ricerca striscia", "https://www.amazon.it/s?k=WS2812B+striscia+144+LED+m", 1]] }
+    ]
+  },
+  {
+    titolo: "B · AliExpress, stesso giorno",
+    nota: "Nei filtri scegli «Spedizione da: Spagna / Italia / Repubblica Ceca / Polonia»: stesso prezzo, 3–7 giorni invece di 10–30. Serve dalla settimana 3.",
+    voci: [
+      { id: "b1", nome: "Carte PVC CR80 con NTAG213", qta: "10", euro: "4–7 €",
+        criterio: "Cinque bastano alla 1.0, le altre sono per crescere. È l'unica voce della parte B senza rimpiazzo: se vuoi un paracadute sui tempi, prendile su Amazon a 8–14 €.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-ntag213-card-cr80-pvc.html", 1]] },
+      { id: "b2", nome: "Adesivi NTAG213 25 mm", qta: "conf. 20–50", euro: "4–6 €",
+        criterio: "<b>NTAG213</b> (ISO 14443A). Non NTAG215/216 «amiibo», non Mifare Classic. Servono ai dischi della musica.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-ntag213-sticker-25mm.html", 1]] },
+      { id: "b3", nome: "TP4056 USB-C con DW01", qta: "conf. 5", euro: "2–4 €",
+        criterio: "La versione <b>USB-C a 6 pin</b>, non micro-USB: quella a 6 pin ha la protezione da sovrascarica e cortocircuito.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-tp4056-type-c-protection-dw01.html", 1]] },
+      { id: "b4", nome: "Potenziometro a slitta B10K, corsa 60 mm", qta: "1–2", euro: "2–4 €",
+        criterio: "Lineare (<b>B</b>), non logaritmico. Misurare corpo e levetta appena arriva: è uno dei cinque parametri del case.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-slide-potentiometer-b10k-60mm.html", 1]] },
+      { id: "b5", nome: "Pulsanti arcade 30 mm, due colori", qta: "2", euro: "3–5 €",
+        criterio: "Sono «indietro» e «avanti»: due colori diversi. Verificare il diametro del <b>foro di montaggio</b> (28 o 30).",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-arcade-button-30mm-low-force.html", 1]] },
+      { id: "b6", nome: "Modulo microSD 3,3 V", qta: "conf. 5", euro: "2–3 €",
+        criterio: "<b>Niente moduli con AMS1117 + 74LVC125</b>: sono per 5 V e rovinano i livelli dell'ESP32. Serve solo il lettore meccanico.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-micro-sd-card-module-3.3v.html", 1]] },
+      { id: "b7", nome: "Interruttore a slitta SS12D00", qta: "conf. 10", euro: "1–3 €",
+        criterio: "Da pannello, incassato sul retro della console o nel fondo del cubo.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-ss12d00-slide-switch-panel.html", 1]] },
+      { id: "b8", nome: "Foglio di ferrite NFC 60 × 60", qta: "1", euro: "2–4 €",
+        criterio: "Solo per la console: va dietro l'antenna, altrimenti il lettore vede le carte nel vano sul retro. Si ritaglia 5–10 mm più grande della spira per lato.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-nfc-ferrite-sheet-anti-metal.html", 1]] },
+      { id: "b9", nome: "Micropulsanti 6 × 6 mm", qta: "conf. 20", euro: "1–2 €",
+        criterio: "È il tasto genitori, incassato in un pozzetto da 6 mm.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-tactile-push-button-6x6mm.html", 1]] },
+      { id: "b10", nome: "Kit resistenze 1% + condensatori", qta: "kit", euro: "3–5 €",
+        criterio: "Servono 100 k 1% per il partitore della batteria, 10 k per il pull-up della SD, 100 nF / 10 µF / 220 µF di serbatoio.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-resistor-kit-1-percent-capacitor-kit.html", 1]] },
+      { id: "b11", nome: "Basetta millefori 70 × 90 doppia faccia", qta: "conf. 5", euro: "2–4 €",
+        criterio: "Da 70 × 90 si ricava sia la basetta del cubo sia quella della console (36 × 80).",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-prototype-pcb-70x90-double-side.html", 1]] },
+      { id: "b12", nome: "Inserti a caldo M2,5 + viti", qta: "kit", euro: "4–6 €",
+        criterio: "Senza, il case non si chiude. Servono dalla settimana 3.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-m2.5-heat-set-insert-screw-kit.html", 1]] },
+      { id: "b13", nome: "Cavetto siliconico 26 AWG + JST-XH", qta: "kit", euro: "3–5 €",
+        criterio: "Siliconico perché resta morbido e non si spacca alle pieghe.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-26awg-silicone-wire-jst-xh-connector.html", 1]] },
+      { id: "b14", nome: "Rete anti-polvere + biadesivo 3M VHB", qta: "1", euro: "2–3 €",
+        criterio: "La rete va dietro la griglia dell'altoparlante.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-speaker-dust-mesh-fabric.html", 1]] },
+      { id: "b15", nome: "Viti di sicurezza Torx pin M2,5 × 8", qta: "conf. 20", euro: "3–5 €",
+        criterio: "Chiusura che un bambino non apre a mano. Se tardano, si usano le M2,5 normali del kit.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-torx-pin-security-screw-m2.5.html", 1]] },
+      { id: "b16", nome: "DS3231 modulo RTC", qta: "1", euro: "2 €",
+        criterio: "Opzionale: ESPuino usa l'RTC interno via NTP, e il controllo genitori senza ora attendibile applica la regola più restrittiva.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-ds3231-rtc-module.html", 1]] }
+    ]
+  },
+  {
+    titolo: "C · Filamento, in negozio",
+    nota: "Dalla Cina non conviene: pesa, e la spedizione si mangia il risparmio.",
+    voci: [
+      { id: "c1", nome: "PETG bianco, 1 kg", qta: "1", euro: "~25 €",
+        criterio: "Un corpo ne usa 150 g scarsi. Bianco perché è il colore del progetto: i comandi colorati sono pezzi comprati.",
+        link: [["cerca", "https://www.amazon.it/s?k=filamento+PETG+bianco+1kg+1.75mm", 1]] },
+      { id: "c2", nome: "TPU 95A, 500 g", qta: "1", euro: "~15 €",
+        criterio: "Solo per i quattro paracolpi della console: 20 g in tutto. Si stampa lento, 20 mm/s, retrazione a zero.",
+        link: [["cerca", "https://www.amazon.it/s?k=filamento+TPU+95A+500g+1.75mm", 1]] }
+    ]
+  }
+];
+
+const lista = document.getElementById("lista");
+let totali = 0;
+
+for (const g of GRUPPI) {
+  const h = document.createElement("h2");
+  h.className = "gruppo";
+  h.textContent = g.titolo;
+  lista.append(h);
+
+  const n = document.createElement("p");
+  n.className = "gruppo-nota";
+  n.textContent = g.nota;
+  lista.append(n);
+
+  const ul = document.createElement("ul");
+  for (const v of g.voci) {
+    totali++;
+    const li = document.createElement("li");
+    li.dataset.id = v.id;
+
+    const box = document.createElement("input");
+    box.type = "checkbox";
+    box.className = "spunta";
+    box.setAttribute("aria-label", "Preso: " + v.nome);
+
+    const nome = document.createElement("div");
+    nome.className = "nome";
+    nome.innerHTML = v.nome + ' <span class="qta">× ' + v.qta + "</span>";
+
+    const euro = document.createElement("div");
+    euro.className = "euro-riga";
+    euro.textContent = v.euro;
+
+    const crit = document.createElement("div");
+    crit.className = "criterio";
+    crit.innerHTML = v.criterio;
+
+    const link = document.createElement("div");
+    link.className = "link";
+    for (const [testo, url, ricerca] of v.link) {
+      const a = document.createElement("a");
+      a.className = "bottone" + (ricerca ? " ricerca" : "");
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = testo;
+      link.append(a);
+    }
+
+    li.append(box, nome, euro, crit, link);
+    box.addEventListener("change", () => {
+      li.classList.toggle("preso", box.checked);
+      salva();
+      conta();
+    });
+    ul.append(li);
+  }
+  lista.append(ul);
+}
+
+document.getElementById("n-tot").textContent = totali;
+
+function stato() {
+  const s = {};
+  document.querySelectorAll("li[data-id]").forEach(li => {
+    s[li.dataset.id] = li.querySelector(".spunta").checked;
+  });
+  return s;
+}
+function salva() {
+  try { localStorage.setItem("spesa-babybox", JSON.stringify(stato())); } catch (e) {}
+}
+function carica() {
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem("spesa-babybox") || "null"); } catch (e) {}
+  if (!s) return;
+  document.querySelectorAll("li[data-id]").forEach(li => {
+    if (s[li.dataset.id]) {
+      li.querySelector(".spunta").checked = true;
+      li.classList.add("preso");
+    }
+  });
+}
+function conta() {
+  const presi = document.querySelectorAll("li.preso").length;
+  document.getElementById("n-presi").textContent = presi;
+  let min = 0, max = 0;
+  document.querySelectorAll("li[data-id]").forEach(li => {
+    if (li.classList.contains("preso")) return;
+    const t = li.querySelector(".euro-riga").textContent.replace("~", "").replace(" €", "");
+    const [a, b] = t.split("–");
+    min += parseFloat(a) || 0;
+    max += parseFloat(b !== undefined ? b : a) || 0;
+  });
+  const el = document.getElementById("totale");
+  el.textContent = presi === totali ? "tutto preso" : "mancano " + Math.round(min) + "–" + Math.round(max) + " €";
+}
+
+carica();
+conta();
+</script>

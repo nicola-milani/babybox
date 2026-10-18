@@ -29,6 +29,10 @@ La lista **non dipende dalla scelta fra cubo e console**: stessa elettronica,
 stesso pinout, stesso firmware. Gli unici due pezzi della sola console sono
 la ferrite (B8) e il TPU (C2), una ventina di euro in tutto.
 
+> **Lista operativa coi link:** `hardware/acquisti.md`, oppure la versione da
+> telefono con le caselle da spuntare in `hardware/lista-acquisti.html`.
+> Qui restano il criterio e il perché; lì ci sono i link.
+
 ## A · Amazon, martedì 20
 
 | # | Cosa cercare | Q.tà | € | Perché qui |
@@ -37,7 +41,7 @@ la ferrite (B8) e il TPU (C2), una ventina di euro in tutto.
 | A2 | `PN5180 NFC modulo ISO15693 SPI` con antenna sul PCB | 1 | 9–14 | Il pezzo più incerto del progetto: va provato in settimana 1 perché il piano B (RC522) si decide in settimana 2. Il case è disegnato su **58 × 47 × 8** |
 | A3 | `18650 Samsung 35E / LG MJ1 protetta` 3000–3500 mAh | 1 | 8–14 | **Non si compra in Cina**: le celle sfuse verso l'UE spesso non partono, e il mercato è pieno di celle riciclate rimarchiate. Sta dentro un oggetto che un bambino tiene in braccio |
 | A4 | `MicroSD 32 GB classe 10` | 1 | 6–9 | Le contraffatte dichiarano 32 GB e ne hanno 8: te ne accorgi quando le storie si corrompono |
-| A5 | `Altoparlante 4 Ω 3 W Ø40 mm` (h ≤ 6 mm) | 1 | 6–10 | Il case è disegnato su Ø40 × 6 e le misure dichiarate in Cina sono ballerine. Qui si può rimandare indietro. **Misurarlo appena arriva** |
+| A5 | `Altoparlante 4 Ω 3 W Ø40 mm` **ultrasottile** | 1 + 1 | 6–10 | **Attenzione**: i Ø40 che si trovano su Amazon sono alti 18–20 mm e nella console non ci stanno (guscio anteriore 26, tubo 12). Serve il tipo ultrasottile, che sta su AliExpress: `40mm ultra thin speaker 4ohm 3W`. Siccome è sul percorso critico, prenderne uno sottile là e uno qualsiasi qui come riserva. Limite: **spessore ≤ 10 mm**, meglio 5–6 |
 | A6 | `MAX98357A modulo I2S amplificatore` | 1 | 6–10 | Senza, in settimana 1 non si sente niente e metà delle prove si ferma |
 | A7 | `ME6211C33` o `AP2112K-3.3` modulo LDO (500–600 mA) | conf. da 5 | 5–8 | **Serve a M2**: il deep sleep sotto 1 mA non si misura sulla DevKit alimentata da USB, perché il convertitore seriale e il suo regolatore assorbono molto di più. Evitare AMS1117 (caduta 1,1 V) e HT7333 (250 mA) |
 | A8 | `Portabatteria 18650` contatti a molla | conf. da 2–5 | 5–7 | Serve al **test di autonomia** della settimana 2, e alla cella non si salda mai direttamente. **Misurare**: le culle sono disegnate su 24 × 78 × 20 |
