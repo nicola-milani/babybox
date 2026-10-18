@@ -17,7 +17,7 @@ Box audio per bambini dai 2 anni, open source e a batteria. Si appoggia sul cope
 
 | Cartella | Contenuto |
 | --- | --- |
-| `docs/` | Specifiche complete, roadmap, decisioni prese |
+| `docs/` | Specifiche complete, roadmap, decisioni prese; varianti esplorate in `docs/varianti/` (v3: console da viaggio) |
 | `tasks/` | Un file per task firmware (1–8), con criteri di accettazione: si passano a Claude Code uno alla volta |
 | `firmware/` | Istruzioni per il fork di ESPuino e le nostre configurazioni/moduli |
 | `hardware/` | Lista d'ordine (`ordine.md`), componenti (`bom.csv`), pinout, schema di cablaggio |

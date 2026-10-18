@@ -7,9 +7,9 @@ il chip li usa tutti e cinque, non solo 35–37 come si legge in giro), 3, 45, 4
 (strapping), 19–20 (USB nativa). GPIO0 è strapping ma è il tasto BOOT, e lo
 usiamo apposta come tasto genitori.
 
-**Margine:** togliendo il display sono tornati liberi sei GPIO consecutivi
-(12–17), tutti utilizzabili. Prima il pinout era pieno; adesso c'è spazio per
-un sensore, un LED di stato o un terzo tasto senza togliere niente.
+**Margine:** togliendo il display erano tornati liberi sei GPIO (12–17). Due
+sono già andati al LED di stato; restano 14, 15, 16 e 17 per un sensore, un
+terzo tasto o il DS3231 se un domani gli servisse un pin di sveglia.
 
 | Periferica | Segnale | GPIO | Note |
 | --- | --- | --- | --- |
@@ -24,7 +24,9 @@ un sensore, un LED di stato o un terzo tasto senza togliere niente.
 | PN5180 | BUSY | 41 | |
 | PN5180 | RST | 48 | Su alcune DevKitC-1 è il LED RGB: verificare |
 | PN5180 | IRQ | 1 | **Serve all'LPCD**: è il pin che sveglia il box quando appoggi la statuina. Deve essere un GPIO RTC (0–21) |
-| Liberi | — | 12, 13, 14, 15, 16, 17 | Erano del display e-paper, tolto il 18 ottobre |
+| LED di stato | Dati (WS2812) | 12 | Dietro la finestrella sul fronte |
+| LED di stato | Alimentazione | 13 | Alto solo da svegli: un WS2812 assorbe ~1 mA anche spento |
+| Liberi | — | 14, 15, 16, 17 | Erano del display e-paper, tolto il 18 ottobre |
 | microSD | CLK | 39 | SD_MMC 1 bit, impostati con `setPins()` (vedi nota) |
 | microSD | CMD | 38 | |
 | microSD | D0 | 40 | |

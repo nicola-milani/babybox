@@ -96,6 +96,17 @@ ALT_TUBO_OD     = 52;  // diametro esterno del tubo portaltoparlante
 ALT_TUBO_LUNG   = 12;  // lunghezza del tubo verso l'interno
 ALT_CAMERA_SEDE = 46.4;// controforo in cui si innesta la camera
 
+// ---------- LED di stato ----------
+// Un WS2812 dietro una finestrella: la parete resta, assottigliata a 0,8 mm,
+// e il PETG la diffonde. Niente foro passante: non entra polvere e non si
+// vede il modulo dentro.
+LED_X        = 0;     // centrato sul fronte, sopra la griglia
+LED_Z        = 78;
+LED_FINESTRA_D = 9;   // il tondo che si illumina
+LED_PARETE   = 0.8;   // quanto resta davanti al LED
+LED_SEDE_D   = 12.5;  // sede del modulino, dall'interno
+LED_SEDE_PROF = 4;
+
 // ---------- Lettore PN5180 ----------
 // Fissato sotto il coperchio con biadesivo + nervature di contenimento.
 // Le nervature sono aperte su un lato: il modulo entra a scorrere.

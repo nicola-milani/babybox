@@ -50,7 +50,11 @@
 	#define MDNS_ENABLE                     // When enabled, you don't have to handle with ESPuino's IP-address. If hostname is set to "ESPuino", you can reach it via ESPuino.local
 	//#define MQTT_ENABLE                   // [BOX] spento: non ci serve e libera risorse                     // Make sure to configure mqtt-server and (optionally) username+pwd
 	//#define FTP_ENABLE                    // [BOX] spento: si attiva con una combinazione di tasti, che non vogliamo                      // Enables FTP-server; DON'T FORGET TO ACTIVATE AFTER BOOT BY PRESSING PAUSE + NEXT-BUTTONS (IN PARALLEL)!
-	//#define NEOPIXEL_ENABLE               // [BOX] spento: al posto dell'anello LED c'e' l'e-paper (task 2)                 // Don't forget configuration of NUM_LEDS if enabled
+	#define NEOPIXEL_ENABLE                 // [BOX] riacceso il 18 ottobre: tolto il
+	                                        // display, un LED RGB e' l'unico modo di
+	                                        // sapere a colpo d'occhio batteria e modo.
+	                                        // Quanti LED si imposta dalla web UI
+	                                        // (Generale -> LED): per noi 1.                 // Don't forget configuration of NUM_LEDS if enabled
 	#define LANGUAGE IT                     // [BOX] italiano (task 3). Originale: DE                     // DE = deutsch; EN = english: FR = french
 	//#define HEADPHONE_ADJUST_ENABLE       // [BOX] spento: non c'e' presa cuffie         // Used to adjust (lower) volume for optional headphone-pcb (refer maxVolumeSpeaker / maxVolumeHeadphone) and to enable stereo (headphones are always stereo, even if mono-playback is enabled via GUI)
 	#define SHUTDOWN_IF_SD_BOOT_FAILS       // Will put ESP to deepsleep if boot fails due to SD. Really recommend this if there's in battery-mode no other way to restart ESP! Interval adjustable via deepsleepTimeAfterBootFails.
@@ -121,7 +125,11 @@
 
 	#define BUTTON_0_LONG     CMD_NOTHING           // [BOX] niente pressione lunga
 	#define BUTTON_1_LONG     CMD_NOTHING           // [BOX] niente pressione lunga
-	#define BUTTON_2_LONG     CMD_NOTHING           // [BOX] niente pressione lunga
+	#define BUTTON_2_LONG     CMD_BOX_MODO_CONFIG   // [BOX] tasto genitori: apre la
+	                                                // rete del box. E' l'unica
+	                                                // pressione lunga del progetto,
+	                                                // e sta su un tasto incassato
+	                                                // sotto la scatola.
 	#define BUTTON_3_LONG     CMD_NOTHING           // [BOX] niente pressione lunga
 	#define BUTTON_4_LONG     CMD_NOTHING           // [BOX] niente pressione lunga
 	#define BUTTON_5_LONG     CMD_NOTHING           // [BOX] niente pressione lunga

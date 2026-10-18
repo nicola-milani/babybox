@@ -24,6 +24,22 @@ ESPuino.
 Serve anche la **prima accensione**: scelta del WiFi, nome del box, lingua,
 fuso orario, ora. ESPuino ha già la pagina dell'access point: va rivestita.
 
+## Fatto il 18 ottobre: come si entra in configurazione fuori casa
+
+ESPuino apre già la propria rete all'accensione **se nessuna rete conosciuta
+è a portata**, con captive portal: fuori casa funziona da solo. Due buchi
+però c'erano, e sono chiusi:
+
+- la rete si chiudeva dopo 5 minuti (`ApTimeout`, impostabile dalla web UI);
+- una volta chiusa non si riapriva più senza spegnere e riaccendere, perché
+  l'access point partiva solo al primo tentativo dopo l'avvio.
+
+Adesso una **pressione lunga sul tasto genitori** (sul fondo, incassato)
+chiama `Wlan_ForceAccessPoint()` e apre la rete in qualunque momento, anche
+col WiFi di casa a portata. Il box lo dice a voce con
+`/sistema/modalita-configurazione.mp3` e lo segnala col LED: senza display
+non c'è altro modo di accorgersene.
+
 ## Vincoli
 - **Niente risorse da internet**: caratteri, stili e immagini stanno sul box.
   I caratteri vanno ritagliati con `pyftsubset` (nel mockup: 36 KB in tutto).

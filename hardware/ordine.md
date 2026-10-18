@@ -37,6 +37,7 @@ minuteria su AliExpress (10–20 giorni, arrivano per la settimana 3).
 | B2 | `HT7333 TO-92` o `ME6211 modulo 3.3V` | 5 | 3 |
 | B3 | `Portabatteria 18650 contatti a molla` | 3 | 3 |
 | B4 | `Interruttore a slitta da pannello SS12D00` | 5 | 3 |
+| B4b | `WS2812B` singolo su breakout, o striscia da tagliare | 5 | 3 |
 | B5 | `Micropulsante 6x6 mm` | 20 | 2 |
 | B6 | `Resistenze 100 kΩ 1%` + `condensatori 100 nF` | kit | 4 |
 | B7 | `Basetta millefori 90 × 70 mm` doppia faccia | 5 | 6 |

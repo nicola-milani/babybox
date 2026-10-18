@@ -78,6 +78,21 @@ fanno abbassare la tensione al microcontrollore.
   carta (LPCD). Deve finire su un GPIO RTC, da qui il GPIO1.
 - Cavi del lettore corti (< 10 cm) e lontani dall'altoparlante.
 
+### LED di stato (WS2812)
+| Modulo | ESP32-S3 | Note |
+| --- | --- | --- |
+| DIN | GPIO12 | dati |
+| VDD | GPIO13 | **non** al 3V3 fisso: il GPIO lo spegne prima del deep sleep |
+| GND | GND | |
+
+Un WS2812 assorbe circa 1 mA anche con il LED spento: lasciandolo alimentato
+il box non scenderebbe mai sotto il milliampere richiesto dal task 1. Con un
+solo LED i ~10 mA di picco li regge il GPIO; se un domani ne metti tre,
+serve un MOSFET.
+
+Dietro la finestrella sul fronte resta 0,8 mm di PETG: diffonde la luce e
+non si vede niente a LED spento.
+
 ### Display e-paper — tolto
 
 Il display è uscito dal progetto il 18 ottobre: lo stato si legge dalla web UI,

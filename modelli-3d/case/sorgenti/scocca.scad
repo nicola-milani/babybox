@@ -127,6 +127,14 @@ module tagli_frontale() {
         translate([0, -BOX_Y/2 + EPD_FONDO/2, EPD_Z])
             cava_y(EPD_FIN_X, EPD_FIN_Z, EPD_FONDO + 0.2, r = 2);
     }
+    // Finestrella del LED di stato: la parete resta, assottigliata.
+    translate([LED_X, -BOX_Y/2 + LED_PARETE, LED_Z])
+        rotate([-90, 0, 0])
+            cylinder(h = PARETE - LED_PARETE + LED_SEDE_PROF, d = LED_FINESTRA_D);
+    translate([LED_X, -BOX_Y/2 + PARETE + 0.01, LED_Z])
+        rotate([-90, 0, 0])
+            cylinder(h = LED_SEDE_PROF, d = LED_SEDE_D);
+
     // sede dell'altoparlante, appoggiato contro la parete
     sede = ALT_ALT + 1;
     translate([0, Y_INT + sede/2 - 0.05, ALT_Z]) rotate([90, 0, 0])

@@ -36,7 +36,7 @@ Autonomia stimata: 150–250 mA in riproduzione a volume medio → 12–15 ore c
 | Cursore volume e tasti | Tasti sì; cursore no (encoder) | Lettura cursore (task 1) |
 | Batteria e deep sleep | Sì | Tarare il partitore |
 | Web UI e caricamento file | Sì, DE/EN | Traduzione italiana (task 3) |
-| Come si sa cosa fa | Anello LED | **Niente schermo** (deciso il 18 ottobre): lo stato si legge dalla web UI, al bambino lo dice la carta che ha in mano, e la batteria scarica il box la annuncia a voce (funzione già presente in ESPuino) |
+| Come si sa cosa fa | Anello LED | **Niente schermo** (18 ottobre): lo stato si legge dalla web UI, al bambino lo dice la carta che ha in mano, e la batteria scarica il box la annuncia a voce. In più **un LED RGB** dietro una finestrella sul fronte, che ESPuino sa già pilotare: livello di batteria al risveglio, WiFi, modalità configurazione, conferma del tag |
 | Suoni di sistema | Sì | Registrarli in italiano (task 4) |
 | Controllo genitori | In parte: sleep timer, blocco comandi | Fasce orarie, nanna, messaggio vocale (task 6) |
 
