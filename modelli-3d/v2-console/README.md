@@ -50,6 +50,13 @@ del tappo della USB, che resta scorrevole proprio perché è piccolo.
 **Serve un foglio di ferrite** dietro l'antenna. Vedi sotto: è la cosa più
 importante da ricordare se si sceglie questa strada, e al cubo non serve.
 
+**Nel vano carte e dischi stanno di piatto**, uno sull'altro, non in
+piedi: il vano è profondo 13 mm e una CR80 in piedi ne vorrebbe 85,6. Sei
+carte fanno 5 mm, tre dischi da 4 ne fanno 12 — la profondità è
+dimensionata sui dischi. Per prenderne una si apre il coperchio e si
+inclina la console: con cinque millimetri di margine il dito da solo non
+passa, ma basta ribaltarla.
+
 **La faccia e' divisa in due**: comandi a sinistra (cursore del volume in
 basso, tasto, LED di stato in alto), griglia dell'altoparlante a destra. Sul
 cubo la griglia sta al centro; qui al centro passa la tasca della fessura, e
@@ -139,7 +146,7 @@ chiudono solo con i pezzi in mano:
 | --- | --- | --- |
 | Pronto a stampare | **sì**, 13 STL verificati | **sì**, 4 STL, ingombri verificati |
 | Gesto | appoggi la carta sul vassoio | la infili nella fessura |
-| Collezione | due raccoglitori ai lati, 6+6 | vano sul retro, 6 carte o 3 dischi |
+| Collezione | due raccoglitori ai lati, 6+6, in vista | vano sul retro, 6 carte o 3 dischi, di piatto |
 | In viaggio | i raccoglitori si sfilano e si perdono | tutto dentro |
 | Sul tavolo | sta fermo, il bambino lo guarda dall'alto | va tenuto o appoggiato di piatto |
 | Rischi aperti | nessuno grosso | lettura a 44 mm, briciole nella fessura |

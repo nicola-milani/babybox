@@ -130,11 +130,16 @@ module guscio_retro() {
 // ------------------------------------------------------------------
 // Vano della collezione
 // ------------------------------------------------------------------
-// Le carte stanno in piedi in sei fessure; i dischi appoggiati di
-// piatto nella parte larga. Chi vuole solo dischi toglie il
-// divisorio stampando con V2_VANO_FESSURE = false.
-V2_VANO_FESSURE = true;
-
+// Carte e dischi stanno di piatto, uno sull'altro: il vano e' 96 x 64 e
+// profondo 13. Una CR80 e' 85,6 x 54, quindi ci sta distesa con cinque
+// millimetri di margine; in piedi non ci starebbe mai, perche' in piedi
+// vorrebbe 85,6 mm di profondita' e ce ne sono 13. Sei carte fanno 5 mm,
+// tre dischi da 4 ne fanno 12: il fondo della profondita' e' dimensionato
+// sui dischi.
+//
+// Niente divisori, quindi. Per tirare fuori una carta si apre il
+// coperchio e si inclina la console: con 5 mm di margine il dito da solo
+// non passa, ma basta ribaltarla.
 module pareti_vano() {
     // cassa del vano, aperta verso il retro
     translate([V2_VANO_X0, V2_RETRO_PROF - V2_VANO_PROF/2 - V2_PARETE,
@@ -143,13 +148,6 @@ module pareti_vano() {
             cube([V2_VANO_X + 2*V2_PARETE, V2_VANO_PROF + V2_PARETE,
                   V2_VANO_Z + 2*V2_PARETE], center = true);
             cube([V2_VANO_X, V2_VANO_PROF + V2_PARETE + 1, V2_VANO_Z], center = true);
-        }
-    // fessure per tenere le carte in piedi
-    if (V2_VANO_FESSURE)
-        for (i = [0 : RACC_CARTE_N - 1]) {
-            x = V2_VANO_X0 - V2_VANO_X/2 + 8 + i * RACC_CARTE_PASSO;
-            translate([x, V2_RETRO_PROF - V2_VANO_PROF/2 - V2_PARETE, V2_VANO_Z0 + 6])
-                cube([1.4, V2_VANO_PROF - 1, 12], center = true);
         }
 }
 

@@ -10,6 +10,6 @@ translate([0, V2_SPLIT, 0]) retro_v2();
 
 // una carta infilata, con il centimetro che sporge
 color("#E9A95C")
-    translate([0, 9.5, V2_Z - CARTA_Y + V2_SPORGE + 2])
+    translate([0, 9.5 + CARTA_SP/2, V2_Z + V2_SPORGE - CARTA_Y/2])
         rotate([90, 0, 0])
             piastra(CARTA_X, CARTA_Y, CARTA_SP, 3.2);

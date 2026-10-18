@@ -15,7 +15,7 @@
 include <parametri-v2.scad>
 include <../../sorgenti/libreria.scad>
 
-PARA_LATO   = 34;    // quanto risale lungo i bordi
+PARA_LATO   = 24;    // quanto risale lungo i bordi: oltre arriva ai tasti
 PARA_SP     = 2.6;   // spessore del cappuccio
 PARA_GIOCO  = 0.25;  // il TPU è elastico: serve meno gioco del PETG
 
