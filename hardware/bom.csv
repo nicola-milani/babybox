@@ -1,7 +1,7 @@
 rif,componente,modello_consigliato,qta_per_box,qta_da_ordinare,prezzo_indicativo_eur,fornitore,note
 A1,Microcontrollore,ESP32-S3-DevKitC-1 N16R8 (16MB flash 8MB PSRAM octal),1,1,12-20,Amazon,Se e' morto o e' la sigla sbagliata non parte niente; verificare N16R8 e PSRAM octal
 A2,Lettore NFC,PN5180 SPI con antenna sul PCB,1,1,9-14,Amazon,Il pezzo piu' incerto: va provato in settimana 1 perche' il piano B (RC522) si decide in settimana 2. Case disegnato su 58x47x8
-A3,Batteria,18650 protetta Samsung 35E o LG MJ1 3000-3500 mAh,1,1,8-14,Amazon,Non si compra in Cina: celle sfuse spesso non spedibili verso l'UE e mercato pieno di celle rimarchiate
+A3,Batteria,18650 Samsung 35E / LG MJ1 / Sony VTC 3000-3500 mAh (meglio se protetta),1,1,8-14,Amazon,Cella nuda da mettere nel portabatteria, non un pacco precablato. Con il carico su OUT+/OUT- del TP4056 la protezione c'e' comunque; protetta e' cintura e bretelle. Non si compra in Cina
 A4,MicroSD,32 GB classe 10,1,1,6-9,Amazon,Le contraffatte dichiarano 32 GB e ne hanno 8; formattare FAT32
 A5,Altoparlante,4 ohm 3W diametro 40 mm altezza max 6 mm,1,1,6-10,Amazon,Il case e' disegnato su D40x6 e da Amazon si puo' rimandare indietro; misurare appena arriva
 A6,Amplificatore,MAX98357A I2S 3W,1,1,6-10,Amazon,Senza non si sente niente in settimana 1; alimentato da VBAT non da 3V3

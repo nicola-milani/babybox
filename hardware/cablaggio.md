@@ -12,8 +12,8 @@ di verità: se qui e lì non coincidono, vale `pinout.md`.
 ```mermaid
 flowchart LR
     USB[USB-C] --> TP[TP4056 + DW01<br/>protezione]
-    TP --> CELLA[18650<br/>3,0-4,2 V]
-    CELLA --> SW[Interruttore<br/>sul fondo]
+    TP -- B+ / B- --> CELLA[18650<br/>3,0-4,2 V]
+    TP -- OUT+ / OUT- --> SW[Interruttore]
     SW --> VBAT((VBAT))
     VBAT --> AMP[MAX98357A<br/>alimentato dalla batteria]
     VBAT --> LDO[ME6211 3,3 V<br/>500 mA]
@@ -27,15 +27,22 @@ flowchart LR
 
 Quattro regole che evitano guai:
 
-1. **Si carica a box spento.** L'interruttore stacca tutto il carico, il
-   TP4056 vede solo la cella e chiude bene la carica. È la ricarica notturna
+1. **Il carico esce da OUT+/OUT−, non dai poli della cella.** Sembra un
+   dettaglio e invece è l'unica protezione da sovrascarica che il box ha: il
+   DW01 sta fra B− e OUT−, quindi prendendo l'alimentazione direttamente
+   dalla cella lo si salta. Così com'è, una cella scarica dimenticata accesa
+   scenderebbe sotto i 2,5 V — si rovina, e ricaricarla dopo è pericoloso.
+   Con il carico su OUT la protezione c'è **anche se la cella non ce l'ha
+   sua**. Costa 100 mΩ di resistenza in più, invisibili a 150 mA.
+2. **Si carica a box spento.** L'interruttore stacca il carico, il TP4056
+   vede solo la cella e chiude bene la carica. È la ricarica notturna
    prevista dalle specifiche, non serve il load sharing.
-2. **Quando colleghi la USB della DevKit per programmare, il box deve essere
+3. **Quando colleghi la USB della DevKit per programmare, il box deve essere
    spento.** Altrimenti due alimentatori spingono sulla stessa linea 3V3.
-3. **Niente AMS1117.** Con una cella a 3,4 V non ce la fa (1,1 V di caduta).
+4. **Niente AMS1117.** Con una cella a 3,4 V non ce la fa (1,1 V di caduta).
    ME6211 (120 mV, 500 mA) o AP2112K-3.3. Con la cella a 3,2 V l'uscita
    scende a ~3,1 V: l'ESP32-S3 lavora fino a 3,0 V, va bene.
-4. **Condensatori sul 3V3:** 220 µF elettrolitico + 10 µF ceramico + 100 nF
+5. **Condensatori sul 3V3:** 220 µF elettrolitico + 10 µF ceramico + 100 nF
    vicino all'ESP32. I picchi del WiFi arrivano a 400 mA per pochi ms: senza
    il serbatoio il box si riavvia da solo.
 
@@ -173,7 +180,9 @@ A ogni passo si accende e si verifica: se qualcosa fuma, si sa cos'è.
 ## Prima di dare tensione la prima volta
 
 - [ ] Continuità fra VBAT e GND: deve essere **aperto** (nessun corto)
-- [ ] Polarità del portabatteria: + al TP4056 B+, − a B−
+- [ ] Polarità del portabatteria: + al TP4056 **B+**, − a **B−**
+- [ ] Il carico (interruttore → VBAT) parte da **OUT+/OUT−**, non dai poli
+      della cella: è lì che sta la protezione da sovrascarica
 - [ ] Nessun modulo collegato a 5 V che tolleri solo 3,3 V
 - [ ] Interruttore in posizione "off"
 - [ ] Prima accensione **senza** la cella, alimentando da banco a 3,7 V con

@@ -76,12 +76,23 @@ avendo tutti e due.
 - [ricerca: Samsung 35E](https://www.amazon.it/s?k=Samsung+INR18650+35E+protetta)
 
 Non ho messo un link diretto apposta: qui conta il venditore, non il
-prezzo. **Cerca «protetta» o «protected» nel titolo** (circuito PCB sul
-polo negativo, la cella è 2 mm più lunga), marca dichiarata Samsung / LG /
-Sony, capacità **3000–3500 mAh**. Qualunque cosa dichiari 5000, 9900 o
-12000 mAh in formato 18650 è falsa. Niente AliExpress per questa: le celle
-sfuse verso l'UE spesso non partono, e il mercato è pieno di celle
-riciclate rimarchiate.
+prezzo. Tre cose da controllare, in ordine:
+
+1. **Deve essere una cella nuda**, non un pacco precablato con fili e
+   connettore JST. Il box usa un portabatteria a molla e la culla nel case
+   è disegnata su quello: un pacco con i fili non ci entra.
+2. **3000–3500 mAh** dichiarati. Qualunque 18650 che dichiari 5000, 9900 o
+   12000 mAh è falsa — in quel formato, fisicamente, non ci stanno.
+3. **Marca vera**: Samsung 35E / 30Q, LG MJ1 / HG2, Sony-Murata VTC. Se la
+   marca è un nome di fantasia e il titolo dice «compatibile Samsung», è
+   una cella di recupero rimarchiata.
+
+«Protetta» è un di più, non un obbligo: con il carico preso da OUT+/OUT−
+del TP4056 la protezione da sovrascarica ce l'ha il DW01 del modulo. Se la
+trovi protetta, meglio — è cintura e bretelle.
+
+Niente AliExpress per questa: le celle sfuse verso l'UE spesso non partono,
+e il mercato è pieno di celle riciclate rimarchiate.
 
 ### A4 · MicroSD 32 GB — 1 pezzo, 8–12 €
 
