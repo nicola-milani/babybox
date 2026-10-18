@@ -166,7 +166,7 @@
 
   <div class="conto">
     <span><b id="n-presi">0</b> <span class="qta">di <span id="n-tot">0</span> presi</span></span>
-    <span class="euro" id="totale">145–205 €</span>
+    <span class="euro" id="totale">156–226 €</span>
   </div>
 
   <div class="allerta">
@@ -205,6 +205,10 @@ const GRUPPI = [
         link: [["RAKSTORE ~10 €", "https://www.amazon.it/RAKSTORE-Modulo-Supporto-ISO15693-frequenza/dp/B0C1SXFG8Z"],
                ["Lonrtesw ~12,78 €", "https://www.amazon.it/Lonrtesw-Pn5180-Iso15693-Lettore-Frequenza/dp/B0DXDVTVKZ"],
                ["ricerca", "https://www.amazon.it/s?k=PN5180+NFC+ISO15693+module", 1]] },
+      { id: "a2b", nome: "RC522 — il piano B, da comprare subito", qta: "1", euro: "8–10 €",
+        criterio: "Legge <b>le stesse carte</b> (NTAG213 è ISO 14443A) e nel firmware si sceglie dalla web UI, senza ricompilare. Quello che perde è l'<b>LPCD</b>: col solo RC522 il box non si sveglia quando appoggi la carta, il bambino deve prima premere un tasto. Portata 0–35 mm, che per una carta appoggiata o infilata basta. Prendilo comunque: è 8 € e il piano B non va comprato quando serve.",
+        link: [["IZOKEE kit RC522", "https://www.amazon.it/IZOKEE-Lettore-MFRC-522-Raspberry-Portachiavi/dp/B076HTH56Q"],
+               ["ricerca", "https://www.amazon.it/s?k=RC522+RFID+13.56MHz", 1]] },
       { id: "a3", nome: "Batteria 18650 protetta", qta: "1", euro: "8–14 €",
         criterio: "Qui conta il venditore, non il prezzo. <b>«Protetta»</b> nel titolo (circuito sul polo negativo), marca Samsung / LG / Sony, <b>3000–3500 mAh</b>. Qualunque 18650 che dichiari 5000 o 9900 mAh è falsa. Mai dalla Cina: celle sfuse spesso non spedibili, e mercato pieno di celle rimarchiate.",
         link: [["ricerca: 18650 protetta", "https://www.amazon.it/s?k=batteria+18650+protetta+3500mAh", 1],
@@ -286,7 +290,10 @@ const GRUPPI = [
         link: [["cerca", "https://it.aliexpress.com/w/wholesale-torx-pin-security-screw-m2.5.html", 1]] },
       { id: "b16", nome: "DS3231 modulo RTC", qta: "1", euro: "2 €",
         criterio: "Opzionale: ESPuino usa l'RTC interno via NTP, e il controllo genitori senza ora attendibile applica la regola più restrittiva.",
-        link: [["cerca", "https://it.aliexpress.com/w/wholesale-ds3231-rtc-module.html", 1]] }
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-ds3231-rtc-module.html", 1]] },
+      { id: "b17", nome: "PN5180 con antenna — se su Amazon non si trova", qta: "1", euro: "5–8 €",
+        criterio: "Su AliExpress abbondano. È il lettore che vogliamo nel box finito: è l'unico con l'<b>LPCD</b>, cioè il risveglio quando il bambino appoggia la carta. Se arriva in tempo si monta questo, altrimenti resta l'RC522 e il box si sveglia col tasto.",
+        link: [["cerca", "https://it.aliexpress.com/w/wholesale-pn5180-nfc-module-iso15693.html", 1]] }
     ]
   },
   {

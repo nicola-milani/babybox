@@ -38,7 +38,8 @@ la ferrite (B8) e il TPU (C2), una ventina di euro in tutto.
 | # | Cosa cercare | Q.tà | € | Perché qui |
 | --- | --- | --- | --- | --- |
 | A1 | `ESP32-S3-DevKitC-1 N16R8` (16 MB flash, 8 MB PSRAM **octal**) | 1 | 12–20 | È il cervello: se è morto o è la sigla sbagliata, non parte niente. Verificare **N16R8**, non N8R2/N8R8 |
-| A2 | `PN5180 NFC modulo ISO15693 SPI` con antenna sul PCB | 1 | 9–14 | Il pezzo più incerto del progetto: va provato in settimana 1 perché il piano B (RC522) si decide in settimana 2. Il case è disegnato su **58 × 47 × 8** |
+| A2 | `PN5180 NFC modulo ISO15693 SPI` con antenna sul PCB | 1 | 9–14 | Il pezzo più incerto del progetto: va provato in settimana 1 perché il piano B si decide in settimana 2. Il case è disegnato su **58 × 47 × 8** |
+| A2b | `RC522 RFID 13.56 MHz` (MFRC522) | 1 | 8–10 | **Il piano B, da comprare subito.** Legge le stesse carte e si sceglie dalla web UI, ma non ha l'LPCD: col solo RC522 il box non si sveglia all'appoggio della carta, il bambino deve prima premere un tasto. Se il PN5180 su Amazon non si trova, prenderne uno anche su AliExpress (B17) e decidere in settimana 2 |
 | A3 | `18650 Samsung 35E / LG MJ1 protetta` 3000–3500 mAh | 1 | 8–14 | **Non si compra in Cina**: le celle sfuse verso l'UE spesso non partono, e il mercato è pieno di celle riciclate rimarchiate. Sta dentro un oggetto che un bambino tiene in braccio |
 | A4 | `MicroSD 32 GB classe 10` | 1 | 6–9 | Le contraffatte dichiarano 32 GB e ne hanno 8: te ne accorgi quando le storie si corrompono |
 | A5 | `Altoparlante 4 Ω 3 W Ø40 mm` **ultrasottile** | 1 + 1 | 6–10 | **Attenzione**: i Ø40 che si trovano su Amazon sono alti 18–20 mm e nella console non ci stanno (guscio anteriore 26, tubo 12). Serve il tipo ultrasottile, che sta su AliExpress: `40mm ultra thin speaker 4ohm 3W`. Siccome è sul percorso critico, prenderne uno sottile là e uno qualsiasi qui come riserva. Limite: **spessore ≤ 10 mm**, meglio 5–6 |
@@ -47,7 +48,7 @@ la ferrite (B8) e il TPU (C2), una ventina di euro in tutto.
 | A8 | `Portabatteria 18650` contatti a molla | conf. da 2–5 | 5–7 | Serve al **test di autonomia** della settimana 2, e alla cella non si salda mai direttamente. **Misurare**: le culle sono disegnate su 24 × 78 × 20 |
 | A9 | `WS2812B` singolo su breakout, o striscia corta da tagliare | 1 | 6–8 | M2 chiede il deep sleep **col LED alimentato**: senza, la misura non vale |
 
-**Totale A: circa 63–100 €.**
+**Totale A: circa 71–110 €.**
 
 ## B · AliExpress, stesso giorno — magazzino Europa dove possibile
 
@@ -69,8 +70,9 @@ la ferrite (B8) e il TPU (C2), una ventina di euro in tutto.
 | B14 | `Rete anti-polvere` + `biadesivo 3M VHB` | 1 | 2–3 |
 | B15 | `Viti di sicurezza` (Torx pin / triwing) M2,5 × 8 | conf. da 20 | 3–5 |
 | B16 | `DS3231 modulo RTC` (con pila CR2032) | 1 | 2 |
+| B17 | `PN5180 NFC module ISO15693` con antenna | 1 | 5–8 |
 
-**Totale B: circa 40–68 €.**
+**Totale B: circa 45–76 €.**
 
 Note di scelta:
 - **B2:** NTAG213 (ISO 14443A). **Non** NTAG215/216 «amiibo», non Mifare Classic.
@@ -105,10 +107,10 @@ spedizione.
 
 | | |
 | --- | --- |
-| A · Amazon | 63–100 € |
-| B · AliExpress | 40–68 € |
+| A · Amazon | 71–110 € |
+| B · AliExpress | 45–76 € |
 | C · filamento | ~40 € |
-| **Totale** | **143–208 €** |
+| **Totale** | **156–226 €** |
 
 Comprando tutto su Amazon erano 190–245 €: si risparmiano **45–55 €** senza
 mettere la data in mano alla dogana.
@@ -139,7 +141,6 @@ Poi `./modelli-3d/genera-stl.sh` e si stampa.
   più sono le confezioni multiple, che non si evitano.
 - **PCB custom:** è la milestone M6, dopo il 20 novembre. Per la 1.0 si va di
   millefori.
-- **RC522:** solo se il PN5180 non arriva o l'LPCD non funziona. Costa 3 € e
-  si decide in settimana 2 — **da Amazon**, perché a quel punto dalla Cina
-  non si fa più in tempo.
+- **Niente**, sul fronte lettore: l'RC522 è passato in parte A proprio
+  perché il piano B non va comprato quando serve, va comprato prima.
 - **Una seconda 18650:** l'autonomia si misura prima di decidere se serve.

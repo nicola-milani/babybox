@@ -54,6 +54,22 @@ PCB quadrato con la spira), non solo il modulo. Pin SCK, MOSI, MISO, NSS,
 BUSY, RST. Il case è disegnato su un modulo da 58 × 47 × 8 mm: misuralo
 appena arriva.
 
+#### Se il PN5180 non si trova: RC522 — 8–10 €
+
+- [IZOKEE kit RC522, 40 × 60 mm](https://www.amazon.it/IZOKEE-Lettore-MFRC-522-Raspberry-Portachiavi/dp/B076HTH56Q)
+- [ricerca](https://www.amazon.it/s?k=RC522+RFID+13.56MHz)
+
+Legge le stesse carte (NTAG213 è ISO 14443A) e nel firmware è **una voce
+della web UI**, non una ricompilazione. Quello che si perde è il risveglio
+all'appoggio: con l'RC522 il box deve essere già sveglio quando arriva la
+carta, quindi il bambino prima preme un tasto. Portata dichiarata 0–35 mm,
+che per una carta appoggiata o infilata basta.
+
+**Cosa farei:** prendere l'RC522 adesso — costa 8 € ed è già il piano B
+scritto nel piano di lavoro — e mettere **un PN5180 nel carrello
+AliExpress**, dove abbondano a 5–8 €. In settimana 2 si decide col banco,
+avendo tutti e due.
+
 ### A3 · Batteria 18650 protetta — 1 pezzo, 8–14 €
 
 - [ricerca: 18650 protetta 3500mAh](https://www.amazon.it/s?k=batteria+18650+protetta+3500mAh)
@@ -144,6 +160,7 @@ Dove non c'è magazzino europeo, ordina lo stesso: serve dalla settimana 3.
 | B14 | Rete anti-polvere + biadesivo 3M VHB | 1 | 2–3 | [cerca](https://it.aliexpress.com/w/wholesale-speaker-dust-mesh-fabric.html) |
 | B15 | Viti di sicurezza Torx pin M2,5 × 8 | conf. 20 | 3–5 | [cerca](https://it.aliexpress.com/w/wholesale-torx-pin-security-screw-m2.5.html) |
 | B16 | DS3231 modulo RTC | 1 | 2 | [cerca](https://it.aliexpress.com/w/wholesale-ds3231-rtc-module.html) |
+| B17 | **PN5180 con antenna** (se su Amazon non si trova) | 1 | 5–8 | [cerca](https://it.aliexpress.com/w/wholesale-pn5180-nfc-module-iso15693.html) |
 
 Attenzione su tre voci:
 
