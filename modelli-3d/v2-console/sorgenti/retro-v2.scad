@@ -55,7 +55,7 @@ module retro_v2() {
 module culla_batteria_retro() {
     for (sz = [-1, 1])
         translate([V2_BATT_X, (V2_RETRO_PROF - V2_PARETE)/2 + V2_PARETE,
-                   V2_BATT_Z + sz * (BATT_HOLDER_Y/2 - 4)])
+                   V2_BATT_Z + sz * V2_BATT_BRACCI])
             difference() {
                 cube([BATT_HOLDER_X + 2*2.4, V2_RETRO_PROF - V2_PARETE, 6], center = true);
                 translate([0, -2, 0])
@@ -63,7 +63,7 @@ module culla_batteria_retro() {
             }
     // asole per una fascetta: la cella non salta via se la console cade
     for (sz = [-1, 1])
-        translate([V2_BATT_X, V2_PARETE + 1.5, V2_BATT_Z + sz * (BATT_HOLDER_Y/2 + 5)])
+        translate([V2_BATT_X, V2_PARETE + 1.5, V2_BATT_Z + sz * V2_BATT_FASCETTE])
             cube([BATT_HOLDER_X + 8, 3, 2.5], center = true);
 }
 

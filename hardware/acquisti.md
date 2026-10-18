@@ -78,9 +78,16 @@ avendo tutti e due.
 Non ho messo un link diretto apposta: qui conta il venditore, non il
 prezzo. Tre cose da controllare, in ordine:
 
-1. **Deve essere una cella nuda**, non un pacco precablato con fili e
-   connettore JST. Il box usa un portabatteria a molla e la culla nel case
-   è disegnata su quello: un pacco con i fili non ci entra.
+1. **Deve dire 18650**, cioè il cilindro d'acciaio. Non un pacco LiPo
+   piatto: in un giocattolo che cade, la busta morbida si fora, il cilindro
+   no. Se il titolo non scrive «18650» e nelle foto non si vede il
+   cilindro, lascia perdere.
+   *Cella nuda o pacco già precablato con fili?* Vanno bene tutti e due: in
+   `modelli-3d/sorgenti/parametri.scad` c'è `BATT_TIPO`, «portabatteria»
+   (cella nuda in un supporto a molle) oppure «cella» (pacco precablato,
+   fermato dalle fascette). Cambi una riga, rigeneri, e la culla si rifà da
+   sola. Il precablato ha anche un vantaggio: niente contatti a molla, che
+   in un oggetto che cade sono la causa numero uno dei falsi contatti.
 2. **3000–3500 mAh** dichiarati. Qualunque 18650 che dichiari 5000, 9900 o
    12000 mAh è falsa — in quel formato, fisicamente, non ci stanno.
 3. **Marca vera**: Samsung 35E / 30Q, LG MJ1 / HG2, Sony-Murata VTC. Se la
@@ -93,6 +100,12 @@ trovi protetta, meglio — è cintura e bretelle.
 
 Niente AliExpress per questa: le celle sfuse verso l'UE spesso non partono,
 e il mercato è pieno di celle riciclate rimarchiate.
+
+**Se su Amazon non esce niente di decente** — succede, la vendita di celle
+sfuse è limitata e quello che resta sono pacchi precablati senza marca —
+la strada seria è un negozio specializzato: **nkon.nl** ha le Samsung 35E
+e le LG MJ1 vere a 5–6 €, spedisce in Italia in pochi giorni. È un terzo
+ordine, ma su questo componente ne vale la pena.
 
 ### A4 · MicroSD 32 GB — 1 pezzo, 8–12 €
 

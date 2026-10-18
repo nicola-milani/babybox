@@ -149,9 +149,23 @@ GEN_POZZO_H  = 1.8;
 
 // Portabatteria con l'asse lungo su Y, sul lato destro: la basetta
 // millefori gli passa sopra senza toccarlo.
-BATT_HOLDER_X = 24;   // larghezza [VERIFICARE]
-BATT_HOLDER_Y = 78;   // lunghezza [VERIFICARE]
-BATT_HOLDER_Z = 20;
+// Come sta ferma la cella. Su Amazon le 18650 nude si trovano male (la
+// vendita di celle sfuse e' limitata) e quasi tutto quello che si trova e'
+// un pacco gia' precablato con fili e connettore. Vanno bene tutti e due,
+// basta dirlo qui:
+//
+//   "portabatteria"  cella nuda dentro un supporto a molle (24 x 78 x 20)
+//   "cella"          pacco precablato, tenuto dalle fascette della culla
+//
+// Cambiando questa riga le culle nei due gusci si rifanno da sole.
+BATT_TIPO = "portabatteria";
+
+BATT_CELLA_D = 19.5;  // 18650 col termoretraibile, con un filo di gioco
+BATT_CELLA_L = 72;    // 65 nuda, 69-70 protetta, qualcosa in piu' coi fili
+
+BATT_HOLDER_X = BATT_TIPO == "cella" ? BATT_CELLA_D : 24;   // larghezza [VERIFICARE]
+BATT_HOLDER_Y = BATT_TIPO == "cella" ? BATT_CELLA_L : 78;   // lunghezza [VERIFICARE]
+BATT_HOLDER_Z = BATT_TIPO == "cella" ? BATT_CELLA_D : 20;
 BATT_X        = 24;   // centro del vano batteria
 BATT_Y        = 0;
 SPORT_X       = 26;   // apertura dello sportellino batteria

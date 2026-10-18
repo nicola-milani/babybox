@@ -106,6 +106,13 @@ V2_GEN_Z      = 10;
 V2_BATT_X     = -70;
 V2_BATT_Z     = 55;
 V2_BATT_Y     = 32;    // a cavallo dello stacco (26): la culla e' divisa
+// I bracci della culla stanno a quota fissa, non a una frazione della
+// lunghezza della cella: quello che li vincola non e' la cella ma lo spazio
+// libero fra il tasto sinistro (che arriva a z 86,5) e il collare del
+// cursore (che comincia a 26). Cosi' reggono sia il portabatteria da 78 sia
+// una cella precablata da 72.
+V2_BATT_BRACCI = 35;   // distanza dei bracci dal centro della cella
+V2_BATT_FASCETTE = 18; // dove passano le fascette, nel guscio posteriore
 
 V2_BASETTA_X  = 36;    // stretta: ci sta la DevKitC-1 (63 x 25) per il verso
 V2_BASETTA_Z  = 80;    // lungo, con una decina di millimetri per i fili

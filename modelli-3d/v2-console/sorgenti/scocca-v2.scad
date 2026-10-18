@@ -204,7 +204,7 @@ module culla_batteria_v2() {
     // la batteria sta in piedi: le culle sono due, sopra e sotto
     for (sz = [-1, 1])
         translate([V2_BATT_X, V2_PARETE + (V2_SPLIT - V2_PARETE)/2,
-                   V2_BATT_Z + sz * (BATT_HOLDER_Y/2 - 4)])
+                   V2_BATT_Z + sz * V2_BATT_BRACCI])
             difference() {
                 cube([BATT_HOLDER_X + 2*2.4, V2_SPLIT - V2_PARETE, 6], center = true);
                 translate([0, 2, 0])
