@@ -114,7 +114,7 @@ sostegni interni completi in entrambe e `verifica-ingombri.py` che dà zero
 collisioni sulla console. Restano due incognite, tutte e due della console e
 tutte e due da chiudere col lettore in mano:
 
-- una CR80 infilata per 44 mm si legge?
+- una CR80 infilata tutta si legge, e il bambino riesce a tirarla fuori dalla tacca?
 - con la ferrite dietro l'antenna, le carte riposte nel vano restano zitte?
 
 Sono dieci minuti col provino NFC. **Quello che cambia oggi è l'ordine**: va

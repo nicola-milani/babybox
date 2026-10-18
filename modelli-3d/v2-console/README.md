@@ -12,18 +12,32 @@ può scegliere con gli STL in mano invece che con un disegno.
 
 ## Come si infila la carta — il punto che decide tutto
 
-La carta CR80 entra **di lato corto**: dentro 44 mm dei suoi 54, fuori un
-centimetro per afferrarla.
+La carta CR80 entra **di lato corto e tutta dentro**: fuori non resta
+niente. Per sfilarla c'è una **tacca** sulla faccia, 34 × 18 mm, che scopre
+un pezzo della carta a filo della fessura: ci si appoggia il pollice e si
+spinge in su, come si sfila una carta dal portafoglio.
 
-Non è un dettaglio di comodità. L'antenna di una CR80 è una spira che corre
-lungo tutto il bordo della carta: infilandola a metà, metà spira resta fuori
-dal campo del lettore e la lettura diventa un'incognita. Con un centimetro
-fuori la spira è tutta dentro, appoggiata all'antenna del PN5180. In più la
-tasca è profonda 50 mm invece di 78, e dentro un corpo alto 110 mm è la
-differenza fra «ci sta» e «non ci sta nient'altro».
+Il lato corto non è un dettaglio di comodità. L'antenna di una CR80 è una
+spira che corre lungo tutto il bordo: infilandola di lato lungo per metà,
+metà spira resta fuori dal campo del lettore e la lettura diventa
+un'incognita. Entrando tutta di lato corto la spira è interamente davanti
+all'antenna del PN5180 — è la condizione migliore delle tre che abbiamo
+provato sulla carta. E la tasca è profonda 55 mm invece di 78: dentro un
+corpo alto 110 è la differenza fra «ci sta» e «non ci sta nient'altro».
 
-Il disco Ø60 usa la stessa fessura: entra 50 mm, il tag centrale arriva
-davanti all'antenna.
+Perché a filo e non sporgente, come nel primo giro: una carta che sporge di
+un centimetro è la prima cosa che si piega quando la console va in borsa,
+ed è una leva comoda in mano a un bambino. In più la tacca fa da finestra
+sul disegno della carta, quindi si vede lo stesso quale storia è dentro.
+
+**Resta da provare con un bambino vero**: spingere su una carta col pollice
+è un gesto da portafoglio, e un bambino di due anni potrebbe non azzeccarlo.
+Se non funziona, si torna alla carta sporgente cambiando una riga —
+`V2_SPORGE = 10` in `parametri-v2.scad`, e tasca, antenna e tacca si
+risistemano da sole.
+
+Il disco Ø60 non ha bisogno della tacca: è più largo della tasca profonda
+55, quindi sporge da solo di cinque millimetri e si prende con due dita.
 
 ## I pezzi
 
@@ -138,9 +152,11 @@ chiudono solo con i pezzi in mano:
 - [ ] **Pulizia della fessura**: oggi la tasca è chiusa in fondo. Un bambino
       ci infila briciole, e per toglierle bisogna aprire i due gusci. Va
       deciso se farci un'uscita.
-- [ ] **La prova che conta**: una CR80 inserita per 44 mm si legge, e una
-      carta nel vano sul retro resta zitta? Si misura col provino NFC appena
+- [ ] **La prova che conta**: una CR80 infilata tutta si legge, e una carta
+      nel vano sul retro resta zitta? Si misura col provino NFC appena
       arrivano PN5180 e ferrite, in dieci minuti.
+- [ ] **La tacca funziona?** Non è una domanda da banco, è da bambino: va
+      provata con lui. Il ripiego è una riga di parametro.
 
 ## Com'è fatta, in due immagini
 
@@ -162,11 +178,11 @@ anche le immagini:
 | | Cubo (v1) | Console (v2) |
 | --- | --- | --- |
 | Pronto a stampare | **sì**, 13 STL verificati | **sì**, 4 STL, ingombri verificati |
-| Gesto | appoggi la carta sul vassoio | la infili nella fessura |
+| Gesto | appoggi la carta sul vassoio | la infili e sparisce dentro |
 | Collezione | due raccoglitori ai lati, 6+6, in vista | vano sul retro, 6 carte o 3 dischi, di piatto |
 | In viaggio | i raccoglitori si sfilano e si perdono | tutto dentro |
 | Sul tavolo | sta fermo, il bambino lo guarda dall'alto | va tenuto o appoggiato di piatto |
-| Rischi aperti | nessuno grosso | lettura a 44 mm, briciole nella fessura |
+| Rischi aperti | nessuno grosso | la tacca di estrazione, briciole nella fessura |
 | Componenti in più | — | ferrite (~5–9 €) e 20 g di TPU |
 
 Il cubo resta la scelta prudente: è lo stesso progetto da più giorni e

@@ -24,7 +24,7 @@ NOMI = ["V2_X", "V2_Z", "V2_Y", "V2_PARETE", "V2_SPLIT", "V2_FESS_LARG",
         "V2_SPORT_X1", "V2_SPORT_X2", "V2_SPORT_GOLA", "V2_SPORT_PAD",
         "SW_VITI", "SW_FORO_Y", "GEN_POZZO_D",
         "ALT_TUBO_OD", "ALT_TUBO_LUNG", "PN_X", "PN_Y", "PN_ALT",
-        "TASTO_CAPPUCCIO", "CURSORE_CORSA", "CURSORE_LARG", "CURSORE_ALT", "CURSORE_Z_SOTTO", "BATT_HOLDER_X",
+        "CARTA_Y", "TASTO_CAPPUCCIO", "CURSORE_CORSA", "CURSORE_LARG", "CURSORE_ALT", "CURSORE_Z_SOTTO", "BATT_HOLDER_X",
         "BATT_HOLDER_Y", "BATT_HOLDER_Z", "LED_SEDE_D", "LED_SEDE_PROF"]
 
 
@@ -59,13 +59,14 @@ ant_y = carta_y + v["V2_FESS_SPESS"] / 2 + 2.4
 
 # (nome, x0, x1, y0, y1, z0, z1)
 pezzi = [
-    ("cava della fessura", -v["V2_FESS_LARG"]/2, v["V2_FESS_LARG"]/2,
-     carta_y - v["V2_FESS_SPESS"]/2, carta_y + v["V2_FESS_SPESS"]/2,
-     fondo_tasca, v["V2_Z"]),
+    # la tasca con le sue pareti: e' l'ingombro che scende verso la camera
+    ("tasca della fessura", -v["V2_FESS_LARG"]/2 - 3.2, v["V2_FESS_LARG"]/2 + 3.2,
+     carta_y - v["V2_FESS_SPESS"]/2 - 2.2, carta_y + v["V2_FESS_SPESS"]/2 + 2.2,
+     fondo_tasca - 1.6, v["V2_Z"]),
     ("lettore PN5180", -(v["PN_X"]+5)/2, (v["PN_X"]+5)/2, ant_y, ant_y + v["PN_ALT"],
-     fondo_tasca + v["PN_Y"]/2 - 2 - (v["PN_Y"]+5)/2, fondo_tasca + v["PN_Y"]/2 - 2 + (v["PN_Y"]+5)/2),
+     fondo_tasca + v["CARTA_Y"]/2 - 2 - (v["PN_Y"]+5)/2, fondo_tasca + v["CARTA_Y"]/2 - 2 + (v["PN_Y"]+5)/2),
     ("ferrite", -32, 32, ant_y + v["PN_ALT"], ant_y + v["PN_ALT"] + 1.1,
-     fondo_tasca + v["PN_Y"]/2 - 2 - v["V2_FERRITE_Z"]/2, fondo_tasca + v["PN_Y"]/2 - 2 + v["V2_FERRITE_Z"]/2),
+     fondo_tasca + v["CARTA_Y"]/2 - 2 - v["V2_FERRITE_Z"]/2, fondo_tasca + v["CARTA_Y"]/2 - 2 + v["V2_FERRITE_Z"]/2),
     ("camera altoparlante", v["V2_ALT_X"] - v["ALT_TUBO_OD"]/2, v["V2_ALT_X"] + v["ALT_TUBO_OD"]/2,
      v["V2_PARETE"], v["V2_PARETE"] + v["ALT_TUBO_LUNG"],
      v["V2_ALT_Z"] - v["ALT_TUBO_OD"]/2, v["V2_ALT_Z"] + v["ALT_TUBO_OD"]/2),

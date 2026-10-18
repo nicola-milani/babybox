@@ -135,14 +135,16 @@
     <h1>Console da viaggio</h1>
     <p class="misure">180 &times; 110 &times; 45 mm &middot; corpo bianco &middot; 5 pezzi stampati</p>
     <p class="occhiello">La variante v2 di babybox, montata. La carta della storia si infila
-      dal bordo superiore e ne sporge un centimetro, come una cartuccia.</p>
+      dal bordo superiore e sparisce dentro: si rivede dalla tacca sulla faccia, ed è di
+      lì che si spinge fuori col pollice.</p>
   </header>
 
   <figure>
     <img src="col-fronte.png" alt="La console vista di tre quarti da davanti: corpo bianco, tasto rosso a sinistra, tasto verde a destra, cursore giallo del volume, griglia dell'altoparlante in basso a destra, carta arancione infilata in alto.">
     <figcaption><b>Davanti.</b> Tasti ai pollici, LED di stato in alto a sinistra, cursore del
       volume in basso con le icone incise ai due capi, griglia dell'altoparlante a destra.
-      Gli angoli morbidi sono quattro pezzi separati in TPU.</figcaption>
+      La tacca in alto scopre 34 × 18 mm della carta: fa da presa per sfilarla e da
+      finestra sul suo disegno. Gli angoli morbidi sono quattro pezzi separati in TPU.</figcaption>
   </figure>
 
   <div class="coppia">
@@ -174,7 +176,7 @@
       <div class="riga"><i class="pastiglia" style="background: var(--antra)"></i>
         <div><b>Paracolpi</b> <span>&mdash; TPU 95A, 20 g in tutto</span></div></div>
       <div class="riga"><i class="pastiglia" style="background: var(--ocra)"></i>
-        <div><b>Carta della storia</b> <span>&mdash; PVC CR80 con NTAG213, comprata</span></div></div>
+        <div><b>Carta della storia</b> <span>&mdash; PVC CR80 con NTAG213, entra tutta</span></div></div>
       <div class="riga"><i class="pastiglia" style="background: #7bd389"></i>
         <div><b>LED di stato</b> <span>&mdash; WS2812B dietro 0,8 mm di parete</span></div></div>
     </div>
@@ -182,9 +184,11 @@
 
   <footer>
     Immagini generate da <code>modelli-3d/v2-console/sorgenti/scena-colori.scad</code> con
-    OpenSCAD: sono gli stessi file degli STL, non un disegno a parte. Restano due prove da
-    fare col lettore in mano &mdash; se una CR80 infilata per 44 mm si legge, e se con la
-    ferrite le carte nel vano restano zitte.
+    OpenSCAD: sono gli stessi file degli STL, non un disegno a parte. Restano tre prove da
+    fare sul pezzo vero: se una CR80 infilata tutta si legge, se con la ferrite le carte nel
+    vano restano zitte, e se un bambino di due anni riesce a spingere fuori la carta dalla
+    tacca. L'ultima ha un ripiego da una riga: <code>V2_SPORGE = 10</code>, e la carta torna
+    a sporgere di un centimetro.
   </footer>
 
 </div>

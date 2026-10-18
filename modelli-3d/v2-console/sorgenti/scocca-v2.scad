@@ -58,6 +58,7 @@ module scocca_v2() {
             pad_led();
         }
         cava_fessura();
+        tacca_estrazione();
         fori_tasti();
         fessura_cursore_v2();
         finestra_led_v2();
@@ -95,14 +96,36 @@ module guida_fessura() {
         translate([0, V2_CARTA_Y + sy * (V2_FESS_SPESS/2 + 1.1),
                    V2_FONDO_TASCA + V2_FESS_PROF/2])
             cube([V2_FESS_LARG + 7, 2.2, V2_FESS_PROF], center = true);
-    // fondo della tasca
-    translate([0, V2_CARTA_Y, V2_FONDO_TASCA - 1.5])
-        cube([V2_FESS_LARG + 7, V2_FESS_SPESS + 4.4, 3], center = true);
+    // fondo della tasca: sottile, perche' sotto passa la camera acustica
+    translate([0, V2_CARTA_Y, V2_FONDO_TASCA - 0.8])
+        cube([V2_FESS_LARG + 7, V2_FESS_SPESS + 4.4, 1.6], center = true);
     // fianchi, perché la carta non scappi di lato
     for (sx = [-1, 1])
         translate([sx * (V2_FESS_LARG/2 + 1.6), V2_CARTA_Y,
                    V2_FONDO_TASCA + V2_FESS_PROF/2])
             cube([3.2, V2_FESS_SPESS + 4.4, V2_FESS_PROF], center = true);
+}
+
+// Tacca di estrazione: la carta entra tutta, e di qui si tira fuori.
+// Scopre 34 x 18 mm della sua faccia a filo della fessura: ci si appoggia
+// il pollice e si spinge in su, come si sfila una carta dal portafoglio.
+// Il disco non ne ha bisogno: e' Ø60 in una tasca da 55, sporge da solo.
+module tacca_estrazione() {
+    r = 6;
+    translate([0, -1, V2_Z - V2_TACCA_Z])
+        linear_extrude(height = V2_TACCA_Z + 2)
+            offset(r = r)
+                square([V2_TACCA_X - 2*r, (V2_CARTA_Y + 1) * 2 - 2*r], center = true);
+    // smusso d'invito dove la tacca incontra il bordo superiore
+    translate([0, 0, V2_Z - 1.2])
+        hull() {
+            linear_extrude(height = 0.02)
+                offset(r = r) square([V2_TACCA_X - 2*r, 2*V2_CARTA_Y - 2*r], center = true);
+            translate([0, 0, 1.2])
+                linear_extrude(height = 0.02)
+                    offset(r = r + 2)
+                        square([V2_TACCA_X - 2*r, 2*V2_CARTA_Y - 2*r], center = true);
+        }
 }
 
 module cava_fessura() {
@@ -131,7 +154,7 @@ V2_ANT_Y = V2_CARTA_Y + V2_FESS_SPESS/2 + 2.4;   // 14,4: subito dietro la guida
 module sedi_antenna() {
     // telaio che trattiene il modulo: tre lati chiusi, il quarto aperto
     // per infilarlo dall'alto a guscio aperto
-    translate([0, V2_ANT_Y + PN_ALT/2, V2_FONDO_TASCA + PN_Y/2 - 2])
+    translate([0, V2_ANT_Y + PN_ALT/2, V2_FONDO_TASCA + CARTA_Y/2 - 2])
         difference() {
             cube([PN_X + 5, PN_ALT, PN_Y + 5], center = true);
             cube([PN_X + GIOCO, PN_ALT + 1, PN_Y + GIOCO], center = true);
@@ -139,7 +162,7 @@ module sedi_antenna() {
         }
     // appoggio della ferrite, dietro l'antenna
     translate([0, V2_ANT_Y + PN_ALT + V2_FERRITE_SP/2 + 0.3,
-               V2_FONDO_TASCA + PN_Y/2 - 2])
+               V2_FONDO_TASCA + CARTA_Y/2 - 2])
         difference() {
             cube([V2_FERRITE_X + 4, V2_FERRITE_SP + 0.6, V2_FERRITE_Z + 4], center = true);
             cube([V2_FERRITE_X + GIOCO, V2_FERRITE_SP + 1.6, V2_FERRITE_Z + GIOCO], center = true);

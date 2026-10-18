@@ -20,14 +20,21 @@ V2_PARETE    = 2.4;
 V2_SPLIT     = 26;    // a che profondità si dividono i due gusci (dal fronte)
 
 // ---------- fessura ----------
-// La carta entra di lato corto e ne sporge un centimetro: così la
-// spira del tag, che corre lungo il bordo della CR80, finisce tutta
-// davanti all'antenna. Prima l'idea era infilarla di lato lungo per
-// metà, e la lettura restava un'incognita.
+// La carta entra di lato corto: così la spira del tag, che corre lungo il
+// bordo della CR80, finisce tutta davanti all'antenna. Prima l'idea era
+// infilarla di lato lungo per metà, e la lettura restava un'incognita.
 V2_FESS_LARG  = CARTA_X + 2.4;      // 88,0: ci passa anche il disco Ø60
 V2_FESS_SPESS = 5.4;                // carta 0,84, disco 4: passa tutto
-V2_SPORGE     = 10;                 // quanto resta fuori per afferrare
-V2_FESS_PROF  = CARTA_Y - V2_SPORGE + 6;  // 50: tasca sotto la fessura
+// La carta entra tutta: fuori non resta niente. Per sfilarla c'e' una
+// tacca sulla faccia, che scopre un pezzo della carta - si spinge su col
+// pollice e si prende. Una carta che sporge e' la prima cosa che si piega
+// in borsa, ed e' anche una leva in mano a un bambino.
+// Per tornare alla carta sporgente basta rimettere V2_SPORGE = 10: tasca,
+// antenna e tacca si risistemano da sole.
+V2_SPORGE     = 0;                  // quanto resta fuori dalla fessura
+V2_FESS_PROF  = CARTA_Y - V2_SPORGE + 1;  // 55: un millimetro di fondo corsa
+V2_TACCA_X    = 34;                 // larghezza della tacca di estrazione
+V2_TACCA_Z    = 18;                 // quanto scende dal bordo superiore
 V2_IMBUTO     = 2.5;                // svasatura d'ingresso, per infilare al buio
 
 // ---------- antenna e schermo ----------
@@ -53,7 +60,7 @@ V2_CURSORE_COLLARE = CURSORE_CORSA + 14;  // piu' stretto che sul cubo: il
 V2_CURSORE_Z  = 34;   // sulla faccia, sotto i tasti e a sinistra della griglia
 
 // ---------- vano della collezione, sul retro ----------
-V2_VANO_X     = 96;   // ci stanno 6 carte in piedi, o 3 dischi
+V2_VANO_X     = 96;   // di piatto ci stanno 6 carte, o 3 dischi
 V2_VANO_Z     = 64;
 V2_VANO_PROF  = 13;
 V2_VANO_X0    = 30;   // spostato a destra: a sinistra c'è la batteria
