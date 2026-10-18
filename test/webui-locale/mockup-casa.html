@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<title>babybox</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+	<style>
+		/* ============================================================
+		   Mockup della pagina "casa" di babybox — task web UI semplice.
+		   Non è codice definitivo: serve a provare i gesti sul telefono
+		   prima di scrivere la pagina vera nel firmware.
+		   ============================================================ */
+
+		:root {
+			/* Sera: è l'ora in cui questa pagina si usa davvero. */
+			--notte: #10211F;
+			--notte-alto: #16302C;
+			--plastica: #1D3B36;
+			--latte: #EFEDE4;
+			--latte-spento: #A9BDB5;
+			--ambra: #E9A95C;
+			--ambra-scura: #C9833A;
+			--viola: #9A8CC7;
+			--riga: #2A4A43;
+
+			--sp: clamp(1rem, 4vw, 1.4rem);
+			--tocco: 3.5rem;
+			/* mai sotto: si usa con una mano sola */
+		}
+
+		@media (prefers-color-scheme: light) {
+			:root {
+				--notte: #F1EFE7;
+				--notte-alto: #FFFFFF;
+				--plastica: #E2E6DE;
+				--latte: #16302C;
+				--latte-spento: #5B726B;
+				--ambra: #B96E1C;
+				--ambra-scura: #8C500F;
+				--viola: #6B5BA8;
+				--riga: #D3D8CE;
+			}
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html,
+		body {
+			margin: 0;
+			background: var(--notte);
+			color: var(--latte);
+		}
+
+		body {
+			font-family: "Hanken Grotesk", system-ui, sans-serif;
+			font-size: 1.0625rem;
+			line-height: 1.5;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		.schermo {
+			max-width: 30rem;
+			margin: 0 auto;
+			padding: var(--sp) var(--sp) 6rem;
+			display: none;
+			flex-direction: column;
+			gap: var(--sp);
+		}
+
+		.schermo[data-attivo] {
+			display: flex;
+		}
+
+		h1 {
+			font-family: "Baloo 2", system-ui, sans-serif;
+			font-weight: 600;
+			font-size: 1.5rem;
+			letter-spacing: 0.01em;
+			margin: 0;
+		}
+
+		h2 {
+			font-family: "Baloo 2", system-ui, sans-serif;
+			font-weight: 600;
+			font-size: 1.25rem;
+			margin: 0;
+		}
+
+		p {
+			margin: 0;
+			color: var(--latte-spento);
+		}
+
+		/* ---------- il coperchio del box, disegnato dal vero ---------- */
+		.coperchio {
+			position: relative;
+			background: var(--plastica);
+			border-radius: 1.75rem;
+			padding: 1.25rem;
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+			overflow: hidden;
+		}
+
+		.coperchio svg {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+
+		.stato {
+			display: flex;
+			flex-direction: column;
+			gap: 0.15rem;
+		}
+
+		.stato strong {
+			font-family: "Baloo 2", system-ui, sans-serif;
+			font-weight: 600;
+			font-size: 1.35rem;
+			line-height: 1.2;
+			color: var(--latte);
+		}
+
+		.stato span {
+			color: var(--latte-spento);
+			font-size: 0.95rem;
+		}
+
+		.misure {
+			display: flex;
+			gap: 1.25rem;
+			align-items: center;
+			font-variant-numeric: tabular-nums;
+			font-size: 0.95rem;
+			color: var(--latte-spento);
+			border-top: 1px solid var(--riga);
+			padding-top: 0.85rem;
+		}
+
+		.misure b {
+			color: var(--latte);
+			font-weight: 600;
+		}
+
+		.pila {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.4rem;
+		}
+
+		.pila i {
+			width: 1.6rem;
+			height: 0.85rem;
+			border: 1.5px solid var(--latte-spento);
+			border-radius: 0.2rem;
+			position: relative;
+			display: inline-block;
+		}
+
+		.pila i::after {
+			content: "";
+			position: absolute;
+			inset: 2px;
+			width: var(--carica, 70%);
+			background: var(--ambra);
+			border-radius: 0.08rem;
+		}
+
+		/* ---------- i quattro tasti ---------- */
+		.azioni {
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+
+		.azione {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			min-height: var(--tocco);
+			padding: 0.9rem 1.1rem;
+			background: var(--notte-alto);
+			color: inherit;
+			border: 1px solid var(--riga);
+			border-radius: 999px;
+			font: inherit;
+			text-align: left;
+			cursor: pointer;
+		}
+
+		.azione:hover {
+			border-color: var(--ambra);
+		}
+
+		.azione:focus-visible {
+			outline: 3px solid var(--ambra);
+			outline-offset: 2px;
+		}
+
+		.azione .pallino {
+			flex: 0 0 auto;
+			width: 2.75rem;
+			height: 2.75rem;
+			border-radius: 50%;
+			background: var(--plastica);
+			display: grid;
+			place-items: center;
+			font-size: 1.35rem;
+		}
+
+		.azione.nanna .pallino {
+			background: color-mix(in srgb, var(--viola) 30%, var(--plastica));
+		}
+
+		.azione b {
+			font-family: "Baloo 2", system-ui, sans-serif;
+			font-weight: 600;
+			font-size: 1.1rem;
+			display: block;
+			line-height: 1.25;
+		}
+
+		.azione small {
+			color: var(--latte-spento);
+			font-size: 0.9rem;
+		}
+
+		/* ---------- riga di servizio ---------- */
+		.servizio {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 1rem;
+			border-top: 1px solid var(--riga);
+			padding-top: 0.9rem;
+			font-size: 0.92rem;
+			color: var(--latte-spento);
+		}
+
+		.servizio a {
+			color: var(--latte-spento);
+			text-decoration-thickness: 1px;
+			text-underline-offset: 3px;
+		}
+
+		.servizio a:hover {
+			color: var(--ambra);
+		}
+
+		/* ---------- pannello che sale dal basso ---------- */
+		.foglio {
+			position: fixed;
+			inset: auto 0 0 0;
+			background: var(--notte-alto);
+			border-radius: 1.5rem 1.5rem 0 0;
+			border-top: 1px solid var(--riga);
+			padding: 1.25rem var(--sp) calc(1.25rem + env(safe-area-inset-bottom));
+			max-width: 30rem;
+			margin: 0 auto;
+			transform: translateY(102%);
+			transition: transform 0.28s cubic-bezier(.2, .8, .2, 1);
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+			z-index: 10;
+		}
+
+		.foglio[data-aperto] {
+			transform: none;
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.foglio {
+				transition: none;
+			}
+		}
+
+		.foglio .maniglia {
+			width: 2.5rem;
+			height: 0.25rem;
+			border-radius: 999px;
+			background: var(--riga);
+			align-self: center;
+		}
+
+		.scelte {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.6rem;
+		}
+
+		.scelta {
+			flex: 1 1 7rem;
+			min-height: var(--tocco);
+			padding: 0.7rem 1rem;
+			border-radius: 1rem;
+			border: 1px solid var(--riga);
+			background: var(--plastica);
+			color: inherit;
+			font: inherit;
+			font-weight: 600;
+			cursor: pointer;
+		}
+
+		.scelta:focus-visible {
+			outline: 3px solid var(--ambra);
+			outline-offset: 2px;
+		}
+
+		.primario {
+			min-height: var(--tocco);
+			border: none;
+			border-radius: 999px;
+			background: var(--ambra);
+			color: #231405;
+			font: inherit;
+			font-weight: 600;
+			font-size: 1.05rem;
+			cursor: pointer;
+			padding: 0.9rem 1.2rem;
+		}
+
+		.primario:focus-visible {
+			outline: 3px solid var(--latte);
+			outline-offset: 2px;
+		}
+
+		.secondario {
+			background: none;
+			border: none;
+			color: var(--latte-spento);
+			font: inherit;
+			text-decoration: underline;
+			text-underline-offset: 3px;
+			cursor: pointer;
+			padding: 0.6rem;
+		}
+
+		/* ---------- attesa della statuina ---------- */
+		.attesa {
+			display: grid;
+			place-items: center;
+			gap: 0.75rem;
+			padding: 1.5rem 0;
+			text-align: center;
+		}
+
+		.onda {
+			width: 5.5rem;
+			height: 5.5rem;
+			border-radius: 50%;
+			border: 2px dashed var(--ambra);
+			display: grid;
+			place-items: center;
+			font-size: 2rem;
+			animation: respira 2.4s ease-in-out infinite;
+		}
+
+		@keyframes respira {
+
+			0%,
+			100% {
+				transform: scale(1);
+				opacity: .75;
+			}
+
+			50% {
+				transform: scale(1.06);
+				opacity: 1;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.onda {
+				animation: none;
+			}
+		}
+
+		.elenco {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+			max-height: 15rem;
+			overflow-y: auto;
+		}
+
+		.voce {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 1rem;
+			min-height: var(--tocco);
+			padding: 0.75rem 1rem;
+			border-radius: 1rem;
+			border: 1px solid var(--riga);
+			background: var(--plastica);
+			color: inherit;
+			font: inherit;
+			text-align: left;
+			cursor: pointer;
+		}
+
+		.voce small {
+			color: var(--latte-spento);
+		}
+
+		/* ---------- primo avvio ---------- */
+		.passi {
+			display: flex;
+			gap: 0.4rem;
+			margin-bottom: 0.25rem;
+		}
+
+		.passi i {
+			height: 0.3rem;
+			flex: 1;
+			border-radius: 999px;
+			background: var(--riga);
+		}
+
+		.passi i[data-fatto] {
+			background: var(--ambra);
+		}
+
+		label {
+			display: flex;
+			flex-direction: column;
+			gap: 0.35rem;
+			font-size: 0.95rem;
+			color: var(--latte-spento);
+		}
+
+		input,
+		select {
+			min-height: var(--tocco);
+			padding: 0.7rem 0.9rem;
+			border-radius: 0.9rem;
+			border: 1px solid var(--riga);
+			background: var(--plastica);
+			color: var(--latte);
+			font: inherit;
+		}
+
+		input:focus-visible,
+		select:focus-visible {
+			outline: 3px solid var(--ambra);
+			outline-offset: 1px;
+		}
+
+		.campi {
+			display: flex;
+			flex-direction: column;
+			gap: 0.9rem;
+		}
+
+		.reti {
+			display: flex;
+			flex-direction: column;
+			gap: 0.4rem;
+		}
+
+		.rete {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			min-height: 3rem;
+			padding: 0.6rem 0.9rem;
+			border-radius: 0.9rem;
+			border: 1px solid var(--riga);
+			background: var(--plastica);
+			color: inherit;
+			font: inherit;
+			cursor: pointer;
+		}
+
+		.rete[data-scelta] {
+			border-color: var(--ambra);
+		}
+
+		.nota {
+			font-size: 0.9rem;
+			color: var(--latte-spento);
+			border-left: 2px solid var(--riga);
+			padding-left: 0.8rem;
+		}
+
+		/* ---------- barra del mockup (non fa parte del prodotto) ---------- */
+		.barra-mockup {
+			position: fixed;
+			inset: 0 0 auto 0;
+			display: flex;
+			gap: 0.3rem;
+			justify-content: center;
+			padding: 0.4rem;
+			background: #000;
+			color: #fff;
+			font-size: 0.75rem;
+			z-index: 20;
+		}
+
+		.barra-mockup button {
+			background: #222;
+			color: #ddd;
+			border: 1px solid #444;
+			border-radius: 0.5rem;
+			padding: 0.3rem 0.6rem;
+			font: inherit;
+			cursor: pointer;
+		}
+
+		.barra-mockup button[data-attivo] {
+			background: var(--ambra);
+			color: #231405;
+			border-color: var(--ambra);
+		}
+
+		.spazio-barra {
+			height: 2.2rem;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="barra-mockup" aria-label="Schermate del mockup">
+		<button data-vai="casa" data-attivo>casa</button>
+		<button data-vai="riposo">riposo</button>
+		<button data-vai="avvio">primo avvio</button>
+		<button data-vai="orologio">data e ora</button>
+	</nav>
+	<div class="spazio-barra"></div>
+
+	<!-- ============================ CASA ============================ -->
+	<main class="schermo" id="casa" data-attivo>
+		<div class="coperchio">
+			<svg viewBox="0 0 320 300" role="img" aria-label="Il coperchio del box visto dall'alto">
+				<defs>
+					<radialGradient id="luce" cx="50%" cy="35%" r="70%">
+						<stop offset="0%" stop-color="#2A524A" />
+						<stop offset="100%" stop-color="#1A3A34" />
+					</radialGradient>
+				</defs>
+				<rect x="6" y="6" width="308" height="288" rx="40" fill="url(#luce)" />
+				<!-- scasso dove si appoggia la statuina -->
+				<circle cx="160" cy="108" r="76" fill="#122B27" />
+				<circle id="piatto" cx="160" cy="108" r="70" fill="#C9833A" opacity=".18" />
+				<g id="ospite" transform="translate(160 108)">
+					<circle r="26" fill="#E9A95C" opacity=".9" />
+					<circle cy="-26" r="17" fill="#E9A95C" />
+					<circle cx="-13" cy="-40" r="7" fill="#E9A95C" />
+					<circle cx="13" cy="-40" r="7" fill="#E9A95C" />
+				</g>
+				<!-- fessura del cursore -->
+				<rect x="54" y="208" width="212" height="9" rx="4.5" fill="#122B27" />
+				<rect id="cursore" x="150" y="203" width="34" height="19" rx="9" fill="#EFEDE4" opacity=".85" />
+				<!-- i due tasti -->
+				<circle cx="96" cy="258" r="26" fill="#122B27" />
+				<circle cx="224" cy="258" r="26" fill="#122B27" />
+				<path d="M103 258 L89 249 L89 267 Z" fill="#6E8B82" transform="rotate(180 96 258)" />
+				<path d="M231 258 L217 249 L217 267 Z" fill="#6E8B82" />
+			</svg>
+
+			<div class="stato">
+				<strong id="statoTitolo">Sta raccontando «La volpe e il bosco»</strong>
+				<span id="statoRiga">Capitolo 2 di 5, volume 6</span>
+			</div>
+
+			<div class="misure">
+				<span class="pila"><i style="--carica:74%"></i> <b>74%</b></span>
+				<span>circa 7 ore</span>
+				<span style="margin-left:auto">WiFi casa</span>
+			</div>
+		</div>
+
+		<div class="azioni">
+			<button class="azione" data-apre="statuina">
+				<span class="pallino" aria-hidden="true">🧸</span>
+				<span><b>Nuova statuina</b><small>Appoggiala e scegli la storia</small></span>
+			</button>
+			<button class="azione" data-apre="vinile">
+				<span class="pallino" aria-hidden="true">🎵</span>
+				<span><b>Nuovo vinile</b><small>Appoggialo e scegli la canzone</small></span>
+			</button>
+			<button class="azione nanna" data-apre="nanna">
+				<span class="pallino" aria-hidden="true">🌙</span>
+				<span><b>Nanna</b><small>Blocca adesso, o imposta le fasce</small></span>
+			</button>
+			<button class="azione" data-apre="carica">
+				<span class="pallino" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+						stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M12 16V4M12 4l-4 4M12 4l4 4M4 17v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-2" /></svg></span>
+				<span><b>Carica storie</b><small>Dal telefono o dal computer</small></span>
+			</button>
+		</div>
+
+		<div class="servizio">
+			<span>Ora del box <b style="color:var(--latte)">14:32</b></span>
+			<a href="#" data-vai="orologio">Data e ora</a>
+			<a href="/management.html">Impostazioni avanzate</a>
+		</div>
+	</main>
+
+	<!-- ========================= CASA, BLOCCATA ========================= -->
+	<main class="schermo" id="riposo">
+		<div class="coperchio">
+			<svg viewBox="0 0 320 300" role="img" aria-label="Il box è in riposo">
+				<rect x="6" y="6" width="308" height="288" rx="40" fill="#15322C" />
+				<circle cx="160" cy="108" r="76" fill="#102520" />
+				<g transform="translate(160 108)">
+					<path d="M18 -26 A30 30 0 1 0 18 26 A24 24 0 1 1 18 -26 Z" fill="#9A8CC7" opacity=".85" />
+				</g>
+				<rect x="54" y="208" width="212" height="9" rx="4.5" fill="#102520" />
+				<rect x="150" y="203" width="34" height="19" rx="9" fill="#3A574F" />
+				<circle cx="96" cy="258" r="26" fill="#102520" />
+				<circle cx="224" cy="258" r="26" fill="#102520" />
+			</svg>
+			<div class="stato">
+				<strong>È ora di dormire</strong>
+				<span>La storia di oggi è già stata raccontata. Riprende alle 15:30.</span>
+			</div>
+			<div class="misure">
+				<span class="pila"><i style="--carica:61%"></i> <b>61%</b></span>
+				<span>nanna fino alle 15:30</span>
+			</div>
+		</div>
+		<div class="azioni">
+			<button class="azione nanna" data-apre="nanna">
+				<span class="pallino" aria-hidden="true">🌙</span>
+				<span><b>Cambia la nanna</b><small>Togli il blocco o sposta l'orario</small></span>
+			</button>
+		</div>
+		<p class="nota">Il bambino sente il messaggio che avete registrato, poi il box si spegne da solo.</p>
+	</main>
+
+	<!-- ========================= PRIMO AVVIO ========================= -->
+	<main class="schermo" id="avvio">
+		<div class="passi" aria-hidden="true">
+			<i data-fatto></i><i></i><i></i>
+		</div>
+		<h1>Colleghiamo il box al WiFi</h1>
+		<p>Serve una volta sola. Dopo, il box si ricollega da solo a ogni accensione.</p>
+
+		<div class="reti">
+			<button class="rete" data-scelta><span>WiFi casa</span><span aria-hidden="true">●●●●</span></button>
+			<button class="rete"><span>WiFi casa 5GHz</span><span aria-hidden="true">●●●○</span></button>
+			<button class="rete"><span>Vicini di casa</span><span aria-hidden="true">●●○○</span></button>
+		</div>
+		<p class="nota">Il box va sulla rete a 2,4 GHz: è quella che arriva più lontano, e le 5 GHz non le vede.</p>
+
+		<div class="campi">
+			<label>Password del WiFi
+				<input type="password" value="••••••••••" autocomplete="off">
+			</label>
+			<label>Nome del box
+				<input type="text" value="babybox-cucina">
+			</label>
+			<label>Lingua
+				<select>
+					<option selected>Italiano</option>
+					<option>English</option>
+					<option>Deutsch</option>
+					<option>Français</option>
+				</select>
+			</label>
+			<label>Fuso orario
+				<select>
+					<option selected>Italia (Roma)</option>
+					<option>Europa centrale</option>
+					<option>Regno Unito</option>
+				</select>
+			</label>
+		</div>
+
+		<button class="primario">Collega il box</button>
+		<p class="nota">Lo troverai poi all'indirizzo <b>babybox-cucina.local</b> dal telefono di casa.</p>
+	</main>
+
+	<!-- ========================== DATA E ORA ========================== -->
+	<main class="schermo" id="orologio">
+		<h1>Data e ora</h1>
+		<p>Servono al controllo genitori: senza, il box applica la regola più severa che avete impostato.</p>
+
+		<div class="coperchio" style="gap:.6rem">
+			<div class="stato">
+				<strong style="font-size:2.2rem;font-variant-numeric:tabular-nums">14:32</strong>
+				<span>domenica 18 ottobre 2026</span>
+			</div>
+			<div class="misure"><span>Sincronizzata da internet 4 minuti fa</span></div>
+		</div>
+
+		<div class="campi">
+			<label>Fuso orario
+				<select>
+					<option selected>Italia (Roma)</option>
+					<option>Europa centrale</option>
+					<option>Regno Unito</option>
+				</select>
+			</label>
+			<label>Imposta a mano
+				<input type="datetime-local" value="2026-10-18T14:32">
+			</label>
+		</div>
+		<button class="primario">Salva l'ora</button>
+		<p class="nota">Con l'orologio a batteria montato, il box tiene l'ora anche da spento e lontano dal WiFi.</p>
+	</main>
+
+	<!-- ===================== pannelli che salgono ===================== -->
+	<section class="foglio" id="foglio" role="dialog" aria-modal="true" aria-labelledby="foglioTitolo">
+		<span class="maniglia" aria-hidden="true"></span>
+		<div id="foglioCorpo"></div>
+	</section>
+
+	<script>
+		const schermi = [...document.querySelectorAll('.schermo')];
+		const foglio = document.getElementById('foglio');
+		const corpo = document.getElementById('foglioCorpo');
+
+		function vai(nome) {
+			schermi.forEach(s => s.toggleAttribute('data-attivo', s.id === nome));
+			document.querySelectorAll('.barra-mockup button').forEach(b =>
+				b.toggleAttribute('data-attivo', b.dataset.vai === nome));
+			chiudi();
+			scrollTo(0, 0);
+		}
+		document.querySelectorAll('[data-vai]').forEach(b =>
+			b.addEventListener('click', e => { e.preventDefault(); vai(b.dataset.vai); }));
+
+		function apri(html) { corpo.innerHTML = html; foglio.setAttribute('data-aperto', ''); }
+		function chiudi() { foglio.removeAttribute('data-aperto'); }
+
+		const storie = ['La volpe e il bosco', 'Il drago gentile', 'La bambina e la luna', 'Tre pesci curiosi'];
+		const canzoni = ['Ninna nanna della sera', 'Il ballo del gatto', 'Filastrocca dei colori'];
+
+		const pannelli = {
+			statuina: () => `
+				<h2 id="foglioTitolo">Nuova statuina</h2>
+				<div class="attesa">
+					<span class="onda" aria-hidden="true">🧸</span>
+					<p>Appoggia la statuina sul coperchio</p>
+				</div>
+				<button class="primario" data-poi="sceltaStoria">Finta lettura (è un mockup)</button>
+				<button class="secondario" data-chiudi>Annulla</button>`,
+			sceltaStoria: () => `
+				<h2 id="foglioTitolo">Che storia racconta?</h2>
+				<p>Statuina nuova, mai vista prima.</p>
+				<div class="elenco">
+					${storie.map(s => `<button class="voce" data-poi="fatto"><span>${s}</span><small>5 capitoli</small></button>`).join('')}
+				</div>
+				<button class="secondario" data-chiudi>Annulla</button>`,
+			vinile: () => `
+				<h2 id="foglioTitolo">Nuovo vinile</h2>
+				<div class="attesa">
+					<span class="onda" aria-hidden="true">🎵</span>
+					<p>Appoggia il vinile sul coperchio</p>
+				</div>
+				<button class="primario" data-poi="sceltaCanzone">Finta lettura (è un mockup)</button>
+				<button class="secondario" data-chiudi>Annulla</button>`,
+			sceltaCanzone: () => `
+				<h2 id="foglioTitolo">Che canzone suona?</h2>
+				<div class="elenco">
+					${canzoni.map(c => `<button class="voce" data-poi="fatto"><span>${c}</span><small>2:41</small></button>`).join('')}
+					<button class="voce" data-poi="fatto"><span>Scegli un file dal telefono</span><small>mp3, m4a</small></button>
+				</div>
+				<button class="secondario" data-chiudi>Annulla</button>`,
+			nanna: () => `
+				<h2 id="foglioTitolo">Nanna</h2>
+				<p>Blocca subito, senza toccare le fasce impostate.</p>
+				<div class="scelte">
+					<button class="scelta" data-poi="fatto">30 minuti</button>
+					<button class="scelta" data-poi="fatto">60 minuti</button>
+					<button class="scelta" data-poi="fatto">90 minuti</button>
+					<button class="scelta" data-poi="fatto">Fino al mattino</button>
+				</div>
+				<button class="primario" data-poi="fasce">Imposta le fasce di riposo</button>
+				<button class="secondario" data-chiudi>Chiudi</button>`,
+			fasce: () => `
+				<h2 id="foglioTitolo">Fasce di riposo</h2>
+				<p>Dentro una fascia si ascolta una storia sola, poi il box riposa.</p>
+				<div class="elenco">
+					<button class="voce"><span>Nanna del pomeriggio</span><small>13:00 – 15:30</small></button>
+					<button class="voce"><span>Notte</span><small>20:30 – 07:00</small></button>
+					<button class="voce"><span>Aggiungi una fascia</span><small></small></button>
+				</div>
+				<button class="secondario" data-chiudi>Chiudi</button>`,
+			carica: () => `
+				<h2 id="foglioTitolo">Carica storie</h2>
+				<div class="elenco">
+					<button class="voce" data-poi="fatto"><span>Scegli i file dal telefono</span><small>mp3, m4a</small></button>
+					<button class="voce" data-poi="fatto"><span>Scegli una cartella intera</span><small>dal computer</small></button>
+				</div>
+				<p class="nota">Oltre i 50 MB conviene togliere la microSD e copiare dal computer: ci mette un minuto invece di mezz'ora.</p>
+				<button class="secondario" data-chiudi>Chiudi</button>`,
+			fatto: () => `
+				<h2 id="foglioTitolo">Fatto</h2>
+				<div class="attesa">
+					<span class="onda" style="border-style:solid" aria-hidden="true">✓</span>
+					<p>Puoi provare subito: appoggia la statuina e ascolta.</p>
+				</div>
+				<button class="primario" data-chiudi>Chiudi</button>`,
+		};
+
+		document.addEventListener('click', (e) => {
+			const apreBtn = e.target.closest('[data-apre]');
+			if (apreBtn) { apri(pannelli[apreBtn.dataset.apre]()); return; }
+			const poi = e.target.closest('[data-poi]');
+			if (poi) { apri(pannelli[poi.dataset.poi]()); return; }
+			if (e.target.closest('[data-chiudi]')) { chiudi(); return; }
+			if (foglio.hasAttribute('data-aperto') && !e.target.closest('#foglio')) { chiudi(); }
+		});
+		document.addEventListener('keydown', (e) => { if (e.key === 'Escape') chiudi(); });
+	</script>
+</body>
+
+</html>

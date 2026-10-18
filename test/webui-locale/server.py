@@ -124,6 +124,14 @@ class Finto(SimpleHTTPRequestHandler):
     def __init__(self, *a, **kw):
         super().__init__(*a, directory=str(HTML), **kw)
 
+    def _servi_file(self, percorso):
+        corpo = percorso.read_bytes()
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(corpo)))
+        self.end_headers()
+        self.wfile.write(corpo)
+
     def _servi_html(self, nome):
         testo = (HTML / nome).read_text(encoding="utf-8")
         for prima, dopo in PATCH:
@@ -159,6 +167,10 @@ class Finto(SimpleHTTPRequestHandler):
             return
         if percorso.startswith("/api/") or percorso in ("/settings", "/info", "/genitori"):
             return self._api_get(percorso)
+        # Il mockup della pagina "casa" sta nel nostro repository, non in
+        # quello di ESPuino: lo serviamo da qui.
+        if percorso in ("/casa", "/casa.html", "/mockup-casa.html"):
+            return self._servi_file(Path(__file__).parent / "mockup-casa.html")
         if percorso.endswith(".html") and (HTML / percorso.lstrip("/")).is_file():
             return self._servi_html(percorso.lstrip("/"))
         return super().do_GET()
