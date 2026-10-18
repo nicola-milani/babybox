@@ -124,10 +124,10 @@ class Finto(SimpleHTTPRequestHandler):
     def __init__(self, *a, **kw):
         super().__init__(*a, directory=str(HTML), **kw)
 
-    def _servi_file(self, percorso):
+    def _servi_file(self, percorso, tipo="text/html; charset=utf-8"):
         corpo = percorso.read_bytes()
         self.send_response(200)
-        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Type", tipo)
         self.send_header("Content-Length", str(len(corpo)))
         self.end_headers()
         self.wfile.write(corpo)
@@ -171,6 +171,10 @@ class Finto(SimpleHTTPRequestHandler):
         # quello di ESPuino: lo serviamo da qui.
         if percorso in ("/casa", "/casa.html", "/mockup-casa.html"):
             return self._servi_file(Path(__file__).parent / "mockup-casa.html")
+        if percorso.startswith("/font/"):
+            carattere = Path(__file__).parent / percorso.lstrip("/")
+            if carattere.is_file():
+                return self._servi_file(carattere, "font/woff2")
         if percorso.endswith(".html") and (HTML / percorso.lstrip("/")).is_file():
             return self._servi_html(percorso.lstrip("/"))
         return super().do_GET()

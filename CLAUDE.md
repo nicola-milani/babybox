@@ -21,6 +21,7 @@ Lingua del progetto: italiano (commenti, documentazione, messaggi della web UI).
 - Finché i componenti non sono acquistati, **pinout e scelte hardware si possono ancora cambiare**: davanti a un attrito fra firmware e hardware, prima di contorcere il firmware valutare se conviene spostare un pin o cambiare modulo. Dopo l'ordine il vincolo si inverte.
 
 ## Vincoli che non si negoziano
+- **Niente risorse da internet nella web UI**: caratteri, fogli di stile, script e immagini stanno sul box e si servono dal suo filesystem. Al primo avvio il telefono è collegato alla rete del box, che internet non ce l'ha — e un box in una casa senza WiFi deve funzionare lo stesso. I caratteri vanno ritagliati ai soli segni dell'italiano (`pyftsubset`), perché finiscono nella flash del firmware.
 - Volume massimo limitato da firmware: il cursore tutto a destra vale il limite impostato dai genitori, mai di più.
 - Nessuna funzione a pressione lunga o combinazione di tasti per il bambino.
 - Il display non deve mai causare salti audio (task FreeRTOS a bassa priorità, bus SPI separato dal PN5180).

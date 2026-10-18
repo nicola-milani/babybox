@@ -1,0 +1,18 @@
+/* Caratteri serviti dal box, non da internet: al primo avvio il telefono è
+   collegato alla rete del box, che internet non ce l'ha. Ritagliati ai soli
+   caratteri che usiamo (alfabeto italiano, cifre, punteggiatura). */
+@font-face {
+	font-family: 'Hanken Grotesk';
+	font-style: normal;
+	font-weight: 100 900;      /* un solo file: è un font variabile */
+	font-display: swap;
+	src: url('font/HankenGrotesk.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Baloo 2';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('font/Baloo2-600.woff2') format('woff2');
+}
