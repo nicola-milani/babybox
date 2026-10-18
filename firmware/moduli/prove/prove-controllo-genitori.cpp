@@ -4,11 +4,14 @@
 //  Girano sul Mac in un secondo, senza hardware:
 //      ./firmware/prove.sh
 //
+//  Il modulo sta nel fork (firmware/ESPuino/src/ControlloGenitori.*),
+//  perche' e' li' che ESPuino lo compila; le prove restano qui.
+//
 //  Ogni blocco qui sotto corrisponde a una riga di
 //  tasks/task-06-controllo-genitori.md. Scritte prima del
 //  modulo, come chiede CLAUDE.md.
 // ============================================================
-#include "../controllo-genitori/ControlloGenitori.h"
+#include "../../ESPuino/src/ControlloGenitori.h"
 
 #include <cstdio>
 #include <cstring>

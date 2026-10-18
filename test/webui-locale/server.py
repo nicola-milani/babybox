@@ -69,6 +69,26 @@ STATO = {
     ],
 }
 
+# Risposta finta di /genitori: due fasce al giorno, nanna 13:00-15:30 e
+# notte 20:30-07:00, una storia concessa, volume dimezzato.
+GENITORI = {
+    "ora": {"testo": "18/10/2026 14:32", "affidabile": True},
+    "riposoBloccato": True,
+    "volumeMassimoNormale": 14,
+    "dissolvenzaSecondi": 30,
+    "storieConcesseNanna": 0,
+    "volumeMassimoNanna": 5,
+    "oraDelMattino": 7 * 60,
+    "giorni": [
+        [
+            {"attiva": True, "inizio": 13 * 60, "fine": 15 * 60 + 30, "storie": 1, "volume": 7},
+            {"attiva": True, "inizio": 20 * 60 + 30, "fine": 7 * 60, "storie": 1, "volume": 7},
+            {"attiva": False, "inizio": 0, "fine": 0, "storie": 1, "volume": 0},
+        ]
+        for _ in range(7)
+    ],
+}
+
 ALBERO_SD = {
     "/": [
         {"name": "storie", "dir": True},
@@ -137,13 +157,15 @@ class Finto(SimpleHTTPRequestHandler):
             self.send_header("Location", "/management.html")
             self.end_headers()
             return
-        if percorso.startswith("/api/") or percorso in ("/settings", "/info"):
+        if percorso.startswith("/api/") or percorso in ("/settings", "/info", "/genitori"):
             return self._api_get(percorso)
         if percorso.endswith(".html") and (HTML / percorso.lstrip("/")).is_file():
             return self._servi_html(percorso.lstrip("/"))
         return super().do_GET()
 
     def _api_get(self, percorso):
+        if "genitori" in percorso:
+            return self._json(GENITORI)
         if "settings" in percorso:
             return self._json(STATO["settings"])
         if "info" in percorso:

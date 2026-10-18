@@ -3,10 +3,10 @@
 #
 #   ./firmware/prove.sh
 #
-# I moduli in firmware/moduli/ sono scritti apposta senza niente di Arduino
+# I nostri moduli nel fork sono scritti apposta senza niente di Arduino
 # dentro: ricevono ora e stato dall'esterno e restituiscono una decisione.
 # Per questo si compilano e si provano qui in un secondo, invece che a ogni
-# giro di flash sul box.
+# giro di flash sul box. Le prove stanno in firmware/moduli/prove/.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -41,7 +41,7 @@ esegui() {   # esegui <nome> <sorgenti...>
 
 esegui controllo-genitori \
   firmware/moduli/prove/prove-controllo-genitori.cpp \
-  firmware/moduli/controllo-genitori/ControlloGenitori.cpp
+  firmware/ESPuino/src/ControlloGenitori.cpp
 
 echo
 echo "Tutte le verifiche passate."

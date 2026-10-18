@@ -54,6 +54,7 @@ M3 (firmware) e M4 (case) vanno in parallelo dalla settimana 2: se siete in due,
 - [x] Fork di ESPuino, submodule e configurazione del box
 - [x] Prima compilazione per ESP32-S3 N16R8 (gate della settimana 0)
 - [x] Task 3 (italiano) completato in anticipo
+- [x] Task 6 (controllo genitori): logica, innesto e pagina web; resta la prova sul box
 - [ ] Installare in VS Code l'estensione PlatformIO
 - [ ] Confermare la lista delle 5 storie e 3 canzoni per la 1.0
 

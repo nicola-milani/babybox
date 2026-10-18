@@ -25,5 +25,39 @@ Nuovo modulo che decide se il box può riprodurre, impostabile solo dalla web UI
 Fasce per giorno, storie concesse, volume nelle fasce, pulsante "Nanna adesso", caricamento messaggi, ora del box.
 
 ## Accettazione
-- [ ] Con fascia attiva la prima storia suona completa; il secondo tentativo produce solo il messaggio entro 2 s
-- [ ] Le modifiche dal telefono valgono dal tentativo successivo, senza toccare il box
+- [x] Con fascia attiva la prima storia suona completa; il secondo tentativo
+      produce solo il messaggio — **verificato in logica** (`./firmware/prove.sh`).
+      I 2 s vanno misurati sul box: dipendono dalla lettura della SD.
+- [x] Le modifiche dal telefono valgono dal tentativo successivo — verificato
+      in logica e con la pagina vera nel banco di prova
+- [ ] Prova sul box: serve l'hardware (e i messaggi in `/nanna`)
+
+## Fatto il 18 ottobre
+
+**Il cuore** — `firmware/ESPuino/src/ControlloGenitori.{h,cpp}`: decide e basta,
+senza niente di Arduino dentro. Fasce per giorno (anche quelle che scavalcano
+la mezzanotte, che restano una fascia sola), storie concesse, volume ridotto,
+dissolvenza sull'ultima, nanna manuale, regola più restrittiva quando l'ora non
+è affidabile. **47 verifiche** in `firmware/moduli/prove/`, scritte prima del
+codice: `./firmware/prove.sh`, un secondo sul Mac.
+
+**I fili** — `ControlloGenitoriBox.{h,cpp}`: legge l'ora, salva lo stato in NVS
+(così spegnere non azzera il blocco), limita il volume del player, sceglie a
+caso un messaggio da `/nanna` e lo riproduce con l'annuncio di ESPuino, poi
+manda il box a dormire. Agganciato in quattro punti del firmware: tag
+appoggiato (`RfidCommon`), fine scaletta (`AudioPlayer`), tag tolto
+(`RfidPn5180`), avvio (`main`).
+
+**La pagina** — linguetta «Genitori» nella web UI, con l'ora del box, i
+pulsanti «Nanna adesso», la tabella delle fasce per i sette giorni e le altre
+impostazioni. Rotte `/genitori` (GET e POST) in `Web.cpp`.
+
+### Cosa manca al task 6
+- Prova sul box vero, quando arriva l'hardware.
+- **DS3231**: ESPuino non lo supporta, usa l'RTC interno sincronizzato via NTP.
+  Finché non scriviamo il modulo, dopo uno spegnimento senza WiFi l'ora non è
+  affidabile e scatta la regola più restrittiva — che è il comportamento
+  previsto, ma non è l'orologio che volevamo. Il punto dove innestarlo è
+  segnato nel codice (`adesso()` in `ControlloGenitoriBox.cpp`).
+- La dissolvenza finale: il modulo dice *quando* sfumare, il player non la fa
+  ancora.
