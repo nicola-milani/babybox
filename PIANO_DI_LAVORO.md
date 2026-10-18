@@ -45,7 +45,7 @@ si è concentrato in un punto solo: la data in cui arrivano i pezzi.
 
 ### Non fatto, e blocca tutto
 
-- [ ] **Ordinare i componenti martedì 20** (`hardware/ordine.md`). Lista rifatta per **un pezzo solo**, senza scorte: quello che serve al primo montaggio sta tutto nella parte A (Amazon, 48 ore), su AliExpress restano due righe che non bloccano niente. La lista non dipende dalla scelta fra cubo e console — stessa elettronica, stesso pinout; ferrite e TPU sono gli unici pezzi della sola console, 20 € in tutto. **Totale 145–200 €**, 190–245 € col filamento
+- [ ] **Ordinare i componenti martedì 20** (`hardware/ordine.md`). Lista per **un pezzo solo**, divisa per conseguenza del guasto: nove voci su Amazon (percorso critico delle settimane 1–2, più batteria e microSD dove il rischio è sicurezza e dati), il resto su AliExpress filtrando i venditori con magazzino in Europa. **143–208 € in tutto**, filamento compreso. La lista non dipende dalla scelta fra cubo e console: ferrite e TPU sono gli unici pezzi della sola console
 - [ ] Stampare provino NFC e calibro parti piccole
 - [ ] Confermare l'elenco delle 5 storie e 3 canzoni
 - [ ] Installare l'estensione PlatformIO in VS Code (per compilare senza riga di comando)
@@ -54,8 +54,8 @@ si è concentrato in un punto solo: la data in cui arrivano i pezzi.
 
 Era il rischio numero uno del piano, e si è avverato in parte. Oggi, 18 ottobre:
 
-- **Amazon** (parte A: tutto il necessario al montaggio, elettronica e minuteria comprese): ordinando lunedì 19 arrivano **mercoledì 21 o giovedì 22**. La settimana 1 si salva.
-- **AliExpress** (parte B: solo DS3231 e viti di sicurezza): 10–20 giorni, quindi **fine ottobre – inizio novembre**. Nessuno dei due blocca il montaggio — il DS3231 è opzionale e al posto delle viti di sicurezza si usano le M2,5 normali. Regolatore, portabatteria e minuteria sono passati su Amazon apposta: per un pezzo solo la differenza è una ventina di euro e toglie una settimana di attesa dal percorso critico.
+- **Amazon** (parte A: scheda, lettore, batteria, microSD, altoparlante, amplificatore, regolatore, portabatteria, LED): ordinando lunedì 19 arrivano **mercoledì 21 o giovedì 22**. Con questi soli si fanno tutte le prove delle settimane 1 e 2, M2 compresa.
+- **AliExpress** (parte B: carte, tag, TP4056, cursore, tasti, minuteria, ferrite): 3–7 giorni dai venditori con magazzino in Europa, 10–30 dalla Cina. Serve dalla **settimana 3**, quando si monta davvero. Se tarda oltre il 10 novembre si monta lo stesso: i tasti si simulano con un filo, la cella si carica a parte, le viti di sicurezza si rimpiazzano con le M2,5 del kit. L'unica voce senza rimpiazzo sono le carte — se si vuole un paracadute, quelle si prendono su Amazon per 8–14 € invece che per 4–7.
 
 **Se l'ordine slitta di una settimana**, M1 slitta con lui e il piano perde il
 suo margine: resta la 1.0, ma senza test di autonomia e senza il secondo giro

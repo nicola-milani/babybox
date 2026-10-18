@@ -1,29 +1,29 @@
 rif,componente,modello_consigliato,qta_per_box,qta_da_ordinare,prezzo_indicativo_eur,fornitore,note
-A1,Microcontrollore,ESP32-S3-DevKitC-1 N16R8 (16MB flash 8MB PSRAM octal),1,1,12-20,Amazon subito,PSRAM octal obbligatoria per ESPuino; verificare la sigla N16R8
-A2,Lettore NFC,PN5180 SPI con antenna sul PCB,1,1,9-14,Amazon subito,Unico con risveglio all'appoggio (LPCD); servono SCK MOSI MISO NSS BUSY RST; case disegnato su 58x47x8
-A3,Carte delle storie,Carte PVC CR80 con NTAG213 (85.6x54),1 per storia,10,8-14,Amazon subito,Cinque bastano alla 1.0; gia' pronte, niente tag da incollare
-A3b,Tag per i dischi,NTAG213 adesivi 25 mm,1 per disco,conf. da 20-50,8-12,Amazon subito,Servono solo ai dischi della musica che stampiamo noi
-A4,Amplificatore,MAX98357A I2S 3W,1,1,6-10,Amazon subito,Alimentato da VBAT non da 3V3; spesso venduto in coppia
-A5,Altoparlante,4 ohm 3W diametro 40 mm altezza max 6 mm,1,1,6-10,Amazon subito,Misurare appena arriva: il case e' disegnato su D40x6
-A7,Batteria,18650 protetta Samsung 35E o LG MJ1 3000-3500 mAh,1,1,8-14,Amazon subito,Venditore serio; diffidare delle celle da 9900 mAh
-A8,Modulo carica,TP4056 USB-C 6 pin con protezione DW01,1,conf. da 5,6-9,Amazon subito,USB-C non micro-USB; si carica a box spento
-A9,Cursore volume,Potenziometro a slitta lineare B10K corsa 60 mm,1,1,6-10,Amazon subito,Lineare (B); misurare corpo e levetta appena arriva
-A10,Tasti,Pulsanti arcade 30 mm bassa forza,2,2,6-10,Amazon subito,Due colori: indietro e avanti; verificare il foro di montaggio (28 o 30 mm)
-A11,MicroSD,32 GB classe 10,1,1,6-9,Amazon subito,Formattare FAT32
-A12,Lettore microSD,Modulo microSD 3.3V nativo o portacard nudo,1,conf. da 5,3-5,Amazon subito,NON i moduli con AMS1117 + 74LVC125 (sono per 5V)
-A13,Ferrite schermante,Foglio di ferrite flessibile adesivo 60x60 mm sp. 0.3-0.5 mm (NFC shielding),1,1,5-9,Amazon subito,Serve SOLO alla console v2: senza, il lettore vede le carte nel vano dietro
-A14,Regolatore 3.3V,ME6211C33 o AP2112K-3.3 (500-600 mA),1,conf. da 5,5-8,Amazon subito,Evitare AMS1117 (caduta 1.1 V) e HT7333 (solo 250 mA)
-A15,Portabatteria,Supporto 18650 contatti a molla,1,conf. da 2-5,5-7,Amazon subito,Misurare: le culle sono disegnate su 24x78x20
-A16,Interruttore,Slitta da pannello SS12D00,1,conf. da 5-10,5-7,Amazon subito,Incassato sul retro (console) o nel fondo (cubo)
-A17,LED di stato,WS2812B singolo su breakout o striscia da tagliare,1,1,6-8,Amazon subito,Batteria e modo a colpo d'occhio; alimentato da GPIO perche' anche spento assorbe ~1 mA
-A18,Tasto genitori,Micropulsante 6x6 mm,1,conf. da 20,5-7,Amazon subito,Incassato in un pozzetto da 6 mm
-A19,Passivi,100k 1% / 100 nF / 10 uF / 220 uF / 10k,1 set,kit,8-10,Amazon subito,Partitore batteria pull-up SD e condensatori di serbatoio
-A20,Basetta,Millefori 70x90 mm doppia faccia,1,conf. da 5,6-8,Amazon subito,Da 70x90 si ricava sia la basetta del cubo sia quella della console (36x80)
-A21,Minuteria,Inserti a caldo M2.5 e viti M2.5,1 set,kit,10-12,Amazon subito,Servono dal primo montaggio: senza non si chiude il case
-A22,Cablaggio,Cavetto siliconico 26 AWG e connettori JST-XH,1 set,kit,8-10,Amazon subito,
-A23,Varie,Rete anti-polvere e biadesivo 3M VHB,1 set,1,5-7,Amazon subito,Rete dietro la griglia dell'altoparlante
-B1,Orologio,Modulo RTC DS3231,1,1,2,AliExpress,Opzionale: ESPuino usa l'RTC interno via NTP. Dissaldare la resistenza di carica da 200 ohm se si usa una CR2032
-B9,Viti di sicurezza,Torx pin o triwing M2.5x8,4,conf. da 20,5,AliExpress,Chiusura non apribile a mano da un bambino; se tardano si usano le M2.5 del kit A21
-C1,Filamento,PETG bianco per il case,~150 g,1 kg,25,,Bianco: i comandi colorati sono pezzi comprati
-C2,Filamento TPU,TPU 95A per i paracolpi degli angoli,~20 g,500 g,15,,Solo console v2: quattro angoli morbidi. Stampare lento (20 mm/s) e senza retrazione
+A1,Microcontrollore,ESP32-S3-DevKitC-1 N16R8 (16MB flash 8MB PSRAM octal),1,1,12-20,Amazon,Se e' morto o e' la sigla sbagliata non parte niente; verificare N16R8 e PSRAM octal
+A2,Lettore NFC,PN5180 SPI con antenna sul PCB,1,1,9-14,Amazon,Il pezzo piu' incerto: va provato in settimana 1 perche' il piano B (RC522) si decide in settimana 2. Case disegnato su 58x47x8
+A3,Batteria,18650 protetta Samsung 35E o LG MJ1 3000-3500 mAh,1,1,8-14,Amazon,Non si compra in Cina: celle sfuse spesso non spedibili verso l'UE e mercato pieno di celle rimarchiate
+A4,MicroSD,32 GB classe 10,1,1,6-9,Amazon,Le contraffatte dichiarano 32 GB e ne hanno 8; formattare FAT32
+A5,Altoparlante,4 ohm 3W diametro 40 mm altezza max 6 mm,1,1,6-10,Amazon,Il case e' disegnato su D40x6 e da Amazon si puo' rimandare indietro; misurare appena arriva
+A6,Amplificatore,MAX98357A I2S 3W,1,1,6-10,Amazon,Senza non si sente niente in settimana 1; alimentato da VBAT non da 3V3
+A7,Regolatore 3.3V,ME6211C33 o AP2112K-3.3 (500-600 mA),1,conf. da 5,5-8,Amazon,Serve a M2: il deep sleep sotto 1 mA non si misura sulla DevKit alimentata da USB. Evitare AMS1117 e HT7333
+A8,Portabatteria,Supporto 18650 contatti a molla,1,conf. da 2-5,5-7,Amazon,Serve al test di autonomia della settimana 2; alla cella non si salda mai direttamente. Culle disegnate su 24x78x20
+A9,LED di stato,WS2812B singolo su breakout o striscia da tagliare,1,1,6-8,Amazon,M2 chiede il deep sleep col LED alimentato: senza non vale la misura. Alimentato da GPIO
+B1,Carte delle storie,Carte PVC CR80 con NTAG213 (85.6x54),1 per storia,10,4-7,AliExpress,Cinque bastano alla 1.0; se si vuole un paracadute sui tempi si prendono su Amazon a 8-14
+B2,Tag per i dischi,NTAG213 adesivi 25 mm,1 per disco,conf. da 20-50,4-6,AliExpress,NTAG213 (ISO 14443A): non NTAG215/216 amiibo, non Mifare Classic
+B3,Modulo carica,TP4056 USB-C 6 pin con protezione DW01,1,conf. da 5,2-4,AliExpress,USB-C non micro-USB; la versione a 6 pin ha la protezione
+B4,Cursore volume,Potenziometro a slitta lineare B10K corsa 60 mm,1,1-2,2-4,AliExpress,Lineare (B); misurare corpo e levetta appena arriva
+B5,Tasti,Pulsanti arcade 30 mm bassa forza,2,2,3-5,AliExpress,Due colori: indietro e avanti; verificare il foro di montaggio (28 o 30 mm)
+B6,Lettore microSD,Modulo microSD 3.3V nativo o portacard nudo,1,conf. da 5,2-3,AliExpress,NON i moduli con AMS1117 + 74LVC125 (sono per 5V)
+B7,Interruttore,Slitta da pannello SS12D00,1,conf. da 10,1-3,AliExpress,Incassato sul retro (console) o nel fondo (cubo)
+B8,Ferrite schermante,Foglio di ferrite flessibile adesivo 60x60 mm sp. 0.3-0.5 mm,1,1,2-4,AliExpress,Serve SOLO alla console v2; ritagliare 5-10 mm piu' grande della spira per lato
+B9,Tasto genitori,Micropulsante 6x6 mm,1,conf. da 20,1-2,AliExpress,Incassato in un pozzetto da 6 mm
+B10,Passivi,100k 1% / 100 nF / 10 uF / 220 uF / 10k,1 set,kit,3-5,AliExpress,Partitore batteria pull-up SD e condensatori di serbatoio
+B11,Basetta,Millefori 70x90 mm doppia faccia,1,conf. da 5,2-4,AliExpress,Da 70x90 si ricava sia la basetta del cubo sia quella della console (36x80)
+B12,Minuteria,Inserti a caldo M2.5 e viti M2.5,1 set,kit,4-6,AliExpress,Servono dalla settimana 3
+B13,Cablaggio,Cavetto siliconico 26 AWG e connettori JST-XH,1 set,kit,3-5,AliExpress,
+B14,Varie,Rete anti-polvere e biadesivo 3M VHB,1 set,1,2-3,AliExpress,Rete dietro la griglia dell'altoparlante
+B15,Viti di sicurezza,Torx pin o triwing M2.5x8,4,conf. da 20,3-5,AliExpress,Se tardano si usano le M2.5 del kit B12
+B16,Orologio,Modulo RTC DS3231,1,1,2,AliExpress,Opzionale: ESPuino usa l'RTC interno via NTP
+C1,Filamento,PETG bianco per il case,~150 g,1 kg,25,negozio o Amazon,Dalla Cina non conviene: pesa e la spedizione si mangia il risparmio
+C2,Filamento TPU,TPU 95A per i paracolpi degli angoli,~20 g,500 g,15,negozio o Amazon,Solo console v2. Stampare lento (20 mm/s) e senza retrazione
 C3,Filamento PLA,PLA per provino NFC calibro e dischi,~80 g,se gia' in casa,0-20,,Non critico: va bene qualsiasi avanzo
