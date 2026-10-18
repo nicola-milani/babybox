@@ -35,7 +35,7 @@ STATO = {
             "initVolume": 6, "maxVolumeSpeaker": 14, "maxVolumeHeadphone": 10,
             "minVolume": 2, "sleepInactivity": 10, "language": 4,
         },
-        "wifi": {"hostname": "faba-cucina", "scanWiFiOnStart": True},
+        "wifi": {"hostname": "babybox-cucina", "scanWiFiOnStart": True},
         "led": {"initBrightness": 16, "nightBrightness": 2, "numLeds": 0},
         "battery": {
             "warningLowVoltage": 3.4, "voltageIndicatorLow": 3.0,

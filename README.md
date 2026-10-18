@@ -29,6 +29,10 @@ Box audio per bambini dai 2 anni, open source e a batteria. Si appoggia una stat
 
 La versione "viva" delle specifiche è il documento *Box racconta storie open source — Progetto*. I file in `docs/` ne sono una copia per lavorare offline e con Claude Code: se cambi qualcosa di sostanziale, aggiorna entrambi.
 
-## Licenza
+## Licenze
 
-Firmware GPL come ESPuino (verificare la versione esatta nel file LICENSE di ESPuino). Modelli 3D: proposta CC BY-SA 4.0.
+- **Firmware, script e documentazione:** GPL-3.0 (`LICENSE`), come ESPuino da cui deriva il firmware.
+- **Modelli 3D:** CC BY-SA 4.0 (`modelli-3d/LICENSE`).
+- **Registrazioni audio:** non stanno qui, sono di chi le ha fatte.
+
+Dettagli e motivazioni in [LICENSE-note.md](LICENSE-note.md).

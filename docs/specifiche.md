@@ -44,7 +44,7 @@ Il risveglio con la statuina (LPCD) funziona solo con tag ISO 14443: gli NTAG213
 
 Web UI di ESPuino tradotta in italiano, su `nomebox.local`.
 - **Già disponibile:** esplora file SD, associazione statuina → cartella con modalità, volume/sleep/WiFi, backup associazioni.
-- **Da configurare:** password al primo avvio, nome del box (es. `faba-cucina`), volume massimo, WiFi sempre attivo in risparmio energetico mentre il box è acceso.
+- **Da configurare:** password al primo avvio, nome del box (es. `babybox-cucina`), volume massimo, WiFi sempre attivo in risparmio energetico mentre il box è acceso.
 - **Caricamenti grandi:** oltre 50 MB meglio copiare la microSD dal PC (fessura sul retro).
 - **Pagina "Controllo genitori"** (task 6), **pagina "Backup"** (task 7), **associazione con tipo** storia/musica e flusso "Nuovo vinile" (task 8).
 - **Accettazione:** associare una nuova statuina da telefono richiede meno di 30 s.

@@ -107,5 +107,5 @@ si aprono pull request verso progetti altrui.
 
 - Volume massimo: partire basso e salire a orecchio con l'altoparlante scelto.
 - Sleep per inattività: 10 minuti (da confermare).
-- Nome host: `faba-cucina`.
+- Nome host: `babybox-cucina`.
 - Offset del partitore batteria: dalla web UI, col multimetro (task 1).
