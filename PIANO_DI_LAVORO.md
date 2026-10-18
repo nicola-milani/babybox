@@ -45,7 +45,7 @@ si è concentrato in un punto solo: la data in cui arrivano i pezzi.
 
 ### Non fatto, e blocca tutto
 
-- [ ] **Ordinare i componenti martedì 20** (`hardware/ordine.md`, parte A su Amazon). Rispetto a ieri: niente display, **20 carte NFC CR80** al posto degli adesivi per le statuine, un **WS2812** in più, il **foglio di ferrite** (A13) e **500 g di TPU**. La lista non dipende dalla scelta fra cubo e console: stessa elettronica, stesso pinout — ferrite e TPU sono gli unici pezzi della sola console, e costano 20 € in tutto
+- [ ] **Ordinare i componenti martedì 20** (`hardware/ordine.md`). Lista rifatta per **un pezzo solo**, senza scorte: quello che serve al primo montaggio sta tutto nella parte A (Amazon, 48 ore), su AliExpress restano due righe che non bloccano niente. La lista non dipende dalla scelta fra cubo e console — stessa elettronica, stesso pinout; ferrite e TPU sono gli unici pezzi della sola console, 20 € in tutto. **Totale 145–200 €**, 190–245 € col filamento
 - [ ] Stampare provino NFC e calibro parti piccole
 - [ ] Confermare l'elenco delle 5 storie e 3 canzoni
 - [ ] Installare l'estensione PlatformIO in VS Code (per compilare senza riga di comando)
@@ -54,8 +54,8 @@ si è concentrato in un punto solo: la data in cui arrivano i pezzi.
 
 Era il rischio numero uno del piano, e si è avverato in parte. Oggi, 18 ottobre:
 
-- **Amazon** (parte A: scheda, lettore, tag, amplificatore, altoparlante, batteria, carica, cursore, tasti, microSD): ordinando lunedì 19 arrivano **mercoledì 21 o giovedì 22**. La settimana 1 si salva.
-- **AliExpress** (parte B: orologio, regolatore, portabatteria, interruttore, minuteria, viti di sicurezza): 10–20 giorni, quindi **fine ottobre – inizio novembre**. In tempo per il montaggio della settimana 4, ma **non** per la breadboard: senza regolatore e portabatteria si lavora alimentando da USB.
+- **Amazon** (parte A: tutto il necessario al montaggio, elettronica e minuteria comprese): ordinando lunedì 19 arrivano **mercoledì 21 o giovedì 22**. La settimana 1 si salva.
+- **AliExpress** (parte B: solo DS3231 e viti di sicurezza): 10–20 giorni, quindi **fine ottobre – inizio novembre**. Nessuno dei due blocca il montaggio — il DS3231 è opzionale e al posto delle viti di sicurezza si usano le M2,5 normali. Regolatore, portabatteria e minuteria sono passati su Amazon apposta: per un pezzo solo la differenza è una ventina di euro e toglie una settimana di attesa dal percorso critico.
 
 **Se l'ordine slitta di una settimana**, M1 slitta con lui e il piano perde il
 suo margine: resta la 1.0, ma senza test di autonomia e senza il secondo giro
