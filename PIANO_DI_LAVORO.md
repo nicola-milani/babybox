@@ -9,7 +9,7 @@ Un box completo e funzionante (milestone M1–M5 in versione essenziale):
 
 - case in PETG chiuso, elettronica su millefori, batteria 18650 con ricarica USB-C;
 - almeno **5 statuine** con storie registrate e **3 vinili** con canzoni;
-- firmware: statuine, pausa/ripresa, cursore volume, tasti, deep sleep, e-paper, web UI in italiano, controllo genitori;
+- firmware: statuine, pausa/ripresa, cursore volume, tasti, deep sleep, web UI in italiano con pagina casa, controllo genitori;
 - test d'uso con un bambino superato; repository pubblico con README e STL.
 
 **Fuori dal 20 novembre** (dopo la 1.0): PCB custom, M6 kit per altre famiglie, esportazione "personaggio" in TAR se il tempo stringe.
@@ -34,6 +34,7 @@ si è concentrato in un punto solo: la data in cui arrivano i pezzi.
 | Progetto elettrico | Lista d'ordine, schema di cablaggio, pinout chiuso |
 | Banco di prova | Verifiche che girano sul Mac in un secondo; web UI navigabile senza hardware |
 | Mockup | Pagina "casa" per i genitori, provabile dal telefono |
+| Display | **Tolto dal progetto** (18 ott): −12/18 € per box, −1 settimana di lavoro, +6 GPIO liberi, fronte del case chiuso |
 
 ### Non fatto, e blocca tutto
 
@@ -46,7 +47,7 @@ si è concentrato in un punto solo: la data in cui arrivano i pezzi.
 
 Era il rischio numero uno del piano, e si è avverato in parte. Oggi, 18 ottobre:
 
-- **Amazon** (parte A: scheda, lettore, tag, amplificatore, altoparlante, display, batteria, carica, cursore, tasti, microSD): ordinando lunedì 19 arrivano **mercoledì 21 o giovedì 22**. La settimana 1 si salva.
+- **Amazon** (parte A: scheda, lettore, tag, amplificatore, altoparlante, batteria, carica, cursore, tasti, microSD): ordinando lunedì 19 arrivano **mercoledì 21 o giovedì 22**. La settimana 1 si salva.
 - **AliExpress** (parte B: orologio, regolatore, portabatteria, interruttore, minuteria, viti di sicurezza): 10–20 giorni, quindi **fine ottobre – inizio novembre**. In tempo per il montaggio della settimana 4, ma **non** per la breadboard: senza regolatore e portabatteria si lavora alimentando da USB.
 
 **Se l'ordine slitta di una settimana**, M1 slitta con lui e il piano perde il
@@ -60,11 +61,21 @@ di stampa del case.
 | ~~0 · 17–18 ott~~ | ~~fork, compilazione~~ **+ task 3 e 6** | ordine **da fare** | elenco **da fare** | ✅ firmware compila |
 | **1 · 19–25 ott** | Pagina "casa" vera; sfoltire la web UI; fuso orario in memoria; modulo DS3231 | **Ordine lunedì.** Stampa provino NFC, calibro, statuina, vinile. Breadboard appena arrivano i pezzi | Elenco definitivo; registrare 2 storie | **M1:** statuina → storia in meno di 1 s |
 | **2 · 26 ott–1 nov** | Task 1: cursore, tasti, deep sleep, taratura batteria. Prova dell'LPCD | Alimentazione su breadboard; stampa case v1 | Altre 2 storie; suoni di sistema | **M2:** sleep < 1 mA, batteria ±3 punti. **Avviare il test di autonomia** (serve una giornata) |
-| **3 · 2–8 nov** | Task 2 (e-paper); task 8 (vinili); prova sul banco del task 6 + dissolvenza | Correzioni → case v2; statuine e vinili col tag (pausa M600) | 5ª storia; 3 canzoni; messaggi della nanna | Display corretto entro 2 s; blocco nanna vero |
+| **3 · 2–8 nov** | Task 8 (vinili); prova sul banco del task 6 + dissolvenza; annuncio vocale della batteria | Correzioni → case v2; statuine e vinili col tag (pausa M600) | 5ª storia; 3 canzoni; messaggi della nanna | Blocco nanna vero sul box |
 | **4 · 9–15 nov** | Task 7 (export/import); task 5 (allineamento ESPuino); OTA | Montaggio su millefori dentro il case; verifiche del prototipo | Normalizzazione a −16 LUFS | **M3 + M4:** statuina associata dal telefono in 30 s; verifiche superate |
 | **5 · 16–20 nov** | Solo correzioni. **Freeze mercoledì 18** | Ritocchi, verniciatura EN 71-3 | — | **M5:** test con un bambino, README, release venerdì 20 |
 
 M3 (firmware) e M4 (case) vanno in parallelo dalla settimana 2.
+
+## Cosa dice lo stato del box, adesso che non c'è lo schermo
+
+| Chi | Come |
+| --- | --- |
+| Il genitore | Web UI: cosa suona, traccia, batteria, se è in fascia di riposo |
+| Il bambino | La statuina che ha in mano: non sa leggere, l'adesivo gli dice più di un titolo |
+| Batteria scarica | **Annuncio vocale**, funzione già presente in ESPuino: va accesa dalla web UI e serve il file in `/sistema` (task 4) |
+| Riposo bloccato | Il messaggio della nanna registrato dai genitori (task 6) |
+| Primo avvio e indirizzo | Pagina del primo avvio (task 9), e il comando «annuncia l'indirizzo IP» |
 
 ## Lavoro firmware rimasto, in ordine di priorità
 
@@ -74,7 +85,7 @@ M3 (firmware) e M4 (case) vanno in parallelo dalla settimana 2.
 | 2 | **Pagina "casa"** dal mockup, e sfoltire la web UI di ESPuino | no | sett. 1 |
 | 3 | **Fuso orario in memoria** (oggi è compilato nel firmware) e primo avvio | no | sett. 1 |
 | 4 | **Modulo DS3231**: ESPuino non lo supporta, usa l'RTC interno via NTP | si scrive senza, si prova con | sett. 1–2 |
-| 5 | **Task 2**: display e-paper | sì | sett. 3 |
+| 5 | ~~Task 2: display e-paper~~ **annullato il 18 ottobre** | — | — |
 | 6 | **Task 8**: tipo del tag e flusso "nuovo vinile" | in parte | sett. 3 |
 | 7 | **Dissolvenza** negli ultimi 30 s: il controllo genitori la chiede già, il player non la fa | sì | sett. 3 |
 | 8 | **Task 7**: esporta e importa la configurazione in JSON | no | sett. 4 |
@@ -84,7 +95,7 @@ M3 (firmware) e M4 (case) vanno in parallelo dalla settimana 2.
 ## Margini e piano B
 
 - Se il PN5180 non arriva o l'LPCD non sveglia il box: RC522 per il prototipo, senza risveglio all'appoggio. Si decide in settimana 2.
-- Se l'e-paper slitta: la 1.0 esce senza display (stato via suoni), il task 2 diventa 1.1.
+- ~~Se l'e-paper slitta~~: non serve più un piano B, il display è stato tolto dal progetto (vedi `tasks/task-02-display-epaper.md`).
 - Se il DS3231 non arriva in tempo: si resta sull'RTC interno con NTP. Il controllo genitori funziona lo stesso, ma un box riacceso lontano dal WiFi parte con la regola più restrittiva.
 - Se il test di autonomia (10 h) non è chiuso: va comunque avviato in settimana 2, perché richiede una giornata intera.
 - Se i contenuti sono in ritardo: la 1.0 può uscire con 3 storie invece di 5. È l'unico taglio che non tocca il firmware né il case.

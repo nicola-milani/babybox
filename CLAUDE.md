@@ -24,6 +24,5 @@ Lingua del progetto: italiano (commenti, documentazione, messaggi della web UI).
 - **Niente risorse da internet nella web UI**: caratteri, fogli di stile, script e immagini stanno sul box e si servono dal suo filesystem. Al primo avvio il telefono è collegato alla rete del box, che internet non ce l'ha — e un box in una casa senza WiFi deve funzionare lo stesso. I caratteri vanno ritagliati ai soli segni dell'italiano (`pyftsubset`), perché finiscono nella flash del firmware.
 - Volume massimo limitato da firmware: il cursore tutto a destra vale il limite impostato dai genitori, mai di più.
 - Nessuna funzione a pressione lunga o combinazione di tasti per il bambino.
-- Il display non deve mai causare salti audio (task FreeRTOS a bassa priorità, bus SPI separato dal PN5180).
 - Stato del controllo genitori in memoria non volatile; ora non affidabile → regola più restrittiva.
 - Evitare GPIO **33–37** (con la PSRAM octal della N16R8 il chip li usa tutti e cinque: SPIIO4–SPIIO7 e SPIDQS), 0/3/45/46 (strapping, salvo il tasto genitori su GPIO0 già previsto), 19–20 (USB).

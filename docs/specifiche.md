@@ -9,16 +9,15 @@ Box audio per bambini, open source e a batteria: si appoggia una statuina con un
 Principi:
 - **Componenti comuni ed economici** (Amazon, AliExpress, negozi di elettronica), sotto 60 € per box.
 - **Batteria 18650 sostituibile con ricarica USB-C**, livello di carica visibile, almeno 10 ore di ascolto.
-- **Display e-paper** per titolo e batteria, consumo nullo a schermo fermo.
 - **Gestione via WiFi** da browser: caricamento audio e associazione tag, senza app.
 - **Case e statuine stampati in 3D**, adatti dai 2 anni: nessuna parte piccola staccabile, comandi grandi, volume massimo limitato da firmware.
-- **Firmware** basato su un fork di ESPuino (PlatformIO): aggiungiamo solo display e-paper, controllo genitori e italiano.
+- **Firmware** basato su un fork di ESPuino (PlatformIO): aggiungiamo solo controllo genitori, italiano e una pagina semplice per i genitori.
 - **Storie e musica:** storie registrate in casa, canzoncine caricate dai genitori. Le statuine avviano le storie, i vinili stampati le canzoni.
 - **Controllo genitori via WiFi:** fasce orarie e modalità nanna dal telefono.
 
 ## Architettura hardware
 
-L'ESP32-S3 è il centro: ogni periferica ha un bus dedicato (I2S audio, SPI per PN5180, secondo SPI per e-paper, SD_MMC 1 bit, I2C per DS3231). L'interruttore stacca tutto, compreso l'amplificatore, alimentato direttamente dalla batteria.
+L'ESP32-S3 è il centro: ogni periferica ha un bus dedicato (I2S audio, SPI per PN5180, SD_MMC 1 bit, I2C per DS3231). L'interruttore stacca tutto, compreso l'amplificatore, alimentato direttamente dalla batteria.
 
 Autonomia stimata: 150–250 mA in riproduzione a volume medio → 12–15 ore con 3000 mAh; deep sleep sotto 1 mA.
 
@@ -34,7 +33,7 @@ Autonomia stimata: 150–250 mA in riproduzione a volume medio → 12–15 ore c
 | Cursore volume e tasti | Tasti sì; cursore no (encoder) | Lettura cursore (task 1) |
 | Batteria e deep sleep | Sì | Tarare il partitore |
 | Web UI e caricamento file | Sì, DE/EN | Traduzione italiana (task 3) |
-| Display e-paper | No (anello LED) | Nuovo modulo (task 2) |
+| Come si sa cosa fa | Anello LED | **Niente schermo** (deciso il 18 ottobre): lo stato si legge dalla web UI, al bambino lo dice la statuina che ha in mano, e la batteria scarica il box la annuncia a voce (funzione già presente in ESPuino) |
 | Suoni di sistema | Sì | Registrarli in italiano (task 4) |
 | Controllo genitori | In parte: sleep timer, blocco comandi | Fasce orarie, nanna, messaggio vocale (task 6) |
 
@@ -55,7 +54,8 @@ Vedi `../modelli-3d/README.md` per le misure di case, statuine e vinili.
 
 ## Decisioni prese
 
-- **Firmware:** fork di ESPuino; aggiungiamo display, controllo genitori e italiano.
+- **Firmware:** fork di ESPuino; aggiungiamo controllo genitori e italiano.
+- **Niente display** (18 ottobre): la web UI dice tutto ai genitori, la statuina dice tutto al bambino. Risparmiati 12–18 € e una settimana di lavoro.
 - **Batteria:** 18650 sostituibile, ricarica USB-C.
 - **Contenuti:** storie registrate da noi (task 4), canzoni caricate dai genitori (task 8).
 - **Quantità:** un box su millefori, schema in KiCad. Kit per altre famiglie solo dopo (M6). Vendere box finiti richiede marcatura CE (sicurezza giocattoli): da verificare prima.

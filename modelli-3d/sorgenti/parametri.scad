@@ -57,19 +57,26 @@ TASTO_CAPPUCCIO = 33;
 TASTO_X      = 35;    // centri a +/- 35 -> 70 mm fra i centri
 TASTO_Y      = -42;
 
-// ---------- Display e-paper 2,13" (Waveshare 250x122) ----------
-EPD_PCB_X    = 59.2;  // [VERIFICARE]
-EPD_PCB_Z    = 29.2;  // [VERIFICARE]
-EPD_PCB_SP   = 1.2;   // spessore del modulo senza componenti
-EPD_FIN_X    = 50;    // finestra visibile (area attiva 48,55 x 23,7)
+// ---------- Display e-paper: TOLTO il 18 ottobre ----------
+// Lo stato (cosa suona, batteria) si legge dalla web UI; al bambino lo dice
+// la statuina che ha in mano, e la batteria scarica la annuncia a voce il box.
+// Via il display: 12-18 euro, una settimana di lavoro e sei GPIO risparmiati,
+// e il fronte del case resta chiuso.
+// Per rimetterlo: CON_DISPLAY = true e si rigenera la scocca.
+CON_DISPLAY  = false;
+EPD_PCB_X    = 59.2;  // [VERIFICARE] — usati solo se CON_DISPLAY = true
+EPD_PCB_Z    = 29.2;
+EPD_PCB_SP   = 1.2;
+EPD_FIN_X    = 50;
 EPD_FIN_Z    = 25.5;
-EPD_Z        = 76;    // quota del centro finestra sulla parete frontale
-EPD_PARETE   = 1.2;   // parete sottile davanti al display (0 = finestra aperta)
+EPD_Z        = 76;
+EPD_PARETE   = 1.2;
 
 // ---------- Altoparlante ----------
 ALT_D        = 40;    // diametro esterno [VERIFICARE]
 ALT_ALT      = 6;     // altezza col magnete [VERIFICARE]
-ALT_Z        = 32;    // quota del centro sulla parete frontale
+ALT_Z        = 48;    // quota del centro: con la finestra del display tolta,
+                      // la griglia va al centro ottico della faccia
 ALT_GRIGLIA_D   = 1.8; // fori della griglia (spec: <= 2 mm)
 ALT_CAMERA_PROF = 12;  // profondità della camera chiusa dietro il cono
 ALT_TUBO_OD     = 52;  // diametro esterno del tubo portaltoparlante

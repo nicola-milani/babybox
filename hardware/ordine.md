@@ -13,7 +13,6 @@ minuteria su AliExpress (10–20 giorni, arrivano per la settimana 3).
 | A3 | `NTAG213 adesivi 25 mm` | 50 | 8–12 | NTAG213 (ISO 14443A). **Non** NTAG215/216 "amiibo", non Mifare Classic |
 | A4 | `MAX98357A modulo I2S amplificatore` | 2 | 6–10 | Breakout con morsettiera o pad per l'altoparlante |
 | A5 | `Altoparlante 4 Ω 3 W Ø40 mm` (h ≤ 6 mm) | 2 | 6–10 | **Misurare diametro e altezza appena arriva**: il case è disegnato su Ø40 × 6 |
-| A6 | `Waveshare e-Paper 2.13" 250x122 SPI` (bianco/nero) | 1 | 12–18 | Modulo "2.13inch e-Paper HAT" o "e-Paper Module". Evitare le versioni a 3 colori (refresh di 15 s) |
 | A7 | `18650 Samsung 35E / LG MJ1 protetta` 3000–3500 mAh | 2 | 10–18 | Comprare da venditore serio, non celle "9900 mAh" |
 | A8 | `TP4056 USB-C con protezione DW01` (6 pin) | 3 | 6–9 | La versione a 6 pin ha la protezione scarica/cortocircuito. **USB-C**, non micro-USB |
 | A9 | `Potenziometro a slitta B10K corsa 60 mm` | 2 | 6–10 | Lineare (B), non logaritmico. **Misurare corpo e levetta appena arriva** |
@@ -21,7 +20,13 @@ minuteria su AliExpress (10–20 giorni, arrivano per la settimana 3).
 | A11 | `MicroSD 32 GB classe 10` | 1 | 6–9 | Da formattare FAT32 |
 | A12 | `Modulo microSD per Arduino` (SPI/SD_MMC) | 2 | 3–5 | Serve solo il lettore meccanico; si cablano i pin in modalità SD_MMC 1 bit |
 
-**Totale A: circa 90–135 €** (ci sono dentro i ricambi di quasi tutto).
+**Totale A: circa 78–117 €** (ci sono dentro i ricambi di quasi tutto).
+
+> Il display e-paper è stato tolto dal progetto il 18 ottobre: lo stato si
+> legge dalla web UI, al bambino lo dice la statuina che ha in mano e la
+> batteria scarica il box la annuncia a voce. Sono 12–18 € e una settimana di
+> lavoro in meno. Se un domani lo si rivuole, la voce era
+> `Waveshare e-Paper 2.13" 250x122 SPI`.
 
 ## B · Su AliExpress (ricambi e minuteria, arrivo settimana 3)
 
@@ -53,7 +58,7 @@ Saldatore a temperatura regolabile con punta fine (per gli inserti a caldo
 serve una punta apposita o la punta vecchia a 220 °C), multimetro con misura
 di corrente in µA (per verificare il deep sleep < 1 mA), pinzette, tronchesino.
 
-## Appena arrivano i pezzi: misurare questi sei
+## Appena arrivano i pezzi: misurare questi cinque
 
 Il case è parametrico ma va rigenerato se qualcosa non torna. Col calibro:
 
@@ -62,7 +67,6 @@ Il case è parametrico ma va rigenerato se qualcosa non torna. Col calibro:
 | Altoparlante | diametro e altezza totale | `ALT_D`, `ALT_ALT` |
 | Potenziometro | lunghezza corpo, larghezza, altezza, levetta | `CURSORE_*` |
 | Tasti arcade | diametro del **foro di montaggio** | `TASTO_FORO` |
-| Display e-paper | PCB (lunghezza × altezza × spessore) | `EPD_PCB_*` |
 | PN5180 | ingombro del modulo con l'antenna | `PN_X`, `PN_Y`, `PN_ALT` |
 | Portabatteria | larghezza × lunghezza × altezza | `BATT_HOLDER_*` |
 

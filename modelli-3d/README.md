@@ -21,8 +21,8 @@ Licenza proposta: CC BY-SA 4.0.
 | 5 | Scocca + fondo + pezzi interni | `case/stl/` | Quando i componenti sono arrivati e misurati |
 
 > Prima di stampare il case: ricontrollare col calibro le misure marcate
-> `[VERIFICARE]` in `sorgenti/parametri.scad` (potenziometro, tasti, display,
-> altoparlante, portabatteria) e rigenerare gli STL. Sono 10 minuti che
+> `[VERIFICARE]` in `sorgenti/parametri.scad` (potenziometro, tasti,
+> altoparlante, PN5180, portabatteria) e rigenerare gli STL. Sono 10 minuti che
 > evitano una stampa da 10 ore buttata.
 
 ## Il case
@@ -42,12 +42,16 @@ Pezzi piccoli: `piatto-nfc` (il fondo dello scasso dove si appoggia la
 statuina, incollato dall'interno), `pomello-cursore`, `culla-cursore`,
 `camera-altoparlante`, `sportellino-batteria`.
 
+Il **display e-paper è stato tolto** il 18 ottobre: il fronte è chiuso, con la
+sola griglia dell'altoparlante. Per rimetterlo basta `CON_DISPLAY = true` in
+`sorgenti/parametri.scad` e rigenerare la scocca.
+
 ### Cosa c'è su ogni faccia
 
 | Faccia | Contenuto |
 | --- | --- |
 | Coperchio | Scasso Ø62 per statuine e vinili (con due tacche per sollevare il disco), fessura del cursore con icone del volume, due tasti arcade Ø30 con frecce incise |
-| Fronte | Finestra e-paper 50 × 25,5 mm, griglia altoparlante (fori Ø1,8) |
+| Fronte | Solo la griglia dell'altoparlante (fori Ø1,8), centrata. Nessuna finestra: il display è stato tolto il 18 ottobre |
 | Retro | USB-C di ricarica, fessura microSD, sfiati |
 | Fondo | Interruttore generale e tasto genitori **incassati**, sportellino batteria |
 
@@ -65,7 +69,7 @@ statuina, incollato dall'interno), `pomello-cursore`, `culla-cursore`,
   |  camera   [18650 a destra]    |   z=3..23
   |  altopar.                     |
   +-------------------------------+   z=0   fondo avvitato
-      v fronte (y -)   display sopra la griglia
+      v fronte (y -)   griglia dell'altoparlante
 ```
 
 La batteria sta a destra con l'asse lungo in profondità; la basetta millefori

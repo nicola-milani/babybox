@@ -42,7 +42,7 @@ python3.12 -m venv .venv-pio                      # NON 3.13 o 3.14
 ## Dove vanno le nostre modifiche
 
 - **Configurazione:** solo nei file di impostazioni di ESPuino (impostazioni generali + file della scheda personalizzata; verificare nel sorgente quale profilo "custom" usa ESPuino). Una copia commentata delle nostre scelte sta in `config/`.
-- **Moduli nuovi** (display e-paper, controllo genitori, export/import): in file nuovi dentro il fork, con commit separati.
+- **Moduli nuovi** (controllo genitori, export/import, pagina casa): in file nuovi dentro il fork, con commit separati.
 - **Core:** solo se indispensabile, commit piccolo e motivato.
 
 ## Cartelle

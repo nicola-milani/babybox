@@ -21,7 +21,7 @@ module scocca() {
                 scatola_arrotondata(BOX_X, BOX_Y, BOX_Z, RAGGIO_VERT, RAGGIO_TOP);
                 cavita_interna();
             }
-            pad_display();
+            if (CON_DISPLAY) pad_display();
             tubo_altoparlante();
         }
         tagli_coperchio();
@@ -108,13 +108,15 @@ module tubo_altoparlante() {
 }
 
 module tagli_frontale() {
-    // sede del modulo e-paper, aperta verso l'interno
-    prof_sede = PARETE + PAD_EPD_SP - EPD_FONDO;
-    translate([0, -BOX_Y/2 + EPD_FONDO + prof_sede/2, EPD_Z])
-        cube([EPD_PCB_X + 1.6, prof_sede + 0.1, EPD_PCB_Z + 1.6], center = true);
-    // finestra visibile
-    translate([0, -BOX_Y/2 + EPD_FONDO/2, EPD_Z])
-        cava_y(EPD_FIN_X, EPD_FIN_Z, EPD_FONDO + 0.2, r = 2);
+    if (CON_DISPLAY) {
+        // sede del modulo e-paper, aperta verso l'interno
+        prof_sede = PARETE + PAD_EPD_SP - EPD_FONDO;
+        translate([0, -BOX_Y/2 + EPD_FONDO + prof_sede/2, EPD_Z])
+            cube([EPD_PCB_X + 1.6, prof_sede + 0.1, EPD_PCB_Z + 1.6], center = true);
+        // finestra visibile
+        translate([0, -BOX_Y/2 + EPD_FONDO/2, EPD_Z])
+            cava_y(EPD_FIN_X, EPD_FIN_Z, EPD_FONDO + 0.2, r = 2);
+    }
     // sede dell'altoparlante, appoggiato contro la parete
     sede = ALT_ALT + 1;
     translate([0, Y_INT + sede/2 - 0.05, ALT_Z]) rotate([90, 0, 0])

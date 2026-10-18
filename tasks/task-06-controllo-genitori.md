@@ -11,7 +11,7 @@ Nuovo modulo che decide se il box può riprodurre, impostabile solo dalla web UI
 
 ## Comportamento in fascia di riposo
 1. La prima statuina avvia normalmente la sua storia.
-2. Finita la storia → stato **Riposo bloccato**: luna e "È ora di dormire".
+2. Finita la storia → stato **Riposo bloccato**. Senza display (task 2 annullato) non c'è nessuna luna da mostrare: lo dice il messaggio registrato dai genitori, e la web UI lo segna.
 3. Ogni tentativo successivo (altra statuina, stessa rimessa, tasti) → messaggio a volume basso, poi sleep.
 4. Togliere e rimettere la stessa statuina *durante* la storia concessa non conta: riprende.
 5. A fine fascia il box torna normale.

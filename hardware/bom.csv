@@ -4,7 +4,6 @@ A2,Lettore NFC,PN5180 SPI con antenna sul PCB,1,2,9-14,Amazon subito,Unico con r
 A3,Tag NFC,NTAG213 adesivi 25 mm,1 per personaggio,50,8-12,Amazon subito,ISO 14443A; non NTAG215/216 ne Mifare Classic
 A4,Amplificatore,MAX98357A I2S 3W,1,2,6-10,Amazon subito,Alimentato da VBAT non da 3V3
 A5,Altoparlante,4 ohm 3W diametro 40 mm altezza max 6 mm,1,2,6-10,Amazon subito,Misurare appena arriva: il case e' disegnato su Ø40x6
-A6,Display,Waveshare e-Paper 2.13 pollici 250x122 B/N SPI,1,1,12-18,Amazon subito,Niente versioni a 3 colori (refresh 15 s)
 A7,Batteria,18650 protetta Samsung 35E o LG MJ1 3000-3500 mAh,1,2,10-18,Amazon/negozio,Venditore serio; diffidare delle celle da 9900 mAh
 A8,Modulo carica,TP4056 USB-C 6 pin con protezione DW01,1,3,6-9,Amazon subito,USB-C non micro-USB; si carica a box spento
 A9,Cursore volume,Potenziometro a slitta lineare B10K corsa 60 mm,1,2,6-10,Amazon subito,Lineare (B); misurare corpo e levetta appena arriva
@@ -21,5 +20,5 @@ B7,Basetta,Millefori 90x70 mm doppia faccia,1,5,6,AliExpress,Misura su cui sono 
 B8,Minuteria,Inserti a caldo M2.5 e viti M2.5,1 set,kit,8,AliExpress,4 inserti per il fondo + 2 per la culla del cursore
 B9,Viti di sicurezza,Torx pin o triwing M2.5x8,4,20,5,AliExpress,Chiusura del fondo non apribile a mano da un bambino
 B10,Cablaggio,Cavetto siliconico 26 AWG e connettori JST-XH,1 set,kit,8,AliExpress,
-B11,Varie,Biadesivo 3M VHB e rete anti-polvere,1 set,1,5,AliExpress,Display incollato nella sede; rete dietro la griglia
+B11,Varie,Rete anti-polvere e biadesivo,1 set,1,5,AliExpress,Rete dietro la griglia dell'altoparlante
 C1,Filamento,PETG per il case PLA per provini e statuine,~150 g,1 kg,20,,Colori diversi per piatto NFC ed etichette dei vinili

@@ -21,7 +21,6 @@ flowchart LR
     LDO --> V33((3V3))
     V33 --> ESP[ESP32-S3<br/>pin 3V3]
     V33 --> PN[PN5180]
-    V33 --> EPD[e-paper]
     V33 --> SD[microSD]
     V33 --> RTC[DS3231]
 ```
@@ -79,19 +78,12 @@ fanno abbassare la tensione al microcontrollore.
   statuina (LPCD). Deve finire su un GPIO RTC, da qui il GPIO1.
 - Cavi del lettore corti (< 10 cm) e lontani dall'altoparlante.
 
-### Display e-paper — secondo bus SPI
-| Modulo | ESP32-S3 |
-| --- | --- |
-| VCC | 3V3 |
-| GND | GND |
-| SCK/CLK | GPIO12 |
-| MOSI/DIN | GPIO13 |
-| CS | GPIO14 |
-| DC | GPIO15 |
-| RST | GPIO16 |
-| BUSY | GPIO17 |
+### Display e-paper — tolto
 
-Bus separato dal PN5180: è il requisito che evita i salti audio.
+Il display è uscito dal progetto il 18 ottobre: lo stato si legge dalla web UI,
+al bambino lo dice la statuina che ha in mano, e la batteria scarica la annuncia
+il box a voce. I **GPIO 12–17 restano liberi**, e con loro cade il vincolo del
+secondo bus SPI separato dal lettore.
 
 ### microSD — SD_MMC a 1 bit
 | Socket | ESP32-S3 | Note |

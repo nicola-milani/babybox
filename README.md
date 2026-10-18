@@ -2,8 +2,8 @@
 
 Box audio per bambini dai 2 anni, open source e a batteria. Si appoggia una statuina (o un piccolo vinile stampato in 3D) con un tag NFC sul coperchio e il box riproduce la storia o la canzone dalla microSD. Togliendo la statuina va in pausa; rimettendola riparte da dove era rimasta.
 
-- **Firmware:** fork di [ESPuino](https://github.com/biologist79/ESPuino) (PlatformIO) su ESP32-S3 N16R8, con display e-paper, controllo genitori e italiano.
-- **Hardware:** PN5180, MAX98357A, e-paper 2,13", DS3231, cella 18650 sostituibile con ricarica USB-C. Costo 45–60 € per box.
+- **Firmware:** fork di [ESPuino](https://github.com/biologist79/ESPuino) (PlatformIO) su ESP32-S3 N16R8, con controllo genitori e italiano.
+- **Hardware:** PN5180, MAX98357A, DS3231, cella 18650 sostituibile con ricarica USB-C. Nessuno schermo: lo stato si legge dalla web UI. Costo 35–50 € per box.
 - **Gestione:** web UI da browser su `nomebox.local`, nessuna app.
 - **Case e statuine:** stampati in 3D, sorgenti parametrici nel repository.
 

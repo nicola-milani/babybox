@@ -7,7 +7,7 @@ Ordine e settimane in `../PIANO_DI_LAVORO.md`.
 | Task | Stato al 18 ottobre |
 | --- | --- |
 | 1 · configurazione di base | da fare, serve l'hardware |
-| 2 · display e-paper | da fare, serve l'hardware |
+| 2 · display e-paper | **annullato** il 18 ottobre (il file spiega perché) |
 | 3 · italiano nella web UI | **fatto** |
 | 4 · registrazioni | da fare (non è firmware) |
 | 5 · allineamento ESPuino | settimana 4, poi mensile |

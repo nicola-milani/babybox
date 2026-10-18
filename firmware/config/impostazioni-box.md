@@ -44,7 +44,7 @@ invece che nel firmware.
 
 ## Quello che abbiamo spento (in `settings-override.h`)
 
-- `NEOPIXEL_ENABLE` — al posto dell'anello LED c'è l'e-paper (task 2).
+- `NEOPIXEL_ENABLE` — il box non ha indicatori luminosi: lo stato si legge dalla web UI e la batteria scarica si annuncia a voce.
 - `USEROTARY_ENABLE` — al posto dell'encoder c'è il cursore a slitta.
 - `BLUETOOTH_ENABLE` — mangia flash e RAM, non ci serve.
 - `MQTT_ENABLE`, `FTP_ENABLE`, `HEADPHONE_ADJUST_ENABLE` — non servono; l'FTP

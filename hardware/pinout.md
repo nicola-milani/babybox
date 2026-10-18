@@ -7,11 +7,9 @@ il chip li usa tutti e cinque, non solo 35–37 come si legge in giro), 3, 45, 4
 (strapping), 19–20 (USB nativa). GPIO0 è strapping ma è il tasto BOOT, e lo
 usiamo apposta come tasto genitori.
 
-**Conseguenza:** il pinout è pieno. Tolti quelli sopra restano esattamente i
-GPIO che abbiamo assegnato: non c'è una riserva. Se serve un pin per qualcosa
-di nuovo, bisogna toglierlo a qualcos'altro — per esempio rinunciando a un
-tasto o mettendo display e lettore sullo stesso bus SPI (sconsigliato: è il
-vincolo che tiene l'audio senza salti).
+**Margine:** togliendo il display sono tornati liberi sei GPIO consecutivi
+(12–17), tutti utilizzabili. Prima il pinout era pieno; adesso c'è spazio per
+un sensore, un LED di stato o un terzo tasto senza togliere niente.
 
 | Periferica | Segnale | GPIO | Note |
 | --- | --- | --- | --- |
@@ -26,12 +24,7 @@ vincolo che tiene l'audio senza salti).
 | PN5180 | BUSY | 41 | |
 | PN5180 | RST | 48 | Su alcune DevKitC-1 è il LED RGB: verificare |
 | PN5180 | IRQ | 1 | **Serve all'LPCD**: è il pin che sveglia il box quando appoggi la statuina. Deve essere un GPIO RTC (0–21) |
-| E-paper | SCK | 12 | Secondo bus SPI, separato dal PN5180 |
-| E-paper | MOSI | 13 | |
-| E-paper | CS | 14 | |
-| E-paper | DC | 15 | |
-| E-paper | RST | 16 | |
-| E-paper | BUSY | 17 | |
+| Liberi | — | 12, 13, 14, 15, 16, 17 | Erano del display e-paper, tolto il 18 ottobre |
 | microSD | CLK | 39 | SD_MMC 1 bit, impostati con `setPins()` (vedi nota) |
 | microSD | CMD | 38 | |
 | microSD | D0 | 40 | |
